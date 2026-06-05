@@ -1,0 +1,50 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Task: Gene Essentiality
+Model: XGBoost
+Number of splits: 15
+
+Hypergraph features (10):
+  - base_Degree
+  - base_UniquePartners
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (6):
+  - base_Degree
+  - base_UniquePartners
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)    : 0.2802 ± 0.0617
+  Hypergraph (no stoich): 0.2242 ± 0.0291
+  Pairwise             : 0.1020 ± 0.0170
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.1782 ± 0.0607
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : +0.0561 ± 0.0541
+  Wins/Losses/Ties : 12/3/0
+  Sign test p (one-sided) : 0.017578
+  Sign test p (two-sided) : 0.035156
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.1221 ± 0.0262
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061

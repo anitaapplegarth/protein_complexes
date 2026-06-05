@@ -1,0 +1,17 @@
+PAIRED COMPARISON: HYPERGRAPH (HGNN) vs PAIRWISE (GNN)
+Pipeline: Transductive
+Task: Gene Essentiality
+Node feature: degree (single scalar)
+Architecture: GraphSAGE / HypergraphConv — 2 layers, hidden_dim=64, dropout=0.3
+Number of splits: 15  (valid: 15)
+
+Hypergraph PR-AUC: 0.3796 ± 0.0652
+Pairwise PR-AUC:   0.4581 ± 0.1167
+
+Mean Difference:   -0.0785 ± 0.0813
+Hypergraph wins:   3/15
+Pairwise wins:     12/15
+Ties:              0/15
+
+Sign test p (one-sided, H > P): 0.996307
+Sign test p (two-sided):        0.035156

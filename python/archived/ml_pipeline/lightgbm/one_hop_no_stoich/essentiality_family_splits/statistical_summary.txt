@@ -1,0 +1,28 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE
+Task: Gene Essentiality
+Model: LightGBM
+Number of splits: 15
+
+Hypergraph features (8):
+  - base_Degree
+  - base_UniquePartners
+  - protein_NumSubgroups
+  - protein_AvgSubgroupSize
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+Hypergraph PR-AUC: 0.4805 ± 0.0459
+Pairwise PR-AUC:   0.4055 ± 0.0974
+
+Mean Difference:   0.0750 ± 0.0846
+Hypergraph wins:   13/15
+Pairwise wins:     2/15
+Ties:              0/15
+
+Sign test p (one-sided, H > P): 0.003693
+Sign test p (two-sided):        0.007385

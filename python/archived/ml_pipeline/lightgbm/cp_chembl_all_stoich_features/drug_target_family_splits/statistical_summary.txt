@@ -1,0 +1,75 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Task: Gene Essentiality
+Model: LightGBM
+Number of splits: 15
+
+Hypergraph features (20):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_ComponentSize
+  - base_ComponentEdgeNodeRatio
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - base_BetweennessCentrality
+  - base_EigenvectorCentrality
+  - base_KatzCentrality
+  - stoich_WeightedTriangles [stoich]
+  - stoich_AvgNeighbourDegreeStoich [stoich]
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (14):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_ComponentSize
+  - base_ComponentEdgeNodeRatio
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - base_BetweennessCentrality
+  - base_EigenvectorCentrality
+  - base_KatzCentrality
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (8):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_ComponentSize
+  - pair_EigenvectorCentrality
+  - pair_BetweennessCentrality
+  - pair_KatzCentrality
+  - pair_AvgNeighborDegree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)    : 0.3240 ± 0.0651
+  Hypergraph (no stoich): 0.2835 ± 0.0563
+  Pairwise             : 0.2130 ± 0.0403
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.1110 ± 0.0709
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : +0.0404 ± 0.0497
+  Wins/Losses/Ties : 10/5/0
+  Sign test p (one-sided) : 0.150879
+  Sign test p (two-sided) : 0.301758
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.0706 ± 0.0511
+  Wins/Losses/Ties : 14/1/0
+  Sign test p (one-sided) : 0.000488
+  Sign test p (two-sided) : 0.000977

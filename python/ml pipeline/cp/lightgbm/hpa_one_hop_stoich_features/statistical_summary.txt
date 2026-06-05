@@ -1,0 +1,50 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Task: Drug Target Prediction (HPA)
+Model: LightGBM
+Number of splits: 15
+
+Hypergraph features (10):
+  - base_Degree
+  - base_UniquePartners
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (6):
+  - base_Degree
+  - base_UniquePartners
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)    : 0.3770 ± 0.0949
+  Hypergraph (no stoich): 0.3174 ± 0.0867
+  Pairwise             : 0.1132 ± 0.0202
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.2638 ± 0.0934
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : +0.0595 ± 0.0497
+  Wins/Losses/Ties : 13/2/0
+  Sign test p (one-sided) : 0.003693
+  Sign test p (two-sided) : 0.007385
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.2042 ± 0.0815
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061

@@ -1,0 +1,70 @@
+=====================================================================================
+  NOISE INJECTION — FEATURE IMPORTANCE RANKING SUMMARY
+=====================================================================================
+  Task          : Drug Target Prediction
+  Model         : RandomForest
+  Splits × Seeds: 15 × 3 = 45 realisations per feature
+  Noise features: 4 (standard normal, i.i.d.)
+
+  Criterion: features are ranked by mean permutation importance across
+  all splits and seeds.  A real feature is considered uninformative if
+  it ranks at or below the highest-ranked noise feature.
+
+=====================================================================================
+  1. PURE RANDOM MODEL (sanity check)
+=====================================================================================
+  All importances should be near zero — confirms noise is uninformative.
+
+  Rank  Feature                   Mean        Std
+  ------------------------------------------------
+  1     rand_1                -0.00075    0.00903
+  2     rand_2                -0.00111    0.00726
+  3     rand_3                -0.00198    0.00800
+  4     rand_0                -0.00259    0.00770
+
+=====================================================================================
+  2. PAIRWISE + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 5
+  All real features rank above noise.
+
+  Rank  Type    Feature                                     Mean        Std
+  ------------------------------------------------------------------------
+  1     real    pair_LocalClustCoeff                     0.10242    0.04556
+  2     real    pair_AvgNeighborDegree                   0.03261    0.03003
+  3     real    pair_Degree                              0.02581    0.02667
+  4     real    pair_TriangleCount                       0.02553    0.02418
+  5     NOISE   rand_0                                   0.00309    0.01561
+  6     NOISE   rand_3                                   0.00149    0.01844
+  7     NOISE   rand_2                                  -0.00228    0.01288
+  8     NOISE   rand_1                                  -0.00382    0.01425
+
+=====================================================================================
+  3. HYPERGRAPH + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 12
+  Real features at or below noise: stoich_RangeComplexSize, protein_RangeComplexNodes, protein_RangeUniqueRatio, stoich_RangeRatio
+
+  Rank  Type    Feature                                     Mean        Std
+  ------------------------------------------------------------------------
+  1     real    base_Degree                              0.09445    0.06488
+  2     real    protein_MedComplexNodes                  0.06657    0.04283
+  3     real    stoich_MedianRatio                       0.06623    0.04359
+  4     real    protein_MedianUniqueRatio                0.06558    0.05010
+  5     real    stoich_MedComplexSize                    0.05769    0.03239
+  6     real    stoich_AvgNeighbourDegreeStoich          0.04915    0.03935
+  7     real    stoich_WeightedTriangles                 0.03529    0.03701
+  8     real    base_LocalClustCoeff                     0.02598    0.01690
+  9     real    base_AvgNeighbourDegree                  0.02533    0.02295
+  10    real    base_TriangleCount                       0.02048    0.02142
+  11    real    base_UniquePartners                      0.00545    0.01854
+  12    NOISE   rand_3                                   0.00141    0.00927
+  13    NOISE   rand_0                                  -0.00023    0.01140
+  14    NOISE   rand_1                                  -0.00074    0.00772
+  15    real    stoich_RangeComplexSize                 -0.00158    0.00580
+  16    NOISE   rand_2                                  -0.00219    0.00946
+  17    real    protein_RangeComplexNodes               -0.00279    0.00661
+  18    real    protein_RangeUniqueRatio                -0.00295    0.01035
+  19    real    stoich_RangeRatio                       -0.00305    0.00741

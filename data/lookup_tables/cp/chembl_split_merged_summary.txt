@@ -1,0 +1,266 @@
+==========================================================================================
+SPLIT SUMMARY — Size-stratified repeated random group-level splits
+Drug Target Labels (ChEMBL)
+==========================================================================================
+Total unique proteins:            3394
+Total complexes:                  2220
+Total groups:                     955
+  Large      (>20, merged):       22
+  Medium     (6–20):              106
+  Small      (2–5):               277
+  Singleton  (1 protein):         550
+Analysis population:              3388  (labelled + structured; excludes 0 Unknown, 6 no-group)
+Global drug target rate:          6.1%  (206 / 3388)
+Number of splits:                 15
+Train/test ratio:                 80% / 20%
+Size tolerance:                   ±5.0pp  (acceptable range: 15%–25%)
+Balance tolerance:                ±1.5pp
+Max redraw attempts per split:    10
+Splits requiring redraw:          5 / 15
+Splits with size warnings:        0 / 15
+Splits with balance warnings:     3 / 15
+Splits with leakage violations:   0 / 15
+
+ Split  Att   Train N  Train%  Train pos%   Test N  Test%  Test pos%   SzDev  LblDev  Flag
+------------------------------------------------------------------------------------------
+     1    2      2778   81.8%        6.6%      616  18.1%       3.7%    1.9pp    2.3pp  ⚠ Lb
+     2    1      2746   80.9%        6.1%      648  19.1%       5.9%    0.9pp    0.2pp  
+     3    1      2694   79.4%        5.8%      700  20.6%       7.0%    0.6pp    0.9pp  
+     4    4      2719   80.1%        6.9%      675  19.9%       2.8%    0.1pp    3.3pp  ⚠ Lb
+     5    1      2690   79.3%        5.9%      704  20.7%       6.7%    0.7pp    0.6pp  
+     6    1      2766   81.5%        6.3%      628  18.5%       5.1%    1.5pp    1.0pp  
+     7    1      2798   82.4%        6.3%      596  17.6%       5.2%    2.4pp    0.9pp  
+     8    1      2792   82.3%        6.3%      602  17.7%       5.0%    2.3pp    1.1pp  
+     9    1      2766   81.5%        6.2%      628  18.5%       5.6%    1.5pp    0.5pp  
+    10    1      2764   81.4%        6.3%      630  18.6%       4.9%    1.4pp    1.1pp  
+    11    1      2813   82.9%        6.0%      581  17.1%       6.5%    2.9pp    0.5pp  
+    12    3      2726   80.3%        6.4%      668  19.7%       5.0%    0.3pp    1.1pp  
+    13    3      2699   79.5%        6.0%      695  20.5%       6.5%    0.5pp    0.4pp  
+    14    2      2693   79.3%        6.5%      701  20.6%       4.3%    0.7pp    1.8pp  ⚠ Lb
+    15    1      2764   81.4%        6.3%      630  18.6%       5.1%    1.4pp    1.0pp  
+------------------------------------------------------------------------------------------
+  Mean                  80.9%        6.3%           19.1%       5.3%    1.3pp
+   Std                  1.21%       0.28%           1.21%      1.14%   0.83pp
+   Min                  79.3%        5.8%           17.1%       2.8%    0.1pp
+   Max                  82.9%        6.9%           20.7%       7.0%    2.9pp
+
+Leakage guarantee: all groups are atomic — no group spans train and test.
+Flag key: Sz = size out of range, Lb = label imbalance, Lk = leakage
+
+==========================================================================================
+TEST SET BREAKDOWN BY STRUCTURAL GROUP SIZE BUCKET (proteins in test)
+==========================================================================================
+ Split   Large N    L%   Pos%   Medium N    M%   Pos%   Small N    S%   Pos%   Singleton N   Sg%   Pos%
+------------------------------------------------------------------------------------------
+     1       126 13.0%   0.0%        221 20.6%   4.5%       158 19.9%   5.7%           110 20.0%   3.6%
+     2       180 18.6%   7.2%        197 18.3%   6.6%       160 20.2%   2.5%           110 20.0%   7.3%
+     3       243 25.1%  11.1%        203 18.9%   3.9%       143 18.0%   5.6%           110 20.0%   5.5%
+     4       186 19.2%   0.0%        225 20.9%   1.8%       153 19.3%   5.2%           110 20.0%   6.4%
+     5       212 21.9%  12.7%        224 20.8%   2.7%       157 19.8%   4.5%           110 20.0%   6.4%
+     6       146 15.1%   4.8%        218 20.3%   4.1%       153 19.3%   5.9%           110 20.0%   6.4%
+     7       125 12.9%   1.6%        213 19.8%   6.1%       147 18.5%   5.4%           110 20.0%   7.3%
+     8       134 13.8%   2.2%        209 19.4%   6.7%       148 18.7%   4.1%           110 20.0%   6.4%
+     9       162 16.7%   1.2%        192 17.9%  10.4%       163 20.6%   3.7%           110 20.0%   6.4%
+    10       177 18.2%   1.1%        197 18.3%   6.6%       145 18.3%   4.1%           110 20.0%   9.1%
+    11       126 13.0%  10.3%        185 17.2%   5.9%       159 20.1%   3.8%           110 20.0%   7.3%
+    12       210 21.6%   3.8%        188 17.5%   3.2%       159 20.1%   6.3%           110 20.0%   8.2%
+    13       198 20.4%  13.6%        214 19.9%   6.1%       172 21.7%   0.0%           110 20.0%   4.5%
+    14       216 22.3%   1.4%        225 20.9%   7.6%       149 18.8%   2.0%           110 20.0%   6.4%
+    15       164 16.9%   6.7%        199 18.5%   5.0%       156 19.7%   1.9%           110 20.0%   7.3%
+------------------------------------------------------------------------------------------
+  Mean     173.7 17.9%   5.2%      207.3 19.3%   5.4%     154.8 19.5%   4.0%         110.0 20.0%   6.6%
+   Std      37.5 3.87%  4.78%       13.9 1.28%  2.17%       7.7 0.98%  1.79%           0.0 0.00%  1.35%
+
+  N% = % of that bucket's proteins going to test.
+  Pos% = drug target rate among analysis-population test proteins in that bucket.
+
+==========================================================================================
+LARGE-BUCKET PROFILE ANALYSIS
+==========================================================================================
+
+1. Which large groups are in TEST per split?
+------------------------------------------------------------
+  Split  1: grp_0033, grp_0091, grp_0673, grp_1004
+  Split  2: grp_0018, grp_0101, grp_1186, grp_1341
+  Split  3: grp_0110, grp_0113, grp_0222, grp_0644
+  Split  4: grp_0033, grp_0064, grp_0065, grp_0644
+  Split  5: grp_0033, grp_0113, grp_0222, grp_1004
+  Split  6: grp_0000, grp_0336, grp_0738, grp_1186
+  Split  7: grp_0091, grp_0644, grp_0738, grp_1091
+  Split  8: grp_0018, grp_0033, grp_0065, grp_1091
+  Split  9: grp_0065, grp_0110, grp_1186, grp_1341
+  Split 10: grp_0110, grp_0113, grp_0673, grp_1186
+  Split 11: grp_0072, grp_0336, grp_0916, grp_1341
+  Split 12: grp_0064, grp_0091, grp_0101, grp_0113
+  Split 13: grp_0065, grp_0222, grp_0644, grp_1004
+  Split 14: grp_0018, grp_0091, grp_0110, grp_1179
+  Split 15: grp_0000, grp_0091, grp_0101, grp_0644
+
+2. All large groups and their sizes (analysis population proteins)
+------------------------------------------------------------
+  grp_0000:   51 proteins  |  in test for splits [6, 15]
+  grp_0018:   48 proteins  |  in test for splits [2, 8, 14]
+  grp_0033:   32 proteins  |  in test for splits [1, 4, 5, 8]
+  grp_0064:   90 proteins  |  in test for splits [4, 12]
+  grp_0065:   25 proteins  |  in test for splits [4, 8, 9, 13]
+  grp_0072:   22 proteins  |  in test for splits [11]
+  grp_0091:   34 proteins  |  in test for splits [1, 7, 12, 14, 15]
+  grp_0101:   40 proteins  |  in test for splits [2, 12, 15]
+  grp_0110:   45 proteins  |  in test for splits [3, 9, 10, 14]
+  grp_0113:   46 proteins  |  in test for splits [3, 5, 10, 12]
+  grp_0222:  113 proteins  |  in test for splits [3, 5, 13]
+  grp_0336:   25 proteins  |  in test for splits [6, 11]
+  grp_0644:   39 proteins  |  in test for splits [3, 4, 7, 13, 15]
+  grp_0673:   39 proteins  |  in test for splits [1, 10]
+  grp_0738:   23 proteins  |  in test for splits [6, 7]
+  grp_0821:   33 proteins  |  in test for splits []
+  grp_0916:   34 proteins  |  in test for splits [11]
+  grp_1004:   21 proteins  |  in test for splits [1, 5, 13]
+  grp_1091:   29 proteins  |  in test for splits [7, 8]
+  grp_1179:   89 proteins  |  in test for splits [14]
+  grp_1186:   47 proteins  |  in test for splits [2, 6, 9, 10]
+  grp_1341:   45 proteins  |  in test for splits [2, 9, 11]
+
+3. Large test set size per split (all proteins)
+------------------------------------------------------------
+  Split  1:  126 proteins
+  Split  2:  180 proteins
+  Split  3:  243 proteins
+  Split  4:  186 proteins
+  Split  5:  212 proteins
+  Split  6:  146 proteins
+  Split  7:  125 proteins
+  Split  8:  134 proteins
+  Split  9:  162 proteins
+  Split 10:  177 proteins
+  Split 11:  126 proteins
+  Split 12:  210 proteins
+  Split 13:  198 proteins
+  Split 14:  216 proteins
+  Split 15:  164 proteins
+
+4. Overlap statistics across all splits
+------------------------------------------------------------
+  Intersection (in ALL test sets): 0
+  Union (in ANY test set):         937
+  Jaccard similarity:              0.000
+
+5. Per-protein test frequency (how many splits each protein is in test)
+------------------------------------------------------------
+  1 split(s): 145 proteins
+  2 split(s): 257 proteins
+  3 split(s): 267 proteins
+  4 split(s): 195 proteins
+  5 split(s): 73 proteins
+
+6. Per-group test frequency — randomness check
+------------------------------------------------------------
+  Total large groups:          22
+  Groups drawn to test/split:  4  (18.2%)
+  Expected test freq per group over 15 splits: 2.7
+
+  Group                           AP size  Test count  Note
+  grp_0000                             51           2  ok
+  grp_0018                             48           3  ok
+  grp_0033                             32           4  ok
+  grp_0064                             90           2  ok
+  grp_0065                             25           4  ok
+  grp_0072                             22           1  ok
+  grp_0091                             34           5  ok
+  grp_0101                             40           3  ok
+  grp_0110                             45           4  ok
+  grp_0113                             46           4  ok
+  grp_0222                            113           3  ok
+  grp_0336                             25           2  ok
+  grp_0644                             39           5  ok
+  grp_0673                             39           2  ok
+  grp_0738                             23           2  ok
+  grp_0821                             33           0  ⚠ NEVER in test
+  grp_0916                             34           1  ok
+  grp_1004                             21           3  ok
+  grp_1091                             29           2  ok
+  grp_1179                             89           1  ok
+  grp_1186                             47           4  ok
+  grp_1341                             45           3  ok
+
+  Min test count: 0  Max: 5  Mean: 2.73  Std: 1.32
+
+==========================================================================================
+7. Drug target rate per group size  (analysis population only)
+==========================================================================================
+  Analysis population = labelled (Drug_target/Non_target) + structured
+  Global drug target rate: 6.1%
+  n = 3388
+
+    group_size   n_groups    n_proteins   n_drug_target   target_rate
+  --------------------------------------------------------------------
+             1        550           550              41          7.5%
+             2        135           270              10          3.7%
+             3         71           213              11          5.2%
+             4         45           180               8          4.4%
+             5         26           130               8          6.2%
+             6         22           132              11          8.3%
+             7         18           126               5          4.0%
+             8         13           104               6          5.8%
+             9          9            81               9         11.1%
+            10          4            40               0          0.0%
+            11          3            33               0          0.0%
+            12          6            72               5          6.9%
+            13          3            39               1          2.6%
+            14          8           112               4          3.6%
+            15          4            60              15         25.0%
+            16          4            64               5          7.8%
+            17          6           102               3          2.9%
+            18          4            72               3          4.2%
+            19          2            38               3          7.9%
+            21          1            21               0          0.0%
+            22          1            22               0          0.0%
+            23          1            23               2          8.7%
+            25          2            50               0          0.0%
+            29          1            29               0          0.0%
+            32          1            32               0          0.0%
+            33          1            33               0          0.0%
+            34          2            68              13         19.1%
+            39          2            78               0          0.0%
+            40          1            40               8         20.0%
+            45          2            90               0          0.0%
+            46          1            46               0          0.0%
+            47          1            47               2          4.3%
+            48          1            48               3          6.2%
+            51          1            51               3          5.9%
+            89          1            89               0          0.0%
+            90          1            90               0          0.0%
+           113          1           113              27         23.9%
+
+  Saved: /Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/avg_chembl_by_group__merged_size.csv
+
+==========================================================================================
+8. Drug target rate profile — focus groups  (analysis population only)
+==========================================================================================
+  Global drug target rate: 6.1%
+
+  Group         AP size   Drug_target  Non_target   vs global
+  ----------------------------------------------------------
+  grp_0222          113            27          86     +17.8pp  ⚠ high
+  grp_0064           90             0          90      -6.1pp  ⚠ low
+  grp_1179           89             0          89      -6.1pp  ⚠ low
+  grp_0000           51             3          48      -0.2pp
+
+  Large-bucket test drug target rate by split, annotated with focus groups:
+  Split  Focus groups in test                Focus rate  Bucket rate
+  --------------------------------------------------------------------
+      1  none                                       N/A         0.0%
+      2  none                                       N/A         7.2%
+      3  grp_0222                                 23.9%        11.1%
+      4  grp_0064                                  0.0%         0.0%
+      5  grp_0222                                 23.9%        12.7%
+      6  grp_0000                                  5.9%         4.8%
+      7  none                                       N/A         1.6%
+      8  none                                       N/A         2.2%
+      9  none                                       N/A         1.2%
+     10  none                                       N/A         1.1%
+     11  none                                       N/A        10.3%
+     12  grp_0064                                  0.0%         3.8%
+     13  grp_0222                                 23.9%        13.6%
+     14  grp_1179                                  0.0%         1.4%
+     15  grp_0000                                  5.9%         6.7%

@@ -1,0 +1,12 @@
+,0
+task,corum_drug_chembl
+model,RandomForest
+split_index,2
+n_train,4163
+n_test,969
+pct_positive_test,13.4%
+hypergraph_pr_auc,0.5891
+pairwise_pr_auc,0.4707
+hypergraph_features,"['base_Degree', 'base_LocalClustCoeff', 'base_TriangleCount', 'base_UniquePartners', 'base_AvgNeighbourDegree', 'protein_MedianUniqueRatio', 'protein_RangeUniqueRatio', 'protein_MedComplexNodes', 'protein_RangeComplexNodes']"
+pairwise_features,"['pair_Degree', 'pair_LocalClustCoeff', 'pair_TriangleCount', 'pair_AvgNeighborDegree']"
+dependence_features,"['protein_MedComplexNodes', 'protein_MedianUniqueRatio', 'base_TriangleCount', 'base_Degree']"

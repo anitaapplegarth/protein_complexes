@@ -1,0 +1,64 @@
+=====================================================================================
+  NOISE INJECTION — FEATURE IMPORTANCE RANKING SUMMARY
+=====================================================================================
+  Task          : Drug Target Prediction
+  Model         : RandomForest
+  Splits × Seeds: 15 × 3 = 45 realisations per feature
+  Noise features: 4 (standard normal, i.i.d.)
+
+  Criterion: features are ranked by mean permutation importance across
+  all splits and seeds.  A real feature is considered uninformative if
+  it ranks at or below the highest-ranked noise feature.
+
+=====================================================================================
+  1. PURE RANDOM MODEL (sanity check)
+=====================================================================================
+  All importances should be near zero — confirms noise is uninformative.
+
+  Rank  Feature                   Mean        Std
+  ------------------------------------------------
+  1     rand_1                 0.00203    0.00969
+  2     rand_0                 0.00002    0.00845
+  3     rand_3                -0.00009    0.00742
+  4     rand_2                -0.00028    0.00948
+
+=====================================================================================
+  2. PAIRWISE + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 5
+  All real features rank above noise.
+
+  Rank  Type    Feature                                     Mean        Std
+  ------------------------------------------------------------------------
+  1     real    pair_TriangleCount                       0.13446    0.04581
+  2     real    pair_Degree                              0.05766    0.02786
+  3     real    pair_AvgNeighborDegree                   0.04188    0.02934
+  4     real    pair_LocalClustCoeff                     0.03302    0.01344
+  5     NOISE   rand_2                                   0.00044    0.00378
+  6     NOISE   rand_0                                  -0.00018    0.00509
+  7     NOISE   rand_1                                  -0.00034    0.00644
+  8     NOISE   rand_3                                  -0.00151    0.00639
+
+=====================================================================================
+  3. HYPERGRAPH + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 10
+  All real features rank above noise.
+
+  Rank  Type    Feature                                     Mean        Std
+  ------------------------------------------------------------------------
+  1     real    base_TriangleCount                       0.07766    0.02379
+  2     real    protein_MedianUniqueRatio                0.05043    0.01415
+  3     real    base_AvgNeighbourDegree                  0.04138    0.02241
+  4     real    protein_MedComplexNodes                  0.03505    0.01338
+  5     real    base_UniquePartners                      0.02636    0.01976
+  6     real    protein_RangeComplexNodes                0.02372    0.01925
+  7     real    base_Degree                              0.01902    0.01177
+  8     real    protein_RangeUniqueRatio                 0.01189    0.00959
+  9     real    base_LocalClustCoeff                     0.00891    0.00646
+  10    NOISE   rand_1                                   0.00044    0.00218
+  11    NOISE   rand_2                                   0.00014    0.00253
+  12    NOISE   rand_3                                  -0.00015    0.00217
+  13    NOISE   rand_0                                  -0.00018    0.00207

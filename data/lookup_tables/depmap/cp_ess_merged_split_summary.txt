@@ -1,0 +1,277 @@
+==========================================================================================
+SPLIT SUMMARY — Size-stratified repeated random group-Level splits
+==========================================================================================
+Total unique proteins:            3394
+Total complexes:                  2220
+Total groups (all atomic):        955
+  Large      (>20, merged):       22
+  Medium     (6–20):              106
+  Small      (2–5):               277
+  Singleton  (1 protein):         550
+Analysis population:              3300  (labelled + structured; excludes 89 Unknown, 6 no-group)
+Global essential rate:            22.6%  (747 / 3300)
+Number of splits:                 15
+Train/test ratio:                 80% / 20%
+Size tolerance:                   ±5.0pp from 20% (acceptable range: 15%–25%)
+Balance tolerance:                ±4.5pp from global rate
+Max redraw attempts per split:    100
+Splits requiring redraw:          4 / 15
+Splits with size warnings:        0 / 15
+Splits with balance warnings:     0 / 15
+Splits with leakage violations:   0 / 15
+
+ Split  Att   Train N  Train%  Train ess%   Test N  Test%  Test ess%   SzDev  EssDev  Flag
+------------------------------------------------------------------------------------------
+     1    1      2709   79.8%       23.3%      685  20.2%      20.0%    0.2pp    2.6pp        
+     2    1      2771   81.6%       22.2%      623  18.4%      24.5%    1.6pp    1.8pp        
+     3    1      2691   79.3%       22.6%      703  20.7%      22.8%    0.7pp    0.1pp        
+     4    1      2811   82.8%       23.1%      583  17.2%      20.3%    2.8pp    2.3pp        
+     5    1      2604   76.7%       23.3%      790  23.3%      20.4%    3.3pp    2.2pp        
+     6    2      2714   80.0%       23.4%      680  20.0%      19.4%    0.0pp    3.2pp        
+     7    2      2757   81.2%       22.1%      637  18.8%      25.2%    1.2pp    2.5pp        
+     8    1      2726   80.3%       23.5%      668  19.7%      19.1%    0.3pp    3.5pp        
+     9    2      2721   80.2%       22.4%      673  19.8%      23.4%    0.2pp    0.8pp        
+    10    1      2717   80.0%       22.4%      677  19.9%      23.5%    0.1pp    0.8pp        
+    11    3      2749   81.0%       21.9%      645  19.0%      25.9%    1.0pp    3.3pp        
+    12    1      2738   80.7%       22.4%      656  19.3%      23.8%    0.7pp    1.2pp        
+    13    1      2675   78.8%       23.5%      719  21.2%      19.4%    1.2pp    3.2pp        
+    14    1      2718   80.1%       23.3%      676  19.9%      19.9%    0.1pp    2.8pp        
+    15    1      2770   81.6%       23.1%      624  18.4%      20.4%    1.6pp    2.3pp        
+------------------------------------------------------------------------------------------
+  Mean                  80.3%       22.8%           19.7%      21.9%    1.0pp
+   Std                  1.41%       0.57%           1.41%      2.36%   1.00pp
+   Min                  76.7%       21.9%           17.2%      19.1%    0.0pp
+   Max                  82.8%       23.5%           23.3%      25.9%    3.3pp
+
+Leakage guarantee: all groups are atomic — no group spans
+train and test within any single split.
+
+Flag key: Sz = size out of range, Es = essentiality imbalance, Lk = leakage
+
+==========================================================================================
+TEST SET BREAKDOWN BY STRUCTURAL GROUP SIZE BUCKET (proteins in test)
+==========================================================================================
+ Split   Large N    L%   Ess%   Medium N    M%   Ess%   Small N    S%   Ess%   Singleton N   Sg%   Ess%
+------------------------------------------------------------------------------------------
+     1       213 22.0%  12.6%        201 18.7%  23.0%       160 20.2%  23.1%           110 20.0%  23.1%
+     2       149 15.4%  36.7%        217 20.2%  23.2%       146 18.4%  16.1%           110 20.0%  21.3%
+     3       233 24.0%  34.2%        196 18.2%  16.5%       163 20.6%  16.8%           110 20.0%  18.2%
+     4       129 13.3%   9.2%        183 17.0%  25.7%       160 20.2%  21.5%           110 20.0%  21.9%
+     5       298 30.7%  25.5%        216 20.1%  18.3%       165 20.8%  15.4%           110 20.0%  18.7%
+     6       169 17.4%  21.3%        231 21.5%  20.6%       169 21.3%  17.7%           110 20.0%  16.7%
+     7       156 16.1%  35.9%        209 19.4%  27.5%       161 20.3%  18.1%           110 20.0%  15.7%
+     8       209 21.5%  14.5%        195 18.1%  24.9%       153 19.3%  21.9%           110 20.0%  12.8%
+     9       157 16.2%  32.0%        241 22.4%  18.3%       164 20.7%  24.2%           110 20.0%  21.2%
+    10       178 18.4%  37.9%        241 22.4%  19.4%       147 18.5%  14.4%           110 20.0%  21.1%
+    11       175 18.0%  35.8%        207 19.3%  24.8%       152 19.2%  21.3%           110 20.0%  18.7%
+    12       200 20.6%  36.7%        189 17.6%  21.5%       156 19.7%  18.2%           110 20.0%  13.6%
+    13       240 24.7%  16.5%        216 20.1%  25.5%       152 19.2%  17.4%           110 20.0%  16.4%
+    14       218 22.5%  25.8%        189 17.6%  14.6%       158 19.9%  19.4%           110 20.0%  17.6%
+    15       153 15.8%  20.7%        202 18.8%  25.6%       158 19.9%  10.4%           110 20.0%  24.5%
+------------------------------------------------------------------------------------------
+  Mean     191.8 19.8%  26.4%      208.9 19.4%  22.0%     157.6 19.9%  18.4%         110.0 20.0%  18.8%
+   Std      44.4 4.56% 10.00%       18.2 1.70%  3.87%       6.6 0.84%  3.64%           0.0 0.00%  3.41%
+
+  N% = proteins from that bucket that went to test (of all proteins in that bucket).
+  Ess% = essential rate among labelled test proteins from that bucket.
+
+==========================================================================================
+LARGE-BUCKET PROFILE ANALYSIS
+==========================================================================================
+
+1. Which large groups are in TEST per split?
+------------------------------------------------------------
+  Split  1: grp_0222, grp_0916, grp_1004, grp_1341
+  Split  2: grp_0018, grp_0072, grp_0101, grp_0644
+  Split  3: grp_0000, grp_0113, grp_1179, grp_1186
+  Split  4: grp_0065, grp_0091, grp_0738, grp_1186
+  Split  5: grp_0000, grp_0222, grp_1179, grp_1341
+  Split  6: grp_0101, grp_0110, grp_0673, grp_1341
+  Split  7: grp_0033, grp_0101, grp_0673, grp_1341
+  Split  8: grp_0018, grp_0222, grp_0336, grp_0738
+  Split  9: grp_0110, grp_0644, grp_0673, grp_0916
+  Split 10: grp_0072, grp_0113, grp_1004, grp_1179
+  Split 11: grp_0091, grp_0738, grp_1091, grp_1179
+  Split 12: grp_0064, grp_0065, grp_0113, grp_0644
+  Split 13: grp_0091, grp_0113, grp_0222, grp_1186
+  Split 14: grp_0018, grp_0064, grp_0113, grp_0916
+  Split 15: grp_0033, grp_0101, grp_0916, grp_1186
+
+2. All large groups and their sizes
+------------------------------------------------------------
+  grp_0000:   51 proteins  |  in test for splits [3, 5]
+  grp_0018:   48 proteins  |  in test for splits [2, 8, 14]
+  grp_0033:   32 proteins  |  in test for splits [7, 15]
+  grp_0064:   90 proteins  |  in test for splits [12, 14]
+  grp_0065:   25 proteins  |  in test for splits [4, 12]
+  grp_0072:   22 proteins  |  in test for splits [2, 10]
+  grp_0091:   34 proteins  |  in test for splits [4, 11, 13]
+  grp_0101:   40 proteins  |  in test for splits [2, 6, 7, 15]
+  grp_0110:   45 proteins  |  in test for splits [6, 9]
+  grp_0113:   46 proteins  |  in test for splits [3, 10, 12, 13, 14]
+  grp_0222:  113 proteins  |  in test for splits [1, 5, 8, 13]
+  grp_0336:   25 proteins  |  in test for splits [8]
+  grp_0644:   39 proteins  |  in test for splits [2, 9, 12]
+  grp_0673:   39 proteins  |  in test for splits [6, 7, 9]
+  grp_0738:   23 proteins  |  in test for splits [4, 8, 11]
+  grp_0821:   33 proteins  |  in test for splits []
+  grp_0916:   34 proteins  |  in test for splits [1, 9, 14, 15]
+  grp_1004:   21 proteins  |  in test for splits [1, 10]
+  grp_1091:   29 proteins  |  in test for splits [11]
+  grp_1179:   89 proteins  |  in test for splits [3, 5, 10, 11]
+  grp_1186:   47 proteins  |  in test for splits [3, 4, 13, 15]
+  grp_1341:   45 proteins  |  in test for splits [1, 5, 6, 7]
+
+3. Large test set size per split
+------------------------------------------------------------
+  Split  1:  213 proteins
+  Split  2:  149 proteins
+  Split  3:  233 proteins
+  Split  4:  129 proteins
+  Split  5:  298 proteins
+  Split  6:  169 proteins
+  Split  7:  156 proteins
+  Split  8:  209 proteins
+  Split  9:  157 proteins
+  Split 10:  178 proteins
+  Split 11:  175 proteins
+  Split 12:  200 proteins
+  Split 13:  240 proteins
+  Split 14:  218 proteins
+  Split 15:  153 proteins
+
+4. Overlap statistics across all splits
+------------------------------------------------------------
+  Intersection (in ALL test sets): 0
+  Union (in ANY test set):         937
+  Jaccard similarity:              0.000
+
+5. Per-protein test frequency (how many splits is each protein in test?)
+------------------------------------------------------------
+  1 split(s): 54 proteins
+  2 split(s): 286 proteins
+  3 split(s): 183 proteins
+  4 split(s): 368 proteins
+  5 split(s): 46 proteins
+
+6. Per-group test frequency — randomness check
+------------------------------------------------------------
+  Total large groups:          22
+  Groups drawn to test/split:  4  (18.2%)
+  Expected test freq per group over 15 splits: 2.7
+
+  Group                            Size  Test count  Note
+  grp_0000                           51           2  ok
+  grp_0018                           48           3  ok
+  grp_0033                           32           2  ok
+  grp_0064                           90           2  ok
+  grp_0065                           25           2  ok
+  grp_0072                           22           2  ok
+  grp_0091                           34           3  ok
+  grp_0101                           40           4  ok
+  grp_0110                           45           2  ok
+  grp_0113                           46           5  ok
+  grp_0222                          113           4  ok
+  grp_0336                           25           1  ok
+  grp_0644                           39           3  ok
+  grp_0673                           39           3  ok
+  grp_0738                           23           3  ok
+  grp_0821                           33           0  ⚠ NEVER in test
+  grp_0916                           34           4  ok
+  grp_1004                           21           2  ok
+  grp_1091                           29           1  ok
+  grp_1179                           89           4  ok
+  grp_1186                           47           4  ok
+  grp_1341                           45           4  ok
+
+  Min test count across groups: 0
+  Max test count across groups: 5
+  Mean test count:              2.73
+  Std dev:                      1.21
+
+==========================================================================================
+7. Average essentiality per group size
+   (labelled + structured proteins only; consistent with global rate denominator)
+==========================================================================================
+
+  Coverage note (split 1, one row per protein):
+    Total proteins in CSV:              3394
+    Labelled (Ess + Non-ess):           3305
+    Unknown label (excluded):           89
+    No group_size / NaN (excluded):     6
+      of which labelled (double-excl):  5
+    Counted in size_stats:              3300
+    Global essential rate (this pop):   22.6%
+
+    group_size    n_proteins   n_essential    ess_rate
+  ----------------------------------------------------
+           1.0           541           100       18.5%
+           2.0           268            61       22.8%
+           3.0           212            34       16.0%
+           4.0           177            35       19.8%
+           5.0           127            18       14.2%
+           6.0           126            30       23.8%
+           7.0           118            23       19.5%
+           8.0           103            25       24.3%
+           9.0            81            21       25.9%
+          10.0            38            12       31.6%
+          11.0            31             9       29.0%
+          12.0            70            18       25.7%
+          13.0            38            15       39.5%
+          14.0           108            26       24.1%
+          15.0            59             4        6.8%
+          16.0            61             4        6.6%
+          17.0           100            22       22.0%
+          18.0            72            11       15.3%
+          19.0            38             4       10.5%
+          21.0            21             0        0.0%
+          22.0            22             9       40.9%
+          23.0            21             4       19.0%
+          25.0            42             9       21.4%
+          29.0            29            22       75.9%
+          32.0            32            28       87.5%
+          33.0            33            24       72.7%
+          34.0            66            10       15.2%
+          39.0            76            38       50.0%
+          40.0            40             0        0.0%
+          45.0            90            29       32.2%
+          46.0            45            29       64.4%
+          47.0            46             0        0.0%
+          48.0            48            14       29.2%
+          51.0            51            21       41.2%
+          89.0            89            29       32.6%
+          90.0            88             9       10.2%
+         113.0            93             0        0.0%
+
+  Saved: /Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/depmap/cp_avg_essentiality_by_group_size.csv
+
+==========================================================================================
+8. Essential rate profile — focus groups
+==========================================================================================
+  Global essential rate (labelled + structured): 22.6%
+
+  Group          Size   Essential   Non-ess   Unknown   Ess rate   vs global
+  --------------------------------------------------------------------
+  grp_0222        113           0        93        20       0.0%     -22.6pp  ⚠ low
+  grp_0064         90           9        79         2      10.2%     -12.4pp  ⚠ low
+  grp_1179         89          29        60         0      32.6%      +9.9pp
+  grp_0000         51          21        30         0      41.2%     +18.5pp  ⚠ high
+
+  Large-bucket test essential rate by split, annotated with focus groups present:
+  Split  Focus groups in test              Focus grp ess%  Large bucket ess%
+  --------------------------------------------------------------------------
+      1  grp_0222                                    0.0%              12.6%
+      2  none                                         N/A              36.7%
+      3  grp_1179, grp_0000                         35.7%              34.2%
+      4  none                                         N/A               9.2%
+      5  grp_0222, grp_1179, grp_0000               21.5%              25.5%
+      6  none                                         N/A              21.3%
+      7  none                                         N/A              35.9%
+      8  grp_0222                                    0.0%              14.5%
+      9  none                                         N/A              32.0%
+     10  grp_1179                                   32.6%              37.9%
+     11  grp_1179                                   32.6%              35.8%
+     12  grp_0064                                   10.2%              36.7%
+     13  grp_0222                                    0.0%              16.5%
+     14  grp_0064                                   10.2%              25.8%
+     15  none                                         N/A              20.7%

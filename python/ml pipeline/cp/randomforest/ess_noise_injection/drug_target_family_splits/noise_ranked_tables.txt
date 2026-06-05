@@ -1,0 +1,70 @@
+=====================================================================================
+  NOISE INJECTION — FEATURE IMPORTANCE RANKING SUMMARY
+=====================================================================================
+  Task          : Drug Target Prediction
+  Model         : RandomForest
+  Splits × Seeds: 15 × 3 = 45 realisations per feature
+  Noise features: 4 (standard normal, i.i.d.)
+
+  Criterion: features are ranked by mean permutation importance across
+  all splits and seeds.  A real feature is considered uninformative if
+  it ranks at or below the highest-ranked noise feature.
+
+=====================================================================================
+  1. PURE RANDOM MODEL (sanity check)
+=====================================================================================
+  All importances should be near zero — confirms noise is uninformative.
+
+  Rank  Feature                   Mean        Std
+  ------------------------------------------------
+  1     rand_0                 0.00094    0.01323
+  2     rand_3                 0.00083    0.01396
+  3     rand_2                 0.00059    0.01382
+  4     rand_1                 0.00045    0.01518
+
+=====================================================================================
+  2. PAIRWISE + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 5
+  All real features rank above noise.
+
+  Rank  Type    Feature                                     Mean        Std
+  ------------------------------------------------------------------------
+  1     real    pair_TriangleCount                       0.14299    0.04671
+  2     real    pair_Degree                              0.08510    0.03428
+  3     real    pair_LocalClustCoeff                     0.03057    0.02387
+  4     real    pair_AvgNeighborDegree                   0.01862    0.02870
+  5     NOISE   rand_0                                   0.00195    0.00592
+  6     NOISE   rand_1                                   0.00005    0.00463
+  7     NOISE   rand_3                                  -0.00106    0.00554
+  8     NOISE   rand_2                                  -0.00194    0.00526
+
+=====================================================================================
+  3. HYPERGRAPH + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 15
+  Real features at or below noise: base_Degree
+
+  Rank  Type    Feature                                     Mean        Std
+  ------------------------------------------------------------------------
+  1     real    base_TriangleCount                       0.06385    0.03471
+  2     real    stoich_WeightedTriangles                 0.04412    0.04004
+  3     real    base_AvgNeighbourDegree                  0.03872    0.01599
+  4     real    base_UniquePartners                      0.02459    0.01923
+  5     real    protein_MedianUniqueRatio                0.01757    0.01445
+  6     real    protein_RangeComplexNodes                0.01736    0.00916
+  7     real    protein_MedComplexNodes                  0.01394    0.01407
+  8     real    protein_RangeUniqueRatio                 0.01288    0.00810
+  9     real    stoich_AvgNeighbourDegreeStoich          0.01087    0.00767
+  10    real    stoich_MedianRatio                       0.00558    0.00782
+  11    real    base_LocalClustCoeff                     0.00387    0.00901
+  12    real    stoich_RangeComplexSize                  0.00214    0.00449
+  13    real    stoich_RangeRatio                        0.00167    0.00325
+  14    real    stoich_MedComplexSize                    0.00155    0.00840
+  15    NOISE   rand_0                                   0.00117    0.00329
+  16    real    base_Degree                              0.00117    0.00664
+  17    NOISE   rand_1                                   0.00036    0.00239
+  18    NOISE   rand_2                                  -0.00024    0.00237
+  19    NOISE   rand_3                                  -0.00060    0.00241

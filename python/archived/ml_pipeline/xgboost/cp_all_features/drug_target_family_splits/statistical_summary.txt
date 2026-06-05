@@ -1,0 +1,49 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE
+Task: Drug Target Prediction
+Model: XGBoost
+Number of splits: 15
+
+Hypergraph features (22):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_ComponentSize
+  - base_ComponentEdgeNodeRatio
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - base_BetweennessCentrality
+  - base_EigenvectorCentrality
+  - base_KatzCentrality
+  - stoich_WeightedTriangles
+  - stoich_AvgNeighbourDegreeStoich
+  - stoich_RangeComplexSize
+  - stoich_MedComplexSize
+  - stoich_MedianRatio
+  - stoich_RangeRatio
+  - protein_NumSubgroups
+  - protein_AvgSubgroupSize
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (8):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_ComponentSize
+  - pair_EigenvectorCentrality
+  - pair_BetweennessCentrality
+  - pair_KatzCentrality
+  - pair_AvgNeighborDegree
+
+Hypergraph PR-AUC: 0.3040 ± 0.0716
+Pairwise PR-AUC:   0.2432 ± 0.0585
+
+Mean Difference:   0.0608 ± 0.0620
+Hypergraph wins:   13/15
+Pairwise wins:     2/15
+Ties:              0/15
+
+Sign test p (one-sided, H > P): 0.003693
+Sign test p (two-sided):        0.007385

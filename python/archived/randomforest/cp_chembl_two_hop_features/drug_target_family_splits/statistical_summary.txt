@@ -1,0 +1,38 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE
+Task: Gene Essentiality
+Model: RandomForest
+Number of splits: 15
+
+Hypergraph features (15):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - stoich_WeightedTriangles
+  - stoich_AvgNeighbourDegreeStoich
+  - stoich_RangeComplexSize
+  - stoich_MedComplexSize
+  - stoich_MedianRatio
+  - stoich_RangeRatio
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (4):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_AvgNeighborDegree
+
+Hypergraph PR-AUC: 0.2705 ± 0.0542
+Pairwise PR-AUC:   0.1866 ± 0.0411
+
+Mean Difference:   0.0840 ± 0.0759
+Hypergraph wins:   13/15
+Pairwise wins:     2/15
+Ties:              0/15
+
+Sign test p (one-sided, H > P): 0.003693
+Sign test p (two-sided):        0.007385

@@ -1,0 +1,50 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Task: Drug Target Prediction (ChEMBL)
+Model: RandomForest
+Number of splits: 15
+
+Hypergraph features (10):
+  - base_Degree
+  - base_UniquePartners
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (6):
+  - base_Degree
+  - base_UniquePartners
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)    : 0.2403 ± 0.0410
+  Hypergraph (no stoich): 0.1967 ± 0.0406
+  Pairwise             : 0.0890 ± 0.0161
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.1513 ± 0.0444
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : +0.0436 ± 0.0339
+  Wins/Losses/Ties : 14/1/0
+  Sign test p (one-sided) : 0.000488
+  Sign test p (two-sided) : 0.000977
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.1077 ± 0.0424
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061

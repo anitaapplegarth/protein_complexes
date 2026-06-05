@@ -1,0 +1,12 @@
+,0
+task,cp_drug_hpa
+model,RandomForest
+split_index,15
+n_train,2717
+n_test,677
+pct_positive_test,8.0%
+hypergraph_pr_auc,0.5269
+pairwise_pr_auc,0.3083
+hypergraph_features,"['base_Degree', 'base_LocalClustCoeff', 'base_TriangleCount', 'base_UniquePartners', 'base_AvgNeighbourDegree', 'stoich_WeightedTriangles', 'stoich_AvgNeighbourDegreeStoich', 'stoich_RangeComplexSize', 'stoich_MedComplexSize', 'stoich_MedianRatio', 'stoich_RangeRatio', 'protein_MedianUniqueRatio', 'protein_RangeUniqueRatio', 'protein_MedComplexNodes', 'protein_RangeComplexNodes']"
+pairwise_features,"['pair_Degree', 'pair_LocalClustCoeff', 'pair_TriangleCount', 'pair_AvgNeighborDegree']"
+dependence_features,"['protein_MedComplexNodes', 'stoich_MedianRatio', 'protein_MedianUniqueRatio', 'stoich_AvgNeighbourDegreeStoich']"

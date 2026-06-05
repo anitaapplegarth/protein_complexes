@@ -1,0 +1,32 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE
+Task: Drug Target Prediction
+Model: LightGBM
+Number of splits: 15
+
+Hypergraph features (12):
+  - base_Degree
+  - base_UniquePartners
+  - stoich_RangeComplexSize
+  - stoich_MedComplexSize
+  - stoich_MedianRatio
+  - stoich_RangeRatio
+  - protein_NumSubgroups
+  - protein_AvgSubgroupSize
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+Hypergraph PR-AUC: 0.2504 ± 0.0501
+Pairwise PR-AUC:   0.1041 ± 0.0246
+
+Mean Difference:   0.1463 ± 0.0460
+Hypergraph wins:   15/15
+Pairwise wins:     0/15
+Ties:              0/15
+
+Sign test p (one-sided, H > P): 0.000031
+Sign test p (two-sided):        0.000061
