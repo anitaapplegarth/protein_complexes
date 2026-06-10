@@ -1,0 +1,80 @@
+==========================================================================================
+  BORUTA ROBUSTNESS CHECK — FEATURE CONFIRMATION ACROSS SPLITS
+==========================================================================================
+  Database      : CORUM
+  Task          : Drug Target Prediction (HPA)
+  Model         : RandomForest (impurity importance)
+  Splits        : 15
+  Boruta config : max_iter=100, perc=100, alpha=0.05
+
+  Boruta verdict (per split): confirmed = importance significantly above
+  the max shadow; tentative = ambiguous; rejected = not above shadow.
+  Confirmation rate = fraction of splits where the feature was confirmed.
+
+  Reference: Kursa & Rudnicki (2010), 'Feature Selection with the Boruta
+  Package', Journal of Statistical Software 36(11):1-13.
+
+==========================================================================================
+  PAIRWISE FEATURE SET
+==========================================================================================
+  Feature                                 Conf  Tent   Rej   Conf rate   Mean rank
+  ------------------------------------------------------------------------------------
+  pair_AvgNeighborDegree                    15     0     0        1.00        1.00
+  pair_Degree                               15     0     0        1.00        1.00
+  pair_LocalClustCoeff                      15     0     0        1.00        1.00
+  pair_TriangleCount                        15     0     0        1.00        1.00
+
+==========================================================================================
+  HYPERGRAPH FEATURE SET
+==========================================================================================
+  Feature                                 Conf  Tent   Rej   Conf rate   Mean rank
+  ------------------------------------------------------------------------------------
+  base_AvgNeighbourDegree                   15     0     0        1.00        1.00
+  base_Degree                               15     0     0        1.00        1.00
+  base_LocalClustCoeff                      15     0     0        1.00        1.00
+  base_TriangleCount                        15     0     0        1.00        1.00
+  base_UniquePartners                       15     0     0        1.00        1.00
+  protein_MedComplexNodes                   15     0     0        1.00        1.00
+  protein_MedianUniqueRatio                 15     0     0        1.00        1.00
+  protein_RangeComplexNodes                 15     0     0        1.00        1.00
+  protein_RangeUniqueRatio                  15     0     0        1.00        1.00
+  stoich_MedComplexSize                     15     0     0        1.00        1.00
+  stoich_MedianRatio                        15     0     0        1.00        1.00
+  stoich_AvgNeighbourDegreeStoich            8     4     3        0.53        1.47
+  stoich_WeightedTriangles                   0     0    15        0.00        2.47
+  stoich_RangeRatio                          0     0    15        0.00        3.53
+  stoich_RangeComplexSize                    0     0    15        0.00        4.40
+
+==========================================================================================
+  CROSS-COMPARISON WITH NOISE-INJECTION RANK CRITERION
+==========================================================================================
+  Below: side-by-side of Boruta confirmation rate vs noise-injection
+  hit rate (where available). Strong agreement = features rated
+  similarly by two independent methods.
+
+  PAIRWISE:
+  Feature                                Boruta conf   NI rank  NI hit rate
+  ---------------------------------------------------------------------------
+  pair_AvgNeighborDegree                        1.00         3         1.00
+  pair_Degree                                   1.00         2         1.00
+  pair_LocalClustCoeff                          1.00         1         1.00
+  pair_TriangleCount                            1.00         4         0.98
+
+  HYPERGRAPH:
+  Feature                                Boruta conf   NI rank  NI hit rate
+  ---------------------------------------------------------------------------
+  base_AvgNeighbourDegree                       1.00         8         0.63
+  base_Degree                                   1.00         3         0.93
+  base_LocalClustCoeff                          1.00         9         0.59
+  base_TriangleCount                            1.00         4         0.77
+  base_UniquePartners                           1.00        11         0.40
+  protein_MedComplexNodes                       1.00         2         0.99
+  protein_MedianUniqueRatio                     1.00         1         1.00
+  protein_RangeComplexNodes                     1.00         7         0.66
+  protein_RangeUniqueRatio                      1.00         5         0.70
+  stoich_MedComplexSize                         1.00        10         0.53
+  stoich_MedianRatio                            1.00         6         0.60
+  stoich_AvgNeighbourDegreeStoich               0.53        19         0.08
+  stoich_WeightedTriangles                      0.00        16         0.10
+  stoich_RangeRatio                             0.00        17         0.09
+  stoich_RangeComplexSize                       0.00        14         0.15

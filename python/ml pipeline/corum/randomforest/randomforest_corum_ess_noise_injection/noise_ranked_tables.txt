@@ -1,0 +1,107 @@
+=====================================================================================
+  NOISE INJECTION — FEATURE IMPORTANCE RANKING SUMMARY
+=====================================================================================
+  Database      : CORUM
+  Task          : Gene Essentiality
+  Model         : RandomForest
+  Splits × Seeds: 15 × 10 = 150 realisations per feature
+  Noise features: 5 (standard normal, i.i.d.)
+
+  Criterion: a real feature is considered uninformative if it ranks at
+  or below the highest-ranked noise feature (rank-based, no numeric
+  threshold required).
+
+  Hit rate / Binom p (Boruta-style, reported not decisive): per
+  realisation, hit rate is the fraction of (split × seed) runs in which
+  the feature's importance exceeds the MAXIMUM noise importance in that
+  run. Binom p tests hits against a 0.5 null. A high mean rank with a low
+  hit rate flags a feature whose ranking is fragile across runs.
+
+=====================================================================================
+  0. MODEL PERFORMANCE (PR-AUC and F1 @ 0.5 threshold)
+=====================================================================================
+  Mean ± std across seeds, then mean over splits in final row.
+  Note: F1@0.5 is a convenience metric — PR-AUC is the primary measure
+  for imbalanced tasks.
+
+  Split      Rand PR-AUC   Pair PR-AUC   Hyper PR-AUC    Rand F1    Pair F1   Hyper F1
+  -------------------------------------------------------------------------------------
+  1          0.1779±0.0113   0.3040±0.0079    0.3412±0.0026  0.0716±0.0871  0.3731±0.0069  0.4146±0.0080
+  2          0.1957±0.0095   0.5898±0.0133    0.6395±0.0064  0.0917±0.1118  0.5187±0.0075  0.5416±0.0036
+  3          0.1983±0.0098   0.3618±0.0106    0.3904±0.0080  0.1621±0.1063  0.4310±0.0056  0.4445±0.0030
+  4          0.1616±0.0128   0.4797±0.0099    0.5133±0.0063  0.0931±0.0912  0.4836±0.0084  0.5111±0.0041
+  5          0.1398±0.0159   0.3186±0.0060    0.3841±0.0056  0.0901±0.0878  0.3968±0.0108  0.4365±0.0044
+  6          0.1953±0.0143   0.4023±0.0064    0.4318±0.0047  0.1352±0.1003  0.4231±0.0064  0.4603±0.0035
+  7          0.1901±0.0111   0.5911±0.0077    0.6317±0.0077  0.1402±0.1059  0.5042±0.0053  0.5339±0.0061
+  8          0.2005±0.0129   0.4644±0.0123    0.5109±0.0039  0.1029±0.0881  0.4628±0.0051  0.4852±0.0037
+  9          0.2626±0.0182   0.6013±0.0074    0.6390±0.0087  0.1444±0.0980  0.5535±0.0068  0.5859±0.0032
+  10         0.1820±0.0088   0.5030±0.0123    0.5286±0.0091  0.0732±0.0713  0.4735±0.0044  0.5063±0.0049
+  11         0.2530±0.0133   0.5896±0.0063    0.6056±0.0027  0.1018±0.1066  0.5341±0.0060  0.5520±0.0030
+  12         0.1587±0.0162   0.3891±0.0110    0.4573±0.0066  0.1606±0.0703  0.4180±0.0045  0.4481±0.0054
+  13         0.1623±0.0087   0.4335±0.0126    0.4683±0.0083  0.1089±0.0565  0.4645±0.0052  0.4834±0.0036
+  14         0.1512±0.0091   0.4070±0.0100    0.4698±0.0066  0.0896±0.0736  0.4459±0.0121  0.4852±0.0040
+  15         0.1646±0.0104   0.4018±0.0093    0.4659±0.0043  0.1086±0.0845  0.4265±0.0061  0.4536±0.0048
+  -------------------------------------------------------------------------------------
+  MEAN       0.1862±0.0121   0.4558±0.0095    0.4985±0.0061  0.1116±0.0893  0.4606±0.0067  0.4895±0.0044
+
+=====================================================================================
+  1. PURE RANDOM MODEL (sanity check)
+=====================================================================================
+  All importances should be near zero — confirms noise is uninformative.
+
+  Rank  Feature                   Mean        Std
+  ------------------------------------------------
+  1     rand_2                 0.00125    0.00848
+  2     rand_1                 0.00091    0.00917
+  3     rand_0                 0.00034    0.00889
+  4     rand_3                 0.00024    0.00773
+  5     rand_4                -0.00036    0.00905
+
+=====================================================================================
+  2. PAIRWISE + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 5
+  All real features rank above noise.
+
+  Rank  Type    Feature                                     Mean        Std   Hit rate    Binom p
+  ----------------------------------------------------------------------------------------------
+  1     real    pair_TriangleCount                       0.16140    0.04911       1.00     0.0000
+  2     real    pair_Degree                              0.05434    0.02800       0.99     0.0000
+  3     real    pair_AvgNeighborDegree                   0.04816    0.03211       0.96     0.0000
+  4     real    pair_LocalClustCoeff                     0.03244    0.01580       1.00     0.0000
+  5     NOISE   rand_2                                   0.00040    0.00429          —          —
+  6     NOISE   rand_0                                   0.00022    0.00438          —          —
+  7     NOISE   rand_4                                  -0.00002    0.00396          —          —
+  8     NOISE   rand_3                                  -0.00022    0.00473          —          —
+  9     NOISE   rand_1                                  -0.00032    0.00484          —          —
+
+=====================================================================================
+  3. HYPERGRAPH + NOISE — Full ranked list
+=====================================================================================
+  Noise features (rand_*) are interleaved at their actual rank position.
+  Highest-ranked noise feature: rank 13
+  Real features at or below noise: stoich_MedComplexSize, stoich_RangeComplexSize, stoich_RangeRatio
+
+  Rank  Type    Feature                                     Mean        Std   Hit rate    Binom p
+  ----------------------------------------------------------------------------------------------
+  1     real    base_TriangleCount                       0.06518    0.02531       1.00     0.0000
+  2     real    protein_MedianUniqueRatio                0.04844    0.01621       1.00     0.0000
+  3     real    base_AvgNeighbourDegree                  0.03702    0.01886       1.00     0.0000
+  4     real    protein_MedComplexNodes                  0.03271    0.01516       1.00     0.0000
+  5     real    base_UniquePartners                      0.02622    0.01880       0.95     0.0000
+  6     real    protein_RangeComplexNodes                0.02234    0.01798       0.90     0.0000
+  7     real    base_Degree                              0.02138    0.01261       0.98     0.0000
+  8     real    protein_RangeUniqueRatio                 0.01319    0.00989       0.86     0.0000
+  9     real    base_LocalClustCoeff                     0.00775    0.00650       0.78     0.0000
+  10    real    stoich_MedianRatio                       0.00112    0.00159       0.25     0.0000
+  11    real    stoich_AvgNeighbourDegreeStoich          0.00077    0.00105       0.22     0.0000
+  12    real    stoich_WeightedTriangles                 0.00033    0.00070       0.13     0.0000
+  13    NOISE   rand_4                                   0.00020    0.00226          —          —
+  14    NOISE   rand_0                                   0.00020    0.00212          —          —
+  15    real    stoich_MedComplexSize                    0.00016    0.00102       0.15     0.0000
+  16    NOISE   rand_2                                   0.00006    0.00213          —          —
+  17    real    stoich_RangeComplexSize                 -0.00002    0.00012       0.09     0.0000
+  18    real    stoich_RangeRatio                       -0.00004    0.00015       0.08     0.0000
+  19    NOISE   rand_3                                  -0.00007    0.00250          —          —
+  20    NOISE   rand_1                                  -0.00011    0.00228          —          —

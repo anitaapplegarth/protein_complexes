@@ -1,0 +1,51 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Database: CORUM
+Task: Gene Essentiality
+Model: RandomForest
+Number of splits: 15
+
+Hypergraph features (10):
+  - base_Degree
+  - base_UniquePartners
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (6):
+  - base_Degree
+  - base_UniquePartners
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)     : 0.4782 ± 0.0953
+  Hypergraph (no stoich): 0.4820 ± 0.0929
+  Pairwise             : 0.4273 ± 0.0991
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.0510 ± 0.0287
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : -0.0038 ± 0.0092
+  Wins/Losses/Ties : 3/12/0
+  Sign test p (one-sided) : 0.996307
+  Sign test p (two-sided) : 0.035156
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.0548 ± 0.0291
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061

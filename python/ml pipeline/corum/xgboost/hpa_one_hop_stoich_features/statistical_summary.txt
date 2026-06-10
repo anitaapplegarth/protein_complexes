@@ -1,0 +1,51 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Database: CORUM
+Task: Drug Target Prediction (HPA)
+Model: XGBoost
+Number of splits: 15
+
+Hypergraph features (10):
+  - base_Degree
+  - base_UniquePartners
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (6):
+  - base_Degree
+  - base_UniquePartners
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (1):
+  - pair_Degree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)    : 0.4050 ± 0.0665
+  Hypergraph (no stoich): 0.4076 ± 0.0596
+  Pairwise             : 0.1666 ± 0.0243
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.2384 ± 0.0620
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : -0.0026 ± 0.0196
+  Wins/Losses/Ties : 6/9/0
+  Sign test p (one-sided) : 0.849121
+  Sign test p (two-sided) : 0.607239
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.2410 ± 0.0532
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061

@@ -1,0 +1,75 @@
+PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)
+Task: Drug Target Prediction (ChEMBL)
+Model: RandomForest
+Number of splits: 15
+
+Hypergraph features (20):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_ComponentSize
+  - base_ComponentEdgeNodeRatio
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - base_BetweennessCentrality
+  - base_EigenvectorCentrality
+  - base_KatzCentrality
+  - stoich_WeightedTriangles [stoich]
+  - stoich_AvgNeighbourDegreeStoich [stoich]
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph no-stoich features (14):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_ComponentSize
+  - base_ComponentEdgeNodeRatio
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - base_BetweennessCentrality
+  - base_EigenvectorCentrality
+  - base_KatzCentrality
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Pairwise features (8):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_ComponentSize
+  - pair_EigenvectorCentrality
+  - pair_BetweennessCentrality
+  - pair_KatzCentrality
+  - pair_AvgNeighborDegree
+
+PR-AUC Mean ± Std:
+  Hypergraph (full)    : 0.4981 ± 0.0482
+  Hypergraph (no stoich): 0.4944 ± 0.0506
+  Pairwise             : 0.4108 ± 0.0418
+
+Hypergraph (full) vs Pairwise:
+  Mean diff : +0.0873 ± 0.0301
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph (full) vs Hypergraph (no stoich) — stoichiometry effect:
+  Mean diff : +0.0037 ± 0.0139
+  Wins/Losses/Ties : 9/6/0
+  Sign test p (one-sided) : 0.303619
+  Sign test p (two-sided) : 0.607239
+
+Hypergraph (no stoich) vs Pairwise — representation effect alone:
+  Mean diff : +0.0836 ± 0.0307
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061

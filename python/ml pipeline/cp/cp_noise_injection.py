@@ -71,7 +71,7 @@ CONFIG = {
     "N_SPLITS_CV":  5,
 
     # --- Noise injection ---
-    "N_NOISE":  4,
+    "N_NOISE":  5,
     "N_SEEDS":  10,
 
     # --- Hyperparameter grids ---
