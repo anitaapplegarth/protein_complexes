@@ -1,0 +1,98 @@
+REPRESENTATION COMPARISON: PAIRWISE vs HYPERGRAPH vs HYPER+FLAG vs HB-GRAPH
+Task: Drug Target Prediction (HPA)
+Model: RandomForest
+Number of splits: 15
+
+Pairwise features (4):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_AvgNeighborDegree
+
+Hypergraph features (9):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+HB-graph features (15):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - stoich_WeightedTriangles [stoich]
+  - stoich_AvgNeighbourDegreeStoich [stoich]
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+PR-AUC Mean ± Std:
+  Pairwise   : 0.3013 ± 0.0996
+  Hypergraph : 0.3624 ± 0.0894
+  Hyper+flag : 0.3749 ± 0.0911
+  HB-graph   : 0.4066 ± 0.1012
+
+F1 (positive class) Mean ± Std:
+  Pairwise   : 0.2892 ± 0.0450
+  Hypergraph : 0.3243 ± 0.0469
+  Hyper+flag : 0.3404 ± 0.0524
+  HB-graph   : 0.3381 ± 0.0517
+
+HB-graph vs Pairwise — headline representation effect:
+  Mean diff : +0.1053 ± 0.0504
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+HB-graph vs Hypergraph — stoichiometry effect:
+  Mean diff : +0.0442 ± 0.0219
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+Hypergraph vs Pairwise — representation effect alone:
+  Mean diff : +0.0611 ± 0.0519
+  Wins/Losses/Ties : 11/4/0
+  Sign test p (one-sided) : 0.059235
+  Sign test p (two-sided) : 0.118469
+
+[TEST A] Hyper+flag vs Hypergraph — ANNOTATION PRESENCE alone:
+  Mean diff : +0.0124 ± 0.0178
+  Wins/Losses/Ties : 10/5/0
+  Sign test p (one-sided) : 0.150879
+  Sign test p (two-sided) : 0.301758
+
+[TEST A] HB-graph vs Hyper+flag — STOICHIOMETRY VALUES, net of annotation:
+  Mean diff : +0.0318 ± 0.0189
+  Wins/Losses/Ties : 15/0/0
+  Sign test p (one-sided) : 0.000031
+  Sign test p (two-sided) : 0.000061
+
+======================================================================
+TEST A — DECOMPOSITION OF THE STOICHIOMETRY EFFECT
+======================================================================
+
+Component                                      dPR-AUC     W/L  p (1-sided)
+----------------------------------------------------------------------------
+Annotation presence   (flag - hypergraph)      +0.0124  10/5         0.1509
+Stoichiometry values  (hb-graph - flag)        +0.0318  15/0         0.0000
+----------------------------------------------------------------------------
+TOTAL  (hb-graph - hypergraph)                 +0.0442  15/0         0.0000
+
+Annotation presence accounts for 28% of the total stoichiometry effect.
+
+VERDICT:
+  Stoichiometry VALUES add signal beyond annotation presence.
+  Finding 2 survives — report net of the flag; confirm with Test B.
+======================================================================

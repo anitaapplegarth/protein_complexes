@@ -1,8 +1,16 @@
 """
-Repeated Random group-Level Splitting — Size-Stratified, N=15
-==============================================================
-Generates N=15 independent train/test splits where each Foldseek structural
+Repeated Random group-Level Splitting — N=50
+===========================================
+Generates N=50 independent train/test splits where each Foldseek structural
 group is allocated atomically (never split across train and test).
+
+ALLOCATION MODE — CONFIG['stratify_by_bucket']
+---------------------------------------------
+  True  (default) : size-stratified draw. The original scheme, described below.
+  False (ablation): all groups are pooled and round(N_total * 0.20) are drawn
+                    to test uniformly at random. Size buckets are ignored.
+                    Output paths gain the '_unstrat' suffix so the stratified
+                    split files are never overwritten.
 
 ALGORITHM — per split
 ---------------------
@@ -20,7 +28,7 @@ no essentiality information is used during the draw itself.
 After all buckets are processed, overall label balance is checked.  If the
 test essential rate deviates from the global rate by more than
 `max_ess_rate_deviation` percentage points, the entire split is redrawn
-(up to `max_attempts` tries). All 15 accepted splits are saved regardless
+(up to `max_attempts` tries). All accepted splits are saved regardless
 of whether they used retries.
 
 Proteins with no group assignment are allocated by stratified random
@@ -68,7 +76,7 @@ CONFIG = {
     'focus_groups': ['grp_0222', 'grp_0064', 'grp_1179', 'grp_0000'],
 
     # Number of independent splits to produce
-    'n_splits': 15,
+    'n_splits': 50,        # CHANGED: was 15
 
     # Train/test ratios
     'train_ratio': 0.80,
@@ -89,7 +97,33 @@ CONFIG = {
     # Base seed — split i uses seed = base_seed + i for first attempt;
     # retries use base_seed + i + attempt * 1000
     'base_seed': 42,
+
+    # ---- BUCKET ABLATION ---------------------------------------------------
+    # True  : original behaviour. Groups are stratified into the four size
+    #         buckets and round(n_bucket * 0.20) groups are drawn to test from
+    #         each bucket independently.
+    # False : ABLATION. All groups are pooled and round(N_total * 0.20) are
+    #         drawn to test uniformly at random, ignoring size entirely.
+    #
+    # Setting this to False has two automatic consequences:
+    #   (a) output paths gain the '_unstrat' suffix, so the stratified split
+    #       files are never overwritten;
+    #   (b) the per-bucket composition checks in validate_split() are demoted
+    #       from vetoes to printed diagnostics. Those checks exist solely to
+    #       police the stratification, so under the ablation they would reject
+    #       the very splits we are trying to produce. Leakage remains a hard
+    #       veto in both modes.
+    'stratify_by_bucket': True,
+    'unstrat_suffix': '_unstrat',
 }
+
+
+# --- Ablation output routing (no effect when stratify_by_bucket is True) -----
+if not CONFIG['stratify_by_bucket']:
+    for _key in ('output_all_splits', 'output_balance',
+                 'output_summary', 'output_ess_by_size'):
+        _stem, _dot, _ext = CONFIG[_key].rpartition('.')
+        CONFIG[_key] = f"{_stem}{CONFIG['unstrat_suffix']}{_dot}{_ext}"
 
 
 # ============================================================================
@@ -143,15 +177,25 @@ def attempt_split(buckets, group_sizes, group_protein_map,
     test_ratio = config['test_ratio']
     group_to_split = {}
 
-    # --- Bucket-level random draw, largest bucket first ---
-    for bucket_grps in buckets.values():
-        if not bucket_grps:
-            continue
-        n_grps    = len(bucket_grps)
-        n_test    = round(n_grps * test_ratio)
-        n_test    = max(n_test, 0)
+    if config.get('stratify_by_bucket', True):
+        # --- Bucket-level random draw, largest bucket first ---
+        for bucket_grps in buckets.values():
+            if not bucket_grps:
+                continue
+            n_grps    = len(bucket_grps)
+            n_test    = round(n_grps * test_ratio)
+            n_test    = max(n_test, 0)
 
-        grps_list = list(bucket_grps)
+            grps_list = list(bucket_grps)
+            rng.shuffle(grps_list)
+
+            for i, grp in enumerate(grps_list):
+                group_to_split[grp] = 'test' if i < n_test else 'train'
+    else:
+        # --- ABLATION: pooled random draw, size buckets ignored ---
+        grps_list = [g for bucket_grps in buckets.values() for g in bucket_grps]
+        n_test    = max(round(len(grps_list) * test_ratio), 0)
+
         rng.shuffle(grps_list)
 
         for i, grp in enumerate(grps_list):
@@ -239,7 +283,9 @@ def validate_split(protein_to_split, protein_to_group, group_sizes, config):
         bucket_counts[bucket]['total']   += 1
 
     bucket_stats = {}
-    problems = []
+    problems    = []
+    diagnostics = []                                    # non-vetoing (ablation)
+    stratified  = bool(config.get('stratify_by_bucket', True))
     expected_test_frac = float(config.get('test_fraction', 0.2))
     abs_tol            = float(config.get('validate_abs_tol', 0.15))
     min_groups_to_warn = int(config.get('validate_min_groups', 3))
@@ -254,18 +300,27 @@ def validate_split(protein_to_split, protein_to_group, group_sizes, config):
         bucket_stats[bucket] = {'train': train_c, 'test': test_c,
                                  'total': total_c, 'test_frac': test_frac}
         print("{:15s} {:6d} {:6d} {:6d} {:9.3f}".format(bucket, train_c, test_c, total_c, test_frac))
+        # Bucket-composition checks. Under the ablation the size composition of
+        # the test set is deliberately uncontrolled, so these are reported but
+        # must not veto the split. Leakage vetoes in both modes.
+        _sink = problems if stratified else diagnostics
         if total_c > 0 and test_c == 0:
-            problems.append(f"Bucket '{bucket}' has {total_c} groups but 0 in TEST.")
+            _sink.append(f"Bucket '{bucket}' has {total_c} groups but 0 in TEST.")
         if total_c > 0 and train_c == 0:
-            problems.append(f"Bucket '{bucket}' has {total_c} groups but 0 in TRAIN.")
+            _sink.append(f"Bucket '{bucket}' has {total_c} groups but 0 in TRAIN.")
         if total_c >= min_groups_to_warn:
             if abs(test_frac - expected_test_frac) > abs_tol:
-                problems.append(
+                _sink.append(
                     f"Bucket '{bucket}' test fraction {test_frac:.3f} "
                     f"differs from expected {expected_test_frac:.3f} by > {abs_tol:.3f}."
                 )
     if offending_groups:
         problems.append(f"{len(offending_groups)} group(ies) are split across train/test (leakage).")
+
+    if diagnostics:
+        print("  [ablation] bucket-composition notes (reported, not vetoing):")
+        for _d in diagnostics:
+            print(f"    - {_d}")
 
     lines = []
     lines.append("group-size bucket distribution after split (groups counted):")
@@ -588,7 +643,9 @@ def bucket_profile_analysis(splits_df, global_rate_pct, focus_groups, config):
 
 def main():
     print("=" * 70)
-    print("Repeated Random group-Level Splitting — Size-Stratified, N=15")
+    print(f"Repeated Random group-Level Splitting — "
+          f"{'Size-Stratified' if CONFIG['stratify_by_bucket'] else 'UNSTRATIFIED'}, "
+          f"N={CONFIG['n_splits']}")
     print("=" * 70)
 
     # -------------------------------------------------------------------------
@@ -690,7 +747,9 @@ def main():
     # -------------------------------------------------------------------------
     # Generate N splits
     # -------------------------------------------------------------------------
-    print(f"\n--- Generating {CONFIG['n_splits']} splits "
+    print(f"\n--- Allocation mode: "
+          f"{'SIZE-STRATIFIED' if CONFIG['stratify_by_bucket'] else 'UNSTRATIFIED (BUCKET ABLATION)'} ---")
+    print(f"--- Generating {CONFIG['n_splits']} splits "
           f"(tolerance ±{CONFIG['max_ess_rate_deviation']}pp ess, "
           f"±{CONFIG['max_size_deviation']}pp size, "
           f"max {CONFIG['max_attempts']} attempts each) ---")
@@ -701,6 +760,8 @@ def main():
     for i in range(CONFIG['n_splits']):
         best_split          = None
         best_grp_split      = None
+        best_seed           = None
+        best_key            = None
         best_deviation      = float('inf')
         best_size_deviation = float('inf')
         attempts            = 0
@@ -724,18 +785,38 @@ def main():
             size_deviation = abs(100 * test_size_frac - 100 * CONFIG['test_ratio'])
             deviation      = abs(100 * test_ess_rate  - global_rate_pct)
 
-            combined = (size_deviation, deviation)
-            if combined < (best_size_deviation, best_deviation):
+            size_ok = size_deviation <= CONFIG['max_size_deviation']
+            ess_ok  = deviation      <= CONFIG['max_ess_rate_deviation']
+
+            # ACCEPTED -> keep exactly this split, then stop.
+            #
+            # This assignment is the fix. Previously the loop broke here but the
+            # split written out afterwards was `best_split`, which tracked the
+            # smallest SIZE deviation across attempts. An earlier attempt that
+            # had FAILED the balance check was therefore frequently saved in
+            # place of the one just accepted -- producing splits flagged for
+            # balance despite `accepted == True` and `attempts < max_attempts`.
+            if size_ok and ess_ok:
+                accepted            = True
+                best_split          = protein_to_split
+                best_grp_split      = group_to_split
+                best_seed           = seed
+                best_size_deviation = size_deviation
+                best_deviation      = deviation
+                break
+
+            # NOT accepted -> retain the best candidate so far, in case every
+            # attempt fails. Rank: passes the size check, then smallest LABEL
+            # deviation, then smallest size deviation. (Previously: size alone,
+            # which ignored label balance entirely.)
+            key = (not size_ok, deviation, size_deviation)
+            if best_key is None or key < best_key:
+                best_key            = key
                 best_size_deviation = size_deviation
                 best_deviation      = deviation
                 best_split          = protein_to_split
                 best_grp_split      = group_to_split
                 best_seed           = seed
-
-            if size_deviation <= CONFIG['max_size_deviation'] and \
-               deviation <= CONFIG['max_ess_rate_deviation']:
-                accepted = True
-                break
 
         protein_to_split = best_split
         group_to_split   = best_grp_split
@@ -889,6 +970,8 @@ def main():
                  f"{n_no_group} no-group)")
     lines.append(f"Global essential rate:            {global_rate_pct:.1f}%  "
                  f"({n_ess_global} / {n_structured})")
+    lines.append(f"Allocation mode:                  "
+                 f"{'size-stratified' if CONFIG['stratify_by_bucket'] else 'UNSTRATIFIED (bucket ablation)'}")
     lines.append(f"Number of splits:                 {CONFIG['n_splits']}")
     lines.append(f"Train/test ratio:                 "
                  f"{CONFIG['train_ratio']:.0%} / {CONFIG['test_ratio']:.0%}")

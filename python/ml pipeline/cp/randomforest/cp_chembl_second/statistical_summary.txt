@@ -1,0 +1,69 @@
+REPRESENTATION COMPARISON: PAIRWISE vs HYPERGRAPH vs HB-GRAPH
+Task: Drug Target Prediction (ChEMBL)
+Model: RandomForest
+Number of splits: 15
+
+Pairwise features (4):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_AvgNeighborDegree
+
+Hypergraph features (9):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+HB-graph features (15):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - stoich_WeightedTriangles [stoich]
+  - stoich_AvgNeighbourDegreeStoich [stoich]
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Random baseline (PR-AUC of a random classifier
+  = positive-class prevalence in test set): 0.0529
+
+PR-AUC Mean ± Std:
+  Pairwise   : 0.1864 ± 0.0667
+  Hypergraph : 0.2049 ± 0.0465
+  HB-graph   : 0.2428 ± 0.0412
+
+F1 (positive class) Mean ± Std:
+  Pairwise   : 0.1927 ± 0.0487
+  Hypergraph : 0.2291 ± 0.0277
+  HB-graph   : 0.2281 ± 0.0283
+
+HB-graph vs Pairwise — headline representation effect:
+  Mean diff : +0.0563 ± 0.0689
+  Wins/Losses/Ties : 12/3/0
+  Sign test p (one-sided) : 0.017578
+  Sign test p (two-sided) : 0.035156
+
+HB-graph vs Hypergraph — stoichiometry effect:
+  Mean diff : +0.0379 ± 0.0392
+  Wins/Losses/Ties : 12/3/0
+  Sign test p (one-sided) : 0.017578
+  Sign test p (two-sided) : 0.035156
+
+Hypergraph vs Pairwise — representation effect alone:
+  Mean diff : +0.0185 ± 0.0813
+  Wins/Losses/Ties : 10/5/0
+  Sign test p (one-sided) : 0.150879
+  Sign test p (two-sided) : 0.301758

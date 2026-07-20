@@ -1,0 +1,447 @@
+==========================================================================================
+SPLIT SUMMARY — Size-stratified repeated random group-level splits
+Drug Target Labels (ChEMBL)
+==========================================================================================
+Total unique proteins:            3394
+Total complexes:                  2220
+Total groups:                     955
+  Large      (>20, merged):       22
+  Medium     (6–20):              106
+  Small      (2–5):               277
+  Singleton  (1 protein):         550
+Analysis population:              3388  (labelled + structured; excludes 0 Unknown, 6 no-group)
+Global drug target rate:          6.1%  (206 / 3388)
+Allocation mode:                  UNSTRATIFIED (bucket ablation)
+Number of splits:                 50
+Train/test ratio:                 80% / 20%
+Size tolerance:                   ±5.0pp  (acceptable range: 15%–25%)
+Balance tolerance:                ±1.5pp
+Max redraw attempts per split:    10
+Splits requiring redraw:          23 / 50
+Splits with size warnings:        0 / 50
+Splits with balance warnings:     0 / 50
+Splits with leakage violations:   0 / 50
+
+ Split  Att   Train N  Train%  Train pos%   Test N  Test%  Test pos%   SzDev  LblDev  Flag
+------------------------------------------------------------------------------------------
+     1    1      2669   78.6%        6.3%      725  21.4%       5.2%    1.4pp    0.8pp  
+     2    2      2787   82.1%        6.1%      607  17.9%       6.1%    2.1pp    0.0pp  
+     3    4      2622   77.2%        6.0%      772  22.8%       6.2%    2.8pp    0.1pp  
+     4    1      2820   83.1%        5.9%      574  16.9%       7.0%    3.1pp    0.9pp  
+     5    1      2787   82.1%        6.0%      607  17.9%       6.4%    2.1pp    0.4pp  
+     6    2      2659   78.3%        6.4%      735  21.7%       4.9%    1.7pp    1.2pp  
+     7    1      2816   83.0%        6.2%      578  17.0%       5.4%    3.0pp    0.7pp  
+     8    2      2755   81.2%        6.3%      639  18.8%       5.0%    1.2pp    1.1pp  
+     9    1      2836   83.6%        5.9%      558  16.4%       6.8%    3.6pp    0.7pp  
+    10    3      2830   83.4%        6.3%      564  16.6%       5.2%    3.4pp    0.9pp  
+    11    1      2878   84.8%        5.9%      516  15.2%       7.2%    4.8pp    1.1pp  
+    12    2      2663   78.5%        6.3%      731  21.5%       5.3%    1.5pp    0.7pp  
+    13    4      2790   82.2%        6.3%      604  17.8%       5.0%    2.2pp    1.1pp  
+    14    2      2712   79.9%        6.2%      682  20.1%       5.6%    0.1pp    0.5pp  
+    15    2      2728   80.4%        6.2%      666  19.6%       5.6%    0.4pp    0.5pp  
+    16    2      2741   80.8%        6.4%      653  19.2%       4.9%    0.8pp    1.2pp  
+    17    1      2781   81.9%        6.3%      613  18.1%       4.9%    1.9pp    1.2pp  
+    18    1      2819   83.1%        5.8%      575  16.9%       7.3%    3.1pp    1.2pp  
+    19    1      2724   80.3%        6.1%      670  19.7%       6.1%    0.3pp    0.1pp  
+    20    2      2738   80.7%        5.8%      656  19.3%       7.3%    0.7pp    1.2pp  
+    21    1      2852   84.0%        6.2%      542  16.0%       5.7%    4.0pp    0.3pp  
+    22    1      2759   81.3%        6.3%      635  18.7%       4.9%    1.3pp    1.2pp  
+    23    3      2610   76.9%        5.7%      784  23.1%       7.3%    3.1pp    1.2pp  
+    24    3      2554   75.2%        5.7%      840  24.8%       7.4%    4.8pp    1.3pp  
+    25    1      2775   81.8%        6.0%      619  18.2%       6.6%    1.8pp    0.6pp  
+    26    2      2750   81.0%        6.1%      644  19.0%       5.9%    1.0pp    0.2pp  
+    27    1      2584   76.1%        6.0%      810  23.9%       6.2%    3.9pp    0.1pp  
+    28    1      2808   82.7%        6.1%      586  17.3%       5.8%    2.7pp    0.3pp  
+    29    2      2785   82.1%        5.9%      609  17.9%       6.7%    2.1pp    0.7pp  
+    30    1      2727   80.3%        6.4%      667  19.6%       4.7%    0.3pp    1.4pp  
+    31    1      2726   80.3%        6.2%      668  19.7%       5.4%    0.3pp    0.7pp  
+    32    3      2837   83.6%        6.3%      557  16.4%       5.0%    3.6pp    1.0pp  
+    33    1      2760   81.3%        5.8%      634  18.7%       7.3%    1.3pp    1.2pp  
+    34    2      2771   81.6%        6.4%      623  18.4%       4.7%    1.6pp    1.4pp  
+    35    5      2742   80.8%        5.9%      652  19.2%       6.8%    0.8pp    0.7pp  
+    36    1      2711   79.9%        6.4%      683  20.1%       4.8%    0.1pp    1.2pp  
+    37    1      2741   80.8%        5.8%      653  19.2%       7.1%    0.8pp    1.0pp  
+    38    1      2764   81.4%        6.0%      630  18.6%       6.5%    1.4pp    0.4pp  
+    39    3      2740   80.7%        6.0%      654  19.3%       6.3%    0.7pp    0.2pp  
+    40    2      2592   76.4%        6.1%      802  23.6%       6.1%    3.6pp    0.0pp  
+    41    1      2703   79.6%        6.4%      691  20.4%       4.8%    0.4pp    1.3pp  
+    42    1      2619   77.2%        5.7%      775  22.8%       7.2%    2.8pp    1.2pp  
+    43    6      2798   82.4%        6.0%      596  17.6%       6.4%    2.4pp    0.3pp  
+    44    1      2725   80.3%        6.1%      669  19.7%       6.0%    0.3pp    0.1pp  
+    45    1      2602   76.7%        6.0%      792  23.3%       6.3%    3.3pp    0.2pp  
+    46    1      2754   81.1%        6.4%      640  18.9%       4.7%    1.1pp    1.4pp  
+    47    2      2676   78.8%        6.2%      718  21.1%       5.6%    1.1pp    0.5pp  
+    48    1      2655   78.2%        5.7%      739  21.8%       7.5%    1.8pp    1.4pp  
+    49    3      2569   75.7%        6.1%      825  24.3%       6.1%    4.3pp    0.0pp  
+    50    1      2713   79.9%        6.2%      681  20.1%       5.7%    0.1pp    0.3pp  
+------------------------------------------------------------------------------------------
+  Mean                  80.5%        6.1%           19.5%       6.0%    1.9pp
+   Std                  2.32%       0.22%           2.32%      0.88%   1.33pp
+   Min                  75.2%        5.7%           15.2%       4.7%    0.1pp
+   Max                  84.8%        6.4%           24.8%       7.5%    4.8pp
+
+Leakage guarantee: all groups are atomic — no group spans train and test.
+Flag key: Sz = size out of range, Lb = label imbalance, Lk = leakage
+
+==========================================================================================
+TEST SET BREAKDOWN BY STRUCTURAL GROUP SIZE BUCKET (proteins in test)
+==========================================================================================
+ Split   Large N    L%   Pos%   Medium N    M%   Pos%   Small N    S%   Pos%   Singleton N   Sg%   Pos%
+------------------------------------------------------------------------------------------
+     1       209 21.5%   6.2%        251 23.3%   6.0%       160 20.2%   3.1%           104 18.9%   4.8%
+     2       137 14.1%   8.0%        187 17.4%   6.4%       168 21.2%   5.4%           114 20.7%   4.4%
+     3       268 27.6%   6.7%        214 19.9%   7.9%       186 23.5%   3.2%           103 18.7%   6.8%
+     4        96  9.9%  13.5%        211 19.6%   5.2%       152 19.2%   4.6%           114 20.7%   7.9%
+     5       170 17.5%   1.8%        163 15.2%  11.0%       151 19.0%   6.0%           122 22.2%   7.4%
+     6       289 29.8%   0.7%        166 15.4%  10.8%       173 21.8%   4.0%           106 19.3%   8.5%
+     7        55  5.7%   3.6%        209 19.4%   5.7%       217 27.4%   5.1%            96 17.5%   6.2%
+     8       181 18.7%   2.8%        186 17.3%   7.0%       157 19.8%   5.1%           114 20.7%   5.3%
+     9        89  9.2%   0.0%        191 17.8%   7.3%       166 20.9%   6.0%           111 20.2%  12.6%
+    10        89  9.2%   0.0%        185 17.2%   3.8%       186 23.5%   5.4%           103 18.7%  11.7%
+    11        25  2.6%   0.0%        194 18.0%  11.3%       189 23.8%   3.7%           107 19.5%   7.5%
+    12       268 27.6%   7.8%        200 18.6%   4.0%       157 19.8%   1.3%           105 19.1%   7.6%
+    13       126 13.0%   2.4%        208 19.3%   3.8%       163 20.6%   3.7%           106 19.3%  12.3%
+    14       213 22.0%   7.0%        214 19.9%   6.5%       139 17.5%   2.2%           115 20.9%   5.2%
+    15       197 20.3%   6.6%        188 17.5%   7.4%       174 21.9%   2.3%           106 19.3%   5.7%
+    16        89  9.2%   0.0%        283 26.3%   8.1%       183 23.1%   2.7%            97 17.6%   4.1%
+    17       240 24.7%   0.0%        117 10.9%  12.8%       127 16.0%   4.7%           128 23.3%   7.0%
+    18        69  7.1%   2.9%        241 22.4%   8.3%       154 19.4%   6.5%           110 20.0%   9.1%
+    19       191 19.7%   6.8%        200 18.6%   4.5%       167 21.1%   4.8%           111 20.2%   9.9%
+    20        89  9.2%   0.0%        292 27.2%   9.6%       167 21.1%   7.2%           107 19.5%   7.5%
+    21        22  2.3%   0.0%        261 24.3%   5.4%       153 19.3%   6.5%           105 19.1%   6.7%
+    22       139 14.3%   2.2%        224 20.8%   5.8%       161 20.3%   4.3%           110 20.0%   7.3%
+    23       324 33.4%  10.5%        214 19.9%   4.2%       129 16.3%   0.0%           116 21.1%  12.1%
+    24       318 32.8%   6.6%        259 24.1%  10.4%       155 19.5%   2.6%           107 19.5%   9.3%
+    25       166 17.1%   1.2%        158 14.7%  11.4%       189 23.8%   5.3%           105 19.1%  10.5%
+    26       143 14.7%   2.1%        236 22.0%   8.1%       158 19.9%   4.4%           106 19.3%   8.5%
+    27       339 34.9%   4.4%        207 19.3%  10.1%       152 19.2%   3.9%           111 20.2%   7.2%
+    28        78  8.0%   0.0%        225 20.9%   8.4%       176 22.2%   4.0%           106 19.3%   7.5%
+    29       168 17.3%   7.7%        178 16.6%   9.6%       143 18.0%   4.2%           119 21.6%   4.2%
+    30       195 20.1%   1.5%        214 19.9%   4.7%       147 18.5%   8.2%           110 20.0%   5.5%
+    31       224 23.1%   5.8%        174 16.2%   5.7%       156 19.7%   3.8%           113 20.5%   6.2%
+    32       140 14.4%   5.7%        124 11.5%   0.8%       183 23.1%   5.5%           109 19.8%   8.3%
+    33       111 11.4%  11.7%        235 21.9%   2.6%       179 22.6%   7.3%           108 19.6%  13.0%
+    34        73  7.5%   4.1%        268 24.9%   4.1%       183 23.1%   6.0%            98 17.8%   4.1%
+    35       193 19.9%   7.3%        190 17.7%   4.7%       156 19.7%   5.8%           112 20.4%  10.7%
+    36       153 15.8%   6.5%        275 25.6%   4.7%       143 18.0%   0.7%           111 20.2%   8.1%
+    37       119 12.3%   6.7%        260 24.2%   8.1%       171 21.6%   4.1%           102 18.5%   9.8%
+    38       119 12.3%  10.9%        249 23.2%   4.8%       149 18.8%   4.7%           112 20.4%   8.0%
+    39       184 19.0%   7.1%        207 19.3%   5.3%       141 17.8%   4.3%           121 22.0%   9.1%
+    40       316 32.6%   2.2%        193 18.0%   9.3%       189 23.8%   5.8%           103 18.7%  12.6%
+    41       182 18.8%   1.6%        242 22.5%   4.5%       161 20.3%   6.2%           105 19.1%   8.6%
+    42       343 35.4%   8.5%        163 15.2%   6.1%       162 20.4%   4.9%           106 19.3%   8.5%
+    43        51  5.3%   5.9%        259 24.1%   7.7%       183 23.1%   4.9%           102 18.5%   5.9%
+    44       142 14.6%  10.6%        271 25.2%   2.6%       148 18.7%   6.1%           107 19.5%   8.4%
+    45       291 30.0%   1.0%        222 20.7%  12.6%       175 22.1%   8.0%           103 18.7%   4.9%
+    46       221 22.8%   1.8%        171 15.9%   8.8%       118 14.9%   2.5%           129 23.5%   6.2%
+    47       180 18.6%   1.1%        273 25.4%  10.6%       159 20.1%   1.9%           105 19.1%   5.7%
+    48       195 20.1%   2.6%        259 24.1%  13.5%       186 23.5%   4.3%            98 17.8%   7.1%
+    49       330 34.0%   4.5%        240 22.3%   7.5%       152 19.2%   3.9%           102 18.5%  10.8%
+    50       199 20.5%   6.5%        181 16.8%   5.0%       200 25.2%   6.0%           100 18.2%   5.0%
+------------------------------------------------------------------------------------------
+  Mean     175.0 18.0%   4.5%      214.6 20.0%   7.1%     163.9 20.7%   4.5%         108.4 19.7%   7.8%
+   Std      85.9 8.85%  3.59%       40.4 3.76%  2.92%      19.4 2.45%  1.76%           7.1 1.30%  2.43%
+
+  N% = % of that bucket's proteins going to test.
+  Pos% = drug target rate among analysis-population test proteins in that bucket.
+
+==========================================================================================
+LARGE-BUCKET PROFILE ANALYSIS
+==========================================================================================
+
+1. Which large groups are in TEST per split?
+------------------------------------------------------------
+  Split  1: grp_0000, grp_0101, grp_0110, grp_0738, grp_1004, grp_1091
+  Split  2: grp_0000, grp_0101, grp_0336, grp_1004
+  Split  3: grp_0000, grp_0064, grp_0113, grp_0916, grp_1186
+  Split  4: grp_0821, grp_0916, grp_1091
+  Split  5: grp_0000, grp_0064, grp_1091
+  Split  6: grp_0033, grp_0113, grp_0336, grp_0738, grp_1091, grp_1179, grp_1341
+  Split  7: grp_0033, grp_0738
+  Split  8: grp_0018, grp_0065, grp_0113, grp_0644, grp_0738
+  Split  9: grp_1179
+  Split 10: grp_1179
+  Split 11: grp_0336
+  Split 12: grp_0072, grp_0091, grp_0101, grp_0110, grp_0336, grp_0673, grp_0916, grp_1091
+  Split 13: grp_0018, grp_0644, grp_0673
+  Split 14: grp_0064, grp_0110, grp_0738, grp_0916, grp_1004
+  Split 15: grp_0064, grp_0091, grp_0644, grp_0916
+  Split 16: grp_1179
+  Split 17: grp_0033, grp_0072, grp_0091, grp_0644, grp_0673, grp_1091, grp_1341
+  Split 18: grp_0113, grp_0738
+  Split 19: grp_0673, grp_0916, grp_1091, grp_1179
+  Split 20: grp_1179
+  Split 21: grp_0072
+  Split 22: grp_0018, grp_0110, grp_0336, grp_1004
+  Split 23: grp_0000, grp_0064, grp_0222, grp_0738, grp_1186
+  Split 24: grp_0101, grp_0113, grp_0336, grp_0673, grp_0916, grp_1179, grp_1341
+  Split 25: grp_0091, grp_0336, grp_0673, grp_0738, grp_1341
+  Split 26: grp_0000, grp_0065, grp_0072, grp_1341
+  Split 27: grp_0033, grp_0072, grp_0113, grp_0673, grp_0738, grp_0821, grp_0916, grp_1004, grp_1179
+  Split 28: grp_0033, grp_0065, grp_1004
+  Split 29: grp_0110, grp_0916, grp_1179
+  Split 30: grp_0018, grp_0336, grp_0673, grp_0821, grp_1004, grp_1091
+  Split 31: grp_0000, grp_0065, grp_0101, grp_0113, grp_0673, grp_0738
+  Split 32: grp_0033, grp_0072, grp_0101, grp_0113
+  Split 33: grp_0033, grp_0916, grp_1341
+  Split 34: grp_0000, grp_0072
+  Split 35: grp_0000, grp_0018, grp_0065, grp_0101, grp_1091
+  Split 36: grp_0033, grp_0091, grp_0101, grp_1186
+  Split 37: grp_0091, grp_0101, grp_0110
+  Split 38: grp_0113, grp_0673, grp_0916
+  Split 39: grp_0000, grp_0101, grp_0110, grp_0336, grp_0738
+  Split 40: grp_0018, grp_0064, grp_0113, grp_0738, grp_0821, grp_1091, grp_1186
+  Split 41: grp_0018, grp_1179, grp_1341
+  Split 42: grp_0033, grp_0072, grp_0110, grp_0113, grp_0222, grp_0738, grp_0821, grp_1091
+  Split 43: grp_0000
+  Split 44: grp_0113, grp_0673, grp_0738, grp_0916
+  Split 45: grp_0000, grp_0033, grp_0091, grp_0336, grp_0644, grp_1004, grp_1179
+  Split 46: grp_0113, grp_0644, grp_0738, grp_1004, grp_1186, grp_1341
+  Split 47: grp_0644, grp_0738, grp_1091, grp_1179
+  Split 48: grp_0018, grp_0091, grp_0110, grp_0738, grp_1341
+  Split 49: grp_0033, grp_0065, grp_0110, grp_0336, grp_0821, grp_0916, grp_1179, grp_1186
+  Split 50: grp_0072, grp_0091, grp_0110, grp_0336, grp_0644, grp_0916
+
+2. All large groups and their sizes (analysis population proteins)
+------------------------------------------------------------
+  grp_0000:   51 proteins  |  in test for splits [1, 2, 3, 5, 23, 26, 31, 34, 35, 39, 43, 45]
+  grp_0018:   48 proteins  |  in test for splits [8, 13, 22, 30, 35, 40, 41, 48]
+  grp_0033:   32 proteins  |  in test for splits [6, 7, 17, 27, 28, 32, 33, 36, 42, 45, 49]
+  grp_0064:   90 proteins  |  in test for splits [3, 5, 14, 15, 23, 40]
+  grp_0065:   25 proteins  |  in test for splits [8, 26, 28, 31, 35, 49]
+  grp_0072:   22 proteins  |  in test for splits [12, 17, 21, 26, 27, 32, 34, 42, 50]
+  grp_0091:   34 proteins  |  in test for splits [12, 15, 17, 25, 36, 37, 45, 48, 50]
+  grp_0101:   40 proteins  |  in test for splits [1, 2, 12, 24, 31, 32, 35, 36, 37, 39]
+  grp_0110:   45 proteins  |  in test for splits [1, 12, 14, 22, 29, 37, 39, 42, 48, 49, 50]
+  grp_0113:   46 proteins  |  in test for splits [3, 6, 8, 18, 24, 27, 31, 32, 38, 40, 42, 44, 46]
+  grp_0222:  113 proteins  |  in test for splits [23, 42]
+  grp_0336:   25 proteins  |  in test for splits [2, 6, 11, 12, 22, 24, 25, 30, 39, 45, 49, 50]
+  grp_0644:   39 proteins  |  in test for splits [8, 13, 15, 17, 45, 46, 47, 50]
+  grp_0673:   39 proteins  |  in test for splits [12, 13, 17, 19, 24, 25, 27, 30, 31, 38, 44]
+  grp_0738:   23 proteins  |  in test for splits [1, 6, 7, 8, 14, 18, 23, 25, 27, 31, 39, 40, 42, 44, 46, 47, 48]
+  grp_0821:   33 proteins  |  in test for splits [4, 27, 30, 40, 42, 49]
+  grp_0916:   34 proteins  |  in test for splits [3, 4, 12, 14, 15, 19, 24, 27, 29, 33, 38, 44, 49, 50]
+  grp_1004:   21 proteins  |  in test for splits [1, 2, 14, 22, 27, 28, 30, 45, 46]
+  grp_1091:   29 proteins  |  in test for splits [1, 4, 5, 6, 12, 17, 19, 30, 35, 40, 42, 47]
+  grp_1179:   89 proteins  |  in test for splits [6, 9, 10, 16, 19, 20, 24, 27, 29, 41, 45, 47, 49]
+  grp_1186:   47 proteins  |  in test for splits [3, 23, 36, 40, 46, 49]
+  grp_1341:   45 proteins  |  in test for splits [6, 17, 24, 25, 26, 33, 41, 46, 48]
+
+3. Large test set size per split (all proteins)
+------------------------------------------------------------
+  Split  1:  209 proteins
+  Split  2:  137 proteins
+  Split  3:  268 proteins
+  Split  4:   96 proteins
+  Split  5:  170 proteins
+  Split  6:  289 proteins
+  Split  7:   55 proteins
+  Split  8:  181 proteins
+  Split  9:   89 proteins
+  Split 10:   89 proteins
+  Split 11:   25 proteins
+  Split 12:  268 proteins
+  Split 13:  126 proteins
+  Split 14:  213 proteins
+  Split 15:  197 proteins
+  Split 16:   89 proteins
+  Split 17:  240 proteins
+  Split 18:   69 proteins
+  Split 19:  191 proteins
+  Split 20:   89 proteins
+  Split 21:   22 proteins
+  Split 22:  139 proteins
+  Split 23:  324 proteins
+  Split 24:  318 proteins
+  Split 25:  166 proteins
+  Split 26:  143 proteins
+  Split 27:  339 proteins
+  Split 28:   78 proteins
+  Split 29:  168 proteins
+  Split 30:  195 proteins
+  Split 31:  224 proteins
+  Split 32:  140 proteins
+  Split 33:  111 proteins
+  Split 34:   73 proteins
+  Split 35:  193 proteins
+  Split 36:  153 proteins
+  Split 37:  119 proteins
+  Split 38:  119 proteins
+  Split 39:  184 proteins
+  Split 40:  316 proteins
+  Split 41:  182 proteins
+  Split 42:  343 proteins
+  Split 43:   51 proteins
+  Split 44:  142 proteins
+  Split 45:  291 proteins
+  Split 46:  221 proteins
+  Split 47:  180 proteins
+  Split 48:  195 proteins
+  Split 49:  330 proteins
+  Split 50:  199 proteins
+
+4. Overlap statistics across all splits
+------------------------------------------------------------
+  Intersection (in ALL test sets): 0
+  Union (in ANY test set):         970
+  Jaccard similarity:              0.000
+
+5. Per-protein test frequency (how many splits each protein is in test)
+------------------------------------------------------------
+  2 split(s): 113 proteins
+  6 split(s): 195 proteins
+  8 split(s): 87 proteins
+  9 split(s): 122 proteins
+  10 split(s): 40 proteins
+  11 split(s): 116 proteins
+  12 split(s): 105 proteins
+  13 split(s): 135 proteins
+  14 split(s): 34 proteins
+  17 split(s): 23 proteins
+
+6. Per-group test frequency — randomness check
+------------------------------------------------------------
+  Total large groups:          22
+  Groups drawn to test/split:  4  (18.2%)
+  Expected test freq per group over 50 splits: 9.1
+
+  Group                           AP size  Test count  Note
+  grp_0000                             51          12  ok
+  grp_0018                             48           8  ok
+  grp_0033                             32          11  ok
+  grp_0064                             90           6  ok
+  grp_0065                             25           6  ok
+  grp_0072                             22           9  ok
+  grp_0091                             34           9  ok
+  grp_0101                             40          10  ok
+  grp_0110                             45          11  ok
+  grp_0113                             46          13  ok
+  grp_0222                            113           2  ok
+  grp_0336                             25          12  ok
+  grp_0644                             39           8  ok
+  grp_0673                             39          11  ok
+  grp_0738                             23          17  ok
+  grp_0821                             33           6  ok
+  grp_0916                             34          14  ok
+  grp_1004                             21           9  ok
+  grp_1091                             29          12  ok
+  grp_1179                             89          13  ok
+  grp_1186                             47           6  ok
+  grp_1341                             45           9  ok
+
+  Min test count: 2  Max: 17  Mean: 9.73  Std: 3.28
+
+==========================================================================================
+7. Drug target rate per group size  (analysis population only)
+==========================================================================================
+  Analysis population = labelled (Drug_target/Non_target) + structured
+  Global drug target rate: 6.1%
+  n = 3388
+
+    group_size   n_groups    n_proteins   n_drug_target   target_rate
+  --------------------------------------------------------------------
+             1        550           550              41          7.5%
+             2        135           270              10          3.7%
+             3         71           213              11          5.2%
+             4         45           180               8          4.4%
+             5         26           130               8          6.2%
+             6         22           132              11          8.3%
+             7         18           126               5          4.0%
+             8         13           104               6          5.8%
+             9          9            81               9         11.1%
+            10          4            40               0          0.0%
+            11          3            33               0          0.0%
+            12          6            72               5          6.9%
+            13          3            39               1          2.6%
+            14          8           112               4          3.6%
+            15          4            60              15         25.0%
+            16          4            64               5          7.8%
+            17          6           102               3          2.9%
+            18          4            72               3          4.2%
+            19          2            38               3          7.9%
+            21          1            21               0          0.0%
+            22          1            22               0          0.0%
+            23          1            23               2          8.7%
+            25          2            50               0          0.0%
+            29          1            29               0          0.0%
+            32          1            32               0          0.0%
+            33          1            33               0          0.0%
+            34          2            68              13         19.1%
+            39          2            78               0          0.0%
+            40          1            40               8         20.0%
+            45          2            90               0          0.0%
+            46          1            46               0          0.0%
+            47          1            47               2          4.3%
+            48          1            48               3          6.2%
+            51          1            51               3          5.9%
+            89          1            89               0          0.0%
+            90          1            90               0          0.0%
+           113          1           113              27         23.9%
+
+  Saved: /Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/avg_chembl_by_group__merged_size_unstrat.csv
+
+==========================================================================================
+8. Drug target rate profile — focus groups  (analysis population only)
+==========================================================================================
+  Global drug target rate: 6.1%
+
+  Group         AP size   Drug_target  Non_target   vs global
+  ----------------------------------------------------------
+  grp_0222          113            27          86     +17.8pp  ⚠ high
+  grp_0064           90             0          90      -6.1pp  ⚠ low
+  grp_1179           89             0          89      -6.1pp  ⚠ low
+  grp_0000           51             3          48      -0.2pp
+
+  Large-bucket test drug target rate by split, annotated with focus groups:
+  Split  Focus groups in test                Focus rate  Bucket rate
+  --------------------------------------------------------------------
+      1  grp_0000                                  5.9%         6.2%
+      2  grp_0000                                  5.9%         8.0%
+      3  grp_0064, grp_0000                        2.1%         6.7%
+      4  none                                       N/A        13.5%
+      5  grp_0064, grp_0000                        2.1%         1.8%
+      6  grp_1179                                  0.0%         0.7%
+      7  none                                       N/A         3.6%
+      8  none                                       N/A         2.8%
+      9  grp_1179                                  0.0%         0.0%
+     10  grp_1179                                  0.0%         0.0%
+     11  none                                       N/A         0.0%
+     12  none                                       N/A         7.8%
+     13  none                                       N/A         2.4%
+     14  grp_0064                                  0.0%         7.0%
+     15  grp_0064                                  0.0%         6.6%
+     16  grp_1179                                  0.0%         0.0%
+     17  none                                       N/A         0.0%
+     18  none                                       N/A         2.9%
+     19  grp_1179                                  0.0%         6.8%
+     20  grp_1179                                  0.0%         0.0%
+     21  none                                       N/A         0.0%
+     22  none                                       N/A         2.2%
+     23  grp_0222, grp_0064, grp_0000             11.8%        10.5%
+     24  grp_1179                                  0.0%         6.6%
+     25  none                                       N/A         1.2%
+     26  grp_0000                                  5.9%         2.1%
+     27  grp_1179                                  0.0%         4.4%
+     28  none                                       N/A         0.0%
+     29  grp_1179                                  0.0%         7.7%
+     30  none                                       N/A         1.5%
+     31  grp_0000                                  5.9%         5.8%
+     32  none                                       N/A         5.7%
+     33  none                                       N/A        11.7%
+     34  grp_0000                                  5.9%         4.1%
+     35  grp_0000                                  5.9%         7.3%
+     36  none                                       N/A         6.5%
+     37  none                                       N/A         6.7%
+     38  none                                       N/A        10.9%
+     39  grp_0000                                  5.9%         7.1%
+     40  grp_0064                                  0.0%         2.2%
+     41  grp_1179                                  0.0%         1.6%
+     42  grp_0222                                 23.9%         8.5%
+     43  grp_0000                                  5.9%         5.9%
+     44  none                                       N/A        10.6%
+     45  grp_1179, grp_0000                        2.1%         1.0%
+     46  none                                       N/A         1.8%
+     47  grp_1179                                  0.0%         1.1%
+     48  none                                       N/A         2.6%
+     49  grp_1179                                  0.0%         4.5%
+     50  none                                       N/A         6.5%

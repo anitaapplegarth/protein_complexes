@@ -54,26 +54,26 @@
   PAIRWISE:
   Feature                                Boruta conf   NI rank  NI hit rate
   ---------------------------------------------------------------------------
-  pair_AvgNeighborDegree                        1.00         2         0.84
-  pair_Degree                                   1.00         4         0.67
+  pair_AvgNeighborDegree                        1.00         2         0.86
+  pair_Degree                                   1.00         3         0.76
   pair_LocalClustCoeff                          1.00         1         1.00
-  pair_TriangleCount                            1.00         3         0.81
+  pair_TriangleCount                            1.00         4         0.84
 
   HYPERGRAPH:
   Feature                                Boruta conf   NI rank  NI hit rate
   ---------------------------------------------------------------------------
   base_AvgNeighbourDegree                       1.00         8         0.77
-  base_Degree                                   1.00         1         0.97
-  base_TriangleCount                            1.00        10         0.73
-  base_UniquePartners                           1.00        11         0.37
-  protein_MedComplexNodes                       1.00         3         0.96
-  protein_MedianUniqueRatio                     1.00         4         0.95
+  base_Degree                                   1.00         1         0.98
+  base_TriangleCount                            1.00        10         0.66
+  base_UniquePartners                           1.00        11         0.40
+  protein_MedComplexNodes                       1.00         3         0.91
+  protein_MedianUniqueRatio                     1.00         2         0.94
   stoich_AvgNeighbourDegreeStoich               1.00         6         0.90
-  stoich_MedComplexSize                         1.00         5         1.00
-  stoich_MedianRatio                            1.00         2         0.99
-  stoich_WeightedTriangles                      1.00         7         0.73
-  protein_RangeUniqueRatio                      0.80        18         0.16
+  stoich_MedComplexSize                         1.00         4         0.97
+  stoich_MedianRatio                            1.00         5         0.96
+  stoich_WeightedTriangles                      1.00         7         0.72
+  protein_RangeUniqueRatio                      0.80        18         0.20
   base_LocalClustCoeff                          0.60         9         0.79
-  stoich_RangeRatio                             0.20        19         0.09
-  protein_RangeComplexNodes                     0.00        16         0.16
-  stoich_RangeComplexSize                       0.00        17         0.13
+  stoich_RangeRatio                             0.20        20         0.13
+  protein_RangeComplexNodes                     0.00        19         0.08
+  stoich_RangeComplexSize                       0.00        17         0.09

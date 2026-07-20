@@ -1,0 +1,69 @@
+REPRESENTATION COMPARISON: PAIRWISE vs HYPERGRAPH vs HB-GRAPH
+Task: Gene Essentiality
+Model: RandomForest
+Number of splits: 15
+
+Pairwise features (4):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_AvgNeighborDegree
+
+Hypergraph features (9):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+HB-graph features (15):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - stoich_WeightedTriangles [stoich]
+  - stoich_AvgNeighbourDegreeStoich [stoich]
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_MedianUniqueRatio
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Random baseline (PR-AUC of a random classifier
+  = positive-class prevalence in test set): 0.2250
+
+PR-AUC Mean ± Std:
+  Pairwise   : 0.5221 ± 0.1160
+  Hypergraph : 0.5583 ± 0.1088
+  HB-graph   : 0.5720 ± 0.1131
+
+F1 (positive class) Mean ± Std:
+  Pairwise   : 0.4968 ± 0.0735
+  Hypergraph : 0.5157 ± 0.0697
+  HB-graph   : 0.5256 ± 0.0645
+
+HB-graph vs Pairwise — headline representation effect:
+  Mean diff : +0.0498 ± 0.0385
+  Wins/Losses/Ties : 14/1/0
+  Sign test p (one-sided) : 0.000488
+  Sign test p (two-sided) : 0.000977
+
+HB-graph vs Hypergraph — stoichiometry effect:
+  Mean diff : +0.0137 ± 0.0304
+  Wins/Losses/Ties : 12/3/0
+  Sign test p (one-sided) : 0.017578
+  Sign test p (two-sided) : 0.035156
+
+Hypergraph vs Pairwise — representation effect alone:
+  Mean diff : +0.0362 ± 0.0273
+  Wins/Losses/Ties : 14/1/0
+  Sign test p (one-sided) : 0.000488
+  Sign test p (two-sided) : 0.000977
