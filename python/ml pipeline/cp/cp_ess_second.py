@@ -34,10 +34,38 @@ plt.rcParams.update({
 CONFIG = {
     # --- Paths ---
     "DATA_DIR": Path("/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/"),
-    "BASE_OUTPUT_DIR": Path("./randomforest/cp_ess_second"),
+    "BASE_OUTPUT_DIR": Path("./randomforest/cp_ess_second_testA"),
 
-    # --- File Names ---
-    "SPLITS_FILE":           "ess_protein_merged_splits.csv",
+    # --- TEST A: annotation-presence control -------------------------------
+    # A fourth tier, HYPER_FLAG = HYPERGRAPH + a single binary feature marking
+    # whether the protein has ANY curated stoichiometry. This decomposes the
+    # apparent stoichiometry effect into two parts:
+    #
+    #     hb_graph - hypergraph   =  [hyper_flag - hypergraph]   (annotation presence)
+    #                             +  [hb_graph  - hyper_flag ]   (stoichiometry VALUES)
+    #
+    # The flag is recovered exactly from the existing features: a true
+    # stoich_MedianRatio lies in (0, 1], so a value of 0 is out of range and
+    # uniquely marks "this protein has no curated stoichiometry anywhere".
+    # NOTE: the fillna(0) encoding is deliberately left UNCHANGED — this test
+    # measures what the current encoding is buying, so it must not be fixed here.
+    "ANNOTATION_FLAG":     "flag_HasStoich",
+    "FLAG_SOURCE_FEATURE": "stoich_MedianRatio",
+    # Optional sanity check against the raw incidence file. Set to None to skip.
+    # Must sit in the SAME subdirectory as DATA_DIR (cp/ or corum/), or the
+    # annotation-flag cross-check silently skips itself.
+    "RAW_STOICH_FILE": Path("/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/stoich_protein.csv"),
+
+    # --- Splits file --------------------------------------------------------
+    # The pipeline runs however many splits this file contains (see
+    # split_indices in main()), so moving from 15 to 50 splits needs no code
+    # change -- only this filename.
+    #
+    # For the bucket-ablation arm, change BOTH of these together:
+    #     "SPLITS_FILE":     "ess_protein_splits_unstrat.csv",
+    #     "BASE_OUTPUT_DIR": Path("./randomforest/cp_ess_second_testA_unstrat"),
+    # Changing only one silently overwrites the other arm's results.
+    "SPLITS_FILE":           "ess_protein_splits.csv",
     "PROTEIN_FEATURES_FILE": "hypergraph_features.csv",
     "PAIRWISE_FEATURES_FILE":"pairwise_features.csv",
 
@@ -106,10 +134,13 @@ CONFIG = {
             'stoich_RangeRatio',
 
             # --- Protein-participation metrics ---
-            'protein_MedianUniqueRatio',
+            # 'protein_MedianUniqueRatio',   # DROPPED: near-exact reciprocal of
+            #                                # protein_MedComplexNodes (Spearman -0.9965).
+            #                                # MedComplexNodes retained.
             'protein_RangeUniqueRatio',
             'protein_MedComplexNodes',
             'protein_RangeComplexNodes',
+            # 'protein_NormUniqueSum'
         ],
 
         # Stoichiometry features to ablate — must be a subset of HB_GRAPH above.
@@ -136,13 +167,9 @@ CONFIG = {
     }
 }
 
-splits_path = CONFIG["DATA_DIR"] / CONFIG["SPLITS_FILE"]
-print(f"   Splits file last modified: {pd.Timestamp(os.path.getmtime(splits_path), unit='s')}")
-print(f"   Splits file rows: {pd.read_csv(splits_path).shape}")
+# NOTE: the splits file is no longer probed at import time — it is resolved in
+# main(), where its existence is checked before any work begins.
 
-# =======================================================
-# DATA LOADING
-# =======================================================
 
 def load_all_features() -> pd.DataFrame:
     """Loads higher-order (hb-graph) and pairwise feature CSVs and merges on ProteinId."""
@@ -156,7 +183,52 @@ def load_all_features() -> pd.DataFrame:
     print(f"   Higher-order (hb-graph) features shape : {hg_df.shape}")
     print(f"   Pairwise features shape               : {pair_df.shape}")
     print(f"   Combined shape                        : {combined.shape}")
+
+    combined = derive_annotation_flag(combined)
     return combined
+
+
+def derive_annotation_flag(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adds CONFIG['ANNOTATION_FLAG'] (binary): 1 if the protein has at least one
+    complex with curated stoichiometry, 0 otherwise.
+
+    Derived from stoich_MedianRatio. In cp_hypergraph_features.ipynb the ratio is
+    computed only over complexes where the protein's own Stoichiometry != 0, and
+    falls back to 0 when that list is empty. Since a genuine ratio is in (0, 1],
+    a value of exactly 0 is unambiguous: no curated stoichiometry anywhere.
+    """
+    flag = CONFIG["ANNOTATION_FLAG"]
+    src  = CONFIG["FLAG_SOURCE_FEATURE"]
+
+    if src not in df.columns:
+        raise KeyError(f"Cannot derive {flag}: '{src}' not in feature file.")
+
+    df[flag] = (df[src] > 0).astype(int)
+
+    n_annot = int(df[flag].sum())
+    print(f"\n   Derived '{flag}' from '{src}':")
+    print(f"     curated   : {n_annot} / {len(df)}  ({100*n_annot/len(df):.1f}%)")
+    print(f"     uncurated : {len(df)-n_annot} / {len(df)}  ({100*(1-n_annot/len(df)):.1f}%)")
+
+    # --- Optional cross-check against the raw incidence file ---
+    raw_path = CONFIG.get("RAW_STOICH_FILE")
+    if raw_path and Path(raw_path).exists():
+        raw = pd.read_csv(raw_path)
+        truth = (raw.assign(a=(raw['Stoichiometry'] > 0).astype(int))
+                    .groupby('ProteinId')['a'].max())
+        chk = df[['ProteinId', flag]].merge(
+            truth.rename('truth'), left_on='ProteinId', right_index=True, how='inner')
+        n_mismatch = int((chk[flag] != chk['truth']).sum())
+        if n_mismatch == 0:
+            print(f"     cross-check vs {Path(raw_path).name}: exact match "
+                  f"on all {len(chk)} proteins ✓")
+        else:
+            print(f"     WARNING: cross-check disagrees on {n_mismatch}/{len(chk)} proteins.")
+    else:
+        print(f"     (raw-file cross-check skipped — RAW_STOICH_FILE not found)")
+
+    return df
 
 
 def load_splits() -> pd.DataFrame:
@@ -171,7 +243,11 @@ def load_splits() -> pd.DataFrame:
         label_mask    — bool; False for Unknown proteins (excluded from metrics)
     """
     print("2. Loading pre-assigned splits...")
-    splits_df = pd.read_csv(CONFIG["DATA_DIR"] / CONFIG["SPLITS_FILE"])
+    splits_path = CONFIG["DATA_DIR"] / CONFIG["SPLITS_FILE"]
+    print(f"   File              : {splits_path.name}")
+    print(f"   Last modified     : "
+          f"{pd.Timestamp(os.path.getmtime(splits_path), unit='s')}")
+    splits_df = pd.read_csv(splits_path)
 
     # Rename to match feature file key
     splits_df = splits_df.rename(columns={'UniProt_AC': 'ProteinId'})
@@ -181,6 +257,10 @@ def load_splits() -> pd.DataFrame:
     splits_df['target'] = splits_df['protein_label'].map(label_map)
 
     n_splits = splits_df['split_index'].nunique()
+    expected = CONFIG.get("EXPECTED_N_SPLITS")
+    if expected is not None and n_splits != expected:
+        print(f"   WARNING: found {n_splits} splits, expected {expected}. "
+              f"Check that the splits file is the regenerated one.")
     print(f"   Splits file rows  : {len(splits_df)}")
     print(f"   Unique proteins   : {splits_df['ProteinId'].nunique()}")
     print(f"   Number of splits  : {n_splits}")
@@ -281,12 +361,14 @@ def run_split(
     splits_df: pd.DataFrame,
     hb_graph_features: List[str],
     hypergraph_features: List[str],
-    pairwise_features: List[str]
+    pairwise_features: List[str],
+    hyper_flag_features: List[str]
 ) -> Dict:
     """
-    Runs the three nested representations for a single pre-assigned split:
+    Runs FOUR tiers for a single pre-assigned split:
       pairwise   — dyadic PPI features
       hypergraph — set-based higher-order features (no stoichiometry)
+      hyper_flag — hypergraph + the binary annotation-presence flag  [TEST A]
       hb_graph   — hypergraph features PLUS stoichiometry (multiset hyperedges)
 
     merged_df   — feature matrix (ProteinId + all feature columns)
@@ -358,6 +440,20 @@ def run_split(
     hyper_preds['hyper_pred_proba']  = hyper_eval['y_pred_proba']
     results['hypergraph_predictions'] = hyper_preds
 
+    # --- Hyper+flag model (hypergraph + annotation-presence flag) [TEST A] ---
+    X_hf_train = train_df[hyper_flag_features]
+    X_hf_test  = test_df[hyper_flag_features]
+
+    hf_model, hf_params = tune_and_train_model(X_hf_train, y_train)
+    hf_eval = evaluate_model(hf_model, X_hf_test, y_test)
+
+    results['hyper_flag_pr_auc']      = hf_eval['pr_auc']
+    results['hyper_flag_f1']          = hf_eval['f1']
+    results['hyper_flag_best_params'] = hf_params
+    results['hyper_flag_importance']  = compute_permutation_importance(
+        hf_model, X_hf_test, y_test
+    )
+
     # --- HB-graph model (hypergraph + stoichiometry) ---
     X_hbg_train = train_df[hb_graph_features]
     X_hbg_test  = test_df[hb_graph_features]
@@ -387,6 +483,12 @@ def run_split(
     results['stoich_pr_auc_diff'] = results['hb_graph_pr_auc'] - results['hypergraph_pr_auc']
     results['stoich_f1_diff']     = results['hb_graph_f1']     - results['hypergraph_f1']
 
+    # --- TEST A decomposition of the stoichiometry effect ---
+    # annotation presence alone:
+    results['annot_pr_auc_diff'] = results['hyper_flag_pr_auc'] - results['hypergraph_pr_auc']
+    # stoichiometry VALUES, net of annotation presence:
+    results['value_pr_auc_diff'] = results['hb_graph_pr_auc']   - results['hyper_flag_pr_auc']
+
     return results
 
 # =======================================================
@@ -394,7 +496,10 @@ def run_split(
 # =======================================================
 
 def run_sign_test_comparison(all_results: List[Dict]) -> Dict:
-    """Sign test (binomial) on paired PR-AUC wins/losses across splits.
+    """One-sided sign test (binomial on wins/losses) on the paired PR-AUC
+    differences across splits: does the better representation win on
+    significantly more than half of the splits? Cohen's dz is reported
+    alongside as a descriptive effect size (it is not a test).
     Covers three paired comparisons:
       1. HB-graph vs Pairwise                        — headline representation effect
       2. HB-graph vs Hypergraph  — stoichiometry effect (adding multiset stoichiometry)
@@ -402,11 +507,13 @@ def run_sign_test_comparison(all_results: List[Dict]) -> Dict:
     """
     pair_vals  = np.array([r['pairwise_pr_auc']   for r in all_results])
     hyper_vals = np.array([r['hypergraph_pr_auc'] for r in all_results])
+    hf_vals    = np.array([r['hyper_flag_pr_auc'] for r in all_results])
     hbg_vals   = np.array([r['hb_graph_pr_auc']   for r in all_results])
 
     # F1 values (positive class) per representation
     pair_f1  = np.array([r['pairwise_f1']   for r in all_results])
     hyper_f1 = np.array([r['hypergraph_f1'] for r in all_results])
+    hf_f1    = np.array([r['hyper_flag_f1'] for r in all_results])
     hbg_f1   = np.array([r['hb_graph_f1']   for r in all_results])
 
     def _sign_test(a, b):
@@ -420,21 +527,33 @@ def run_sign_test_comparison(all_results: List[Dict]) -> Dict:
             p_two_sided = binomtest(n_wins, n_valid, 0.5, alternative='two-sided').pvalue
         else:
             p_greater = p_two_sided = 1.0
+
+        # --- Paired standardised effect size (Cohen's dz) ---
+        sd = float(np.std(diffs, ddof=1)) if len(diffs) > 1 else 0.0
+        dz = float(np.mean(diffs) / sd) if sd > 0 else 0.0
+
         return dict(wins=n_wins, losses=n_loss, ties=n_ties,
-                    mean_diff=float(np.mean(diffs)), std_diff=float(np.std(diffs)),
-                    p_greater=p_greater, p_two_sided=p_two_sided)
+                    mean_diff=float(np.mean(diffs)),
+                    std_diff=sd,   # sample SD (ddof=1), consistent with Cohen's dz
+                    p_greater=p_greater, p_two_sided=p_two_sided,
+                    cohens_dz=dz)
 
     hbg_vs_pair   = _sign_test(hbg_vals,   pair_vals)   # headline
     stoich_effect = _sign_test(hbg_vals,   hyper_vals)  # hb_graph vs hypergraph
     hyper_vs_pair = _sign_test(hyper_vals, pair_vals)   # representation effect alone
 
-    # Random-classifier PR-AUC baseline = positive-class prevalence in test set
-    base_key = 'test_ess_pct' if 'test_ess_pct' in all_results[0] else 'test_dt_pct'
-    random_baseline = float(np.mean([r[base_key] for r in all_results])) / 100.0
+    # --- TEST A: split the stoichiometry effect into its two parts ---
+    annot_effect = _sign_test(hf_vals,  hyper_vals)  # what annotation PRESENCE buys
+    value_effect = _sign_test(hbg_vals, hf_vals)     # what stoichiometry VALUES buy
 
     return {
         'n_runs': len(all_results),
-        'random_baseline': random_baseline,
+        'hyper_flag_pr_auc_mean': float(np.mean(hf_vals)),
+        'hyper_flag_pr_auc_std':  float(np.std(hf_vals)),
+        'hyper_flag_f1_mean':     float(np.mean(hf_f1)),
+        'hyper_flag_f1_std':      float(np.std(hf_f1)),
+        'annot_effect': annot_effect,
+        'value_effect': value_effect,
         # --- PR-AUC mean ± std per representation ---
         'pairwise_pr_auc_mean':   float(np.mean(pair_vals)),
         'pairwise_pr_auc_std':    float(np.std(pair_vals)),
@@ -457,6 +576,7 @@ def run_sign_test_comparison(all_results: List[Dict]) -> Dict:
         'ties':                  hbg_vs_pair['ties'],
         'sign_test_p_greater':   hbg_vs_pair['p_greater'],
         'sign_test_p_two_sided': hbg_vs_pair['p_two_sided'],
+        'cohens_dz':             hbg_vs_pair['cohens_dz'],
         # --- Stoichiometry effect: HB-graph vs Hypergraph ---
         'stoich_effect':         stoich_effect,
         # --- Representation effect alone: Hypergraph vs Pairwise ---
@@ -509,8 +629,6 @@ def print_statistical_summary(stats: Dict):
     print("  STATISTICAL COMPARISON")
     print(f"{'='*70}")
     print(f"\n  Number of splits: {stats['n_runs']}")
-    print(f"  Random baseline (PR-AUC = positive-class prevalence): "
-          f"{stats['random_baseline']:.4f}")
 
     # --- PR-AUC (ordered pairwise -> hypergraph -> hb_graph) ---
     print(f"\n  PR-AUC")
@@ -520,6 +638,8 @@ def print_statistical_summary(stats: Dict):
           f"{stats['pairwise_pr_auc_mean']:.4f} ± {stats['pairwise_pr_auc_std']:.4f}")
     print(f"  {'Hypergraph':<20} "
           f"{stats['hypergraph_pr_auc_mean']:.4f} ± {stats['hypergraph_pr_auc_std']:.4f}")
+    print(f"  {'Hypergraph + flag':<20} "
+          f"{stats['hyper_flag_pr_auc_mean']:.4f} ± {stats['hyper_flag_pr_auc_std']:.4f}")
     print(f"  {'HB-graph':<20} "
           f"{stats['hb_graph_pr_auc_mean']:.4f} ± {stats['hb_graph_pr_auc_std']:.4f}")
 
@@ -531,15 +651,18 @@ def print_statistical_summary(stats: Dict):
           f"{stats['pairwise_f1_mean']:.4f} ± {stats['pairwise_f1_std']:.4f}")
     print(f"  {'Hypergraph':<20} "
           f"{stats['hypergraph_f1_mean']:.4f} ± {stats['hypergraph_f1_std']:.4f}")
+    print(f"  {'Hypergraph + flag':<20} "
+          f"{stats['hyper_flag_f1_mean']:.4f} ± {stats['hyper_flag_f1_std']:.4f}")
     print(f"  {'HB-graph':<20} "
           f"{stats['hb_graph_f1_mean']:.4f} ± {stats['hb_graph_f1_std']:.4f}")
 
     def _print_comparison(label, d):
         print(f"\n  --- {label} ---")
-        print(f"  Mean diff : {d['mean_diff']:+.4f} ± {d['std_diff']:.4f}")
+        print(f"  Mean diff : {d['mean_diff']:+.4f} ± {d['std_diff']:.4f}"
+              f"   (Cohen's dz = {d.get('cohens_dz', float('nan')):+.3f})")
         print(f"  Wins/Losses/Ties : {d['wins']}/{d['losses']}/{d['ties']}")
-        print(f"  Sign test p (one-sided) : {d['p_greater']:.6f}")
-        print(f"  Sign test p (two-sided) : {d['p_two_sided']:.6f}")
+        print(f"  Sign test p (one-sided) : {d['p_greater']:.6f}   "
+              f"(two-sided: {d['p_two_sided']:.6f})")
 
     _print_comparison("HB-graph vs Pairwise — headline representation effect",
                       {'mean_diff': stats['mean_difference'],
@@ -548,11 +671,54 @@ def print_statistical_summary(stats: Dict):
                        'losses':    stats['pairwise_wins'],
                        'ties':      stats['ties'],
                        'p_greater': stats['sign_test_p_greater'],
-                       'p_two_sided': stats['sign_test_p_two_sided']})
+                       'p_two_sided': stats['sign_test_p_two_sided'],
+                       'cohens_dz':   stats['cohens_dz']})
     _print_comparison("HB-graph vs Hypergraph — stoichiometry effect",
                       stats['stoich_effect'])
     _print_comparison("Hypergraph vs Pairwise — representation effect alone",
                       stats['hyper_vs_pair'])
+
+    # ---------------- TEST A: decomposition ----------------
+    ann = stats['annot_effect']
+    val = stats['value_effect']
+    tot = stats['stoich_effect']
+
+    _print_comparison("[TEST A] Hyper+flag vs Hypergraph — ANNOTATION PRESENCE alone",
+                      ann)
+    _print_comparison("[TEST A] HB-graph vs Hyper+flag — STOICHIOMETRY VALUES, "
+                      "net of annotation", val)
+
+    print(f"\n{'='*70}")
+    print("  TEST A — DECOMPOSITION OF THE STOICHIOMETRY EFFECT")
+    print(f"{'='*70}")
+    print(f"\n  {'Component':<44} {'ΔPR-AUC':>9} {'W/L':>7} {'p (1-sided)':>12}")
+    print(f"  {'-'*78}")
+    print(f"  {'Annotation presence   (flag − hypergraph)':<44} "
+          f"{ann['mean_diff']:>+9.4f} {ann['wins']:>3}/{ann['losses']:<3} "
+          f"{ann['p_greater']:>12.4f}")
+    print(f"  {'Stoichiometry values  (hb-graph − flag)':<44} "
+          f"{val['mean_diff']:>+9.4f} {val['wins']:>3}/{val['losses']:<3} "
+          f"{val['p_greater']:>12.4f}")
+    print(f"  {'-'*78}")
+    print(f"  {'TOTAL  (hb-graph − hypergraph)':<44} "
+          f"{tot['mean_diff']:>+9.4f} {tot['wins']:>3}/{tot['losses']:<3} "
+          f"{tot['p_greater']:>12.4f}")
+
+    total = tot['mean_diff']
+    if abs(total) > 1e-9:
+        share = 100 * ann['mean_diff'] / total
+        print(f"\n  Annotation presence accounts for {share:.0f}% of the total "
+              f"stoichiometry effect.")
+
+    print("\n  VERDICT:")
+    if val['p_greater'] < 0.05:
+        print("    Stoichiometry VALUES add signal beyond annotation presence.")
+        print("    Finding 2 survives — but report it net of the flag, and confirm with Test B")
+        print("    (re-run restricted to curated proteins only).")
+    else:
+        print("    Stoichiometry VALUES add NO significant signal beyond annotation presence.")
+        print("    The apparent stoichiometry effect is substantially an ascertainment artefact.")
+        print("    Finding 2 cannot be claimed as stated.")
     print(f"{'='*70}")
 
 
@@ -580,21 +746,6 @@ def print_feature_importance_summary(
 # PLOTTING
 # =======================================================
 
-def get_random_baseline(all_results: List[Dict]) -> float:
-    """
-    PR-AUC of a random classifier = positive-class prevalence in the test set.
-
-    (Note: 0.5 is the *ROC-AUC* baseline, not the PR-AUC baseline. Because
-    PR-AUC depends on class balance, this baseline is task-specific and must be
-    quoted alongside PR-AUC values.)
-
-    Averaged across splits; the per-split test prevalence is already stored as
-    'test_ess_pct' (essentiality) or 'test_dt_pct' (drug target).
-    """
-    key = 'test_ess_pct' if 'test_ess_pct' in all_results[0] else 'test_dt_pct'
-    return float(np.mean([r[key] for r in all_results])) / 100.0
-
-
 def plot_paired_comparison(all_results: List[Dict], stats: Dict, output_dir: Path):
     """Two-panel comparison plot: paired scatter (headline contrast) and 3-way boxplot.
 
@@ -604,18 +755,12 @@ def plot_paired_comparison(all_results: List[Dict], stats: Dict, output_dir: Pat
     hyper_vals = np.array([r['hypergraph_pr_auc'] for r in all_results])
     hbg_vals   = np.array([r['hb_graph_pr_auc']   for r in all_results])
 
-    baseline = get_random_baseline(all_results)
-
     fig, axes = plt.subplots(1, 2, figsize=(13, 6))
 
     # Panel 1: paired scatter — headline contrast (HB-graph vs Pairwise), one point per split
     ax1 = axes[0]
     ax1.scatter(pair_vals, hbg_vals, alpha=0.7, s=60, zorder=3)
     ax1.plot([0, 1], [0, 1], 'r--', linewidth=2, label='y = x')
-    # Random-classifier baseline (= positive-class prevalence)
-    ax1.axhline(baseline, color='dimgray', linestyle=':', linewidth=1.8, zorder=1,
-                label=f'Random baseline ({baseline:.3f})')
-    ax1.axvline(baseline, color='dimgray', linestyle=':', linewidth=1.8, zorder=1)
     ax1.set_xlabel('Pairwise PR-AUC')
     ax1.set_ylabel('HB-graph PR-AUC')
     ax1.set_title('Paired Comparison — One Point per Split')
@@ -645,10 +790,6 @@ def plot_paired_comparison(all_results: List[Dict], stats: Dict, output_dir: Pat
     for i, data in enumerate(box_data):
         x = rng.normal(i + 1, 0.04, size=len(data))
         ax2.scatter(x, data, alpha=0.4, s=20, color='black')
-    # Random-classifier baseline (= positive-class prevalence)
-    ax2.axhline(baseline, color='dimgray', linestyle=':', linewidth=1.8, zorder=1,
-                label=f'Random baseline ({baseline:.3f})')
-    ax2.legend(loc='upper right', fontsize=10)
 
     plt.tight_layout()
     plt.savefig(output_dir / 'paired_comparison.png', dpi=300)
@@ -672,8 +813,6 @@ def plot_stoich_ablation(all_results: List[Dict], stats: Dict, output_dir: Path)
     stoich_wins   = int(np.sum(hbg_vals > hyper_vals))
     stoich_losses = int(np.sum(hbg_vals < hyper_vals))
 
-    baseline = get_random_baseline(all_results)
-
     ab  = stats['stoich_effect']
     p_one = ab['p_greater']
     p_two = ab['p_two_sided']
@@ -685,10 +824,6 @@ def plot_stoich_ablation(all_results: List[Dict], stats: Dict, output_dir: Path)
     ax1.scatter(hyper_vals, hbg_vals, alpha=0.7, s=60, zorder=3,
                 color='steelblue')
     ax1.plot([0, 1], [0, 1], 'r--', linewidth=2, label='y = x (no difference)')
-    # Random-classifier baseline (= positive-class prevalence)
-    ax1.axhline(baseline, color='dimgray', linestyle=':', linewidth=1.8, zorder=1,
-                label=f'Random baseline ({baseline:.3f})')
-    ax1.axvline(baseline, color='dimgray', linestyle=':', linewidth=1.8, zorder=1)
     ax1.set_xlabel('Hypergraph PR-AUC')
     ax1.set_ylabel('HB-graph PR-AUC')
     ax1.set_title('Stoichiometry Ablation — One Point per Split')
@@ -721,10 +856,6 @@ def plot_stoich_ablation(all_results: List[Dict], stats: Dict, output_dir: Path)
     for i, data in enumerate(box_data):
         x = rng.normal(i + 1, 0.04, size=len(data))
         ax2.scatter(x, data, alpha=0.4, s=20, color='black', zorder=3)
-    # Random-classifier baseline (= positive-class prevalence)
-    ax2.axhline(baseline, color='dimgray', linestyle=':', linewidth=1.8, zorder=1,
-                label=f'Random baseline ({baseline:.3f})')
-    ax2.legend(loc='upper left', fontsize=10)
 
     # Annotate with mean ± std for each box
     for i, vals in enumerate(box_data):
@@ -743,6 +874,68 @@ def plot_stoich_ablation(all_results: List[Dict], stats: Dict, output_dir: Path)
     plt.savefig(output_dir / 'stoich_ablation.png', dpi=300, bbox_inches='tight')
     plt.close()
     print("   Saved: stoich_ablation.png")
+
+
+def plot_testA_decomposition(all_results: List[Dict], stats: Dict, output_dir: Path):
+    """
+    TEST A figure.
+
+    Panel 1 — Boxplot of all four tiers. The gap between 'Hypergraph + flag' and
+              'HB-graph' is the only part of the stoichiometry effect that the
+              stoichiometry VALUES can claim.
+    Panel 2 — Paired scatter, hb-graph vs hypergraph+flag, one point per split.
+              Points on the diagonal = the values add nothing beyond the flag.
+    """
+    pair_vals  = np.array([r['pairwise_pr_auc']   for r in all_results])
+    hyper_vals = np.array([r['hypergraph_pr_auc'] for r in all_results])
+    hf_vals    = np.array([r['hyper_flag_pr_auc'] for r in all_results])
+    hbg_vals   = np.array([r['hb_graph_pr_auc']   for r in all_results])
+
+    ann, val = stats['annot_effect'], stats['value_effect']
+
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+    ax = axes[0]
+    box_data = [pair_vals, hyper_vals, hf_vals, hbg_vals]
+    labels   = ['Pairwise', 'Hypergraph', 'Hypergraph\n+ flag', 'HB-graph']
+    colours  = ['lightgray', 'skyblue', 'gold', 'steelblue']
+    bp = ax.boxplot(box_data, labels=labels, patch_artist=True,
+                    medianprops=dict(color='black', linewidth=2))
+    for patch, c in zip(bp['boxes'], colours):
+        patch.set_facecolor(c)
+    rng = np.random.default_rng(0)
+    for i, d in enumerate(box_data):
+        ax.scatter(rng.normal(i + 1, 0.04, size=len(d)), d,
+                   alpha=0.4, s=20, color='black', zorder=3)
+    for i, v in enumerate(box_data):
+        ax.text(i + 1, 0.02, f'{v.mean():.3f}', ha='center', va='bottom', fontsize=12)
+    ax.set_ylabel('PR-AUC')
+    ax.set_ylim(0, 1)
+    ax.set_title('Test A — four nested tiers')
+
+    ax = axes[1]
+    ax.scatter(hf_vals, hbg_vals, alpha=0.75, s=60, color='steelblue', zorder=3)
+    lo = min(hf_vals.min(), hbg_vals.min()) - 0.05
+    hi = max(hf_vals.max(), hbg_vals.max()) + 0.05
+    ax.plot([lo, hi], [lo, hi], 'r--', linewidth=2, label='y = x (values add nothing)')
+    ax.set_xlim(lo, hi); ax.set_ylim(lo, hi); ax.set_aspect('equal')
+    ax.set_xlabel('Hypergraph + flag PR-AUC')
+    ax.set_ylabel('HB-graph PR-AUC')
+    ax.set_title('Stoichiometry values, net of annotation')
+    ax.legend(fontsize=12, loc='upper left')
+    ax.text(0.97, 0.03,
+            f"Annotation:  {ann['mean_diff']:+.4f}  ({ann['wins']}/{ann['losses']}, "
+            f"p={ann['p_greater']:.4f})\n"
+            f"Values:      {val['mean_diff']:+.4f}  ({val['wins']}/{val['losses']}, "
+            f"p={val['p_greater']:.4f})",
+            transform=ax.transAxes, ha='right', va='bottom', fontsize=11,
+            family='monospace',
+            bbox=dict(facecolor='lightyellow', alpha=0.9))
+
+    plt.tight_layout()
+    plt.savefig(output_dir / 'testA_decomposition.png', dpi=300)
+    plt.close()
+    print("   Saved: testA_decomposition.png")
 
 
 def plot_feature_importance(
@@ -786,8 +979,16 @@ if __name__ == "__main__":
     start_time = time.time()
     print(f"Process started at {time.strftime('%H:%M:%S', time.localtime(start_time))}")
 
+    splits_path = CONFIG["DATA_DIR"] / CONFIG["SPLITS_FILE"]
+    if not splits_path.exists():
+        raise FileNotFoundError(
+            f"Splits file not found: {splits_path}\n"
+            f"   Check CONFIG['SPLITS_FILE'].")
+
+
     # --- Output directory ---
-    output_dir = CONFIG["BASE_OUTPUT_DIR"]
+    # Set BASE_OUTPUT_DIR in CONFIG (alongside SPLITS_FILE) when switching arms.
+    output_dir = Path(CONFIG["BASE_OUTPUT_DIR"])
     output_dir.mkdir(parents=True, exist_ok=True)
     CONFIG["OUTPUT_DIR"] = output_dir
 
@@ -796,6 +997,7 @@ if __name__ == "__main__":
     print(f"  Task   : Gene Essentiality")
     print(f"  Model  : {CONFIG['MODEL_TYPE']}")
     print(f"  Splits : pre-assigned family-level")
+    print(f"           {splits_path}")
     print(f"  Output : {output_dir}")
     print(f"{'='*70}\n")
 
@@ -818,6 +1020,10 @@ if __name__ == "__main__":
     hypergraph_features = [f for f in hb_graph_features
                            if f not in stoich_features]
 
+    # TEST A tier: hypergraph + the single annotation-presence flag
+    flag = CONFIG["ANNOTATION_FLAG"]
+    hyper_flag_features = hypergraph_features + [flag]
+
     missing_hbg  = [f for f in CONFIG["FEATURES"]["HB_GRAPH"] if f not in features_df.columns]
     missing_pair = [f for f in CONFIG["FEATURES"]["PAIRWISE"] if f not in features_df.columns]
     if missing_hbg:
@@ -831,12 +1037,18 @@ if __name__ == "__main__":
     print(f"   Active hypergraph features ({len(hypergraph_features)}):")
     for f in hypergraph_features:
         print(f"     - {f}")
+    print(f"   Active hypergraph + flag features ({len(hyper_flag_features)}):  [TEST A]")
+    for f in hyper_flag_features:
+        tag = " [annotation flag]" if f == flag else ""
+        print(f"     - {f}{tag}")
     print(f"   Active hb-graph features ({len(hb_graph_features)}):")
     for f in hb_graph_features:
         tag = " [stoich]" if f in stoich_features else ""
         print(f"     - {f}{tag}")
 
     # --- Fill any NaNs in feature columns ---
+    # NB: encoding deliberately UNCHANGED from the original script. Test A measures
+    # what the current fillna(0) encoding is buying; fixing it here would defeat that.
     all_feature_cols = hb_graph_features + pairwise_features
     n_nans = features_df[all_feature_cols].isna().sum().sum()
     if n_nans > 0:
@@ -846,25 +1058,53 @@ if __name__ == "__main__":
     # --- Main loop over splits ---
     print(f"\n3. Running paired comparisons across {len(split_indices)} splits...\n")
     all_results = []
+    failed_splits = []
 
-    for split_idx in split_indices:
-        print(f"   Split {split_idx:>2}/{len(split_indices)}...", end=" ", flush=True)
+    # Per-split checkpoint: a 50-split run is long, so results are appended to
+    # disk as they complete rather than only at the very end.
+    checkpoint_path = output_dir / 'split_results_checkpoint.csv'
+    checkpoint_cols = ['split_index', 'n_train', 'n_test',
+                       'train_ess_pct', 'test_ess_pct',
+                       'pairwise_pr_auc', 'hypergraph_pr_auc',
+                       'hyper_flag_pr_auc', 'hb_graph_pr_auc']
+    if checkpoint_path.exists():
+        checkpoint_path.unlink()
+
+    for i, split_idx in enumerate(split_indices, start=1):
+        print(f"   Split {split_idx:>3} ({i:>2}/{len(split_indices)})...",
+              end=" ", flush=True)
         try:
             result = run_split(
                 split_idx, features_df, splits_df,
-                hb_graph_features, hypergraph_features, pairwise_features
+                hb_graph_features, hypergraph_features, pairwise_features,
+                hyper_flag_features
             )
             all_results.append(result)
+            pd.DataFrame([{k: result[k] for k in checkpoint_cols}]).to_csv(
+                checkpoint_path, mode='a', index=False,
+                header=not checkpoint_path.exists()
+            )
             winner = ("HB-graph" if result['pr_auc_diff'] > 0
                       else "Pair" if result['pr_auc_diff'] < 0 else "Tie")
             print(f"train={result['n_train']} ({result['train_ess_pct']:.1f}% ess)  "
                   f"test={result['n_test']} ({result['test_ess_pct']:.1f}% ess)  |  "
                   f"Pair: {result['pairwise_pr_auc']:.4f}, "
                   f"Hyper: {result['hypergraph_pr_auc']:.4f}, "
-                  f"HB-graph: {result['hb_graph_pr_auc']:.4f}, "
-                  f"Diff(stoich): {result['stoich_pr_auc_diff']:+.4f} [{winner}]")
+                  f"Hyper+flag: {result['hyper_flag_pr_auc']:.4f}, "
+                  f"HB-graph: {result['hb_graph_pr_auc']:.4f}  |  "
+                  f"annot: {result['annot_pr_auc_diff']:+.4f}, "
+                  f"values: {result['value_pr_auc_diff']:+.4f} [{winner}]")
         except Exception as e:
+            failed_splits.append(split_idx)
             print(f"ERROR: {e}")
+
+    # --- Fail loudly rather than silently analysing a partial run ---
+    if failed_splits:
+        print(f"\n   WARNING: {len(failed_splits)} split(s) FAILED and are excluded "
+              f"from all statistics: {failed_splits}")
+    if not all_results:
+        raise RuntimeError("No splits completed successfully — nothing to analyse.")
+    print(f"\n   Completed {len(all_results)}/{len(split_indices)} splits.")
 
     # --- Statistical comparison ---
     print("\n4. Statistical analysis...")
@@ -880,13 +1120,21 @@ if __name__ == "__main__":
     print("\n6. Aggregating feature importance...")
     pair_imp_df  = aggregate_feature_importance(all_results, 'pairwise')
     hyper_imp_df = aggregate_feature_importance(all_results, 'hypergraph')
+    hf_imp_df    = aggregate_feature_importance(all_results, 'hyper_flag')
     hbg_imp_df   = aggregate_feature_importance(all_results, 'hb_graph')
     print_feature_importance_summary(
         [("Pairwise", pair_imp_df),
          ("Hypergraph", hyper_imp_df),
+         ("Hypergraph + flag", hf_imp_df),
          ("HB-graph", hbg_imp_df)],
         top_n=10
     )
+
+    # Where does the annotation flag rank on its own?
+    if not hf_imp_df.empty and flag in set(hf_imp_df['feature']):
+        row = hf_imp_df[hf_imp_df['feature'] == flag].iloc[0]
+        print(f"\n   >>> '{flag}' ranks {int(row['rank'])} of {len(hf_imp_df)} "
+              f"in the hypergraph+flag model (mean importance {row['mean']:.5f})")
     plot_feature_importance(
         [("Pairwise", pair_imp_df, 'gray'),
          ("Hypergraph", hyper_imp_df, 'skyblue'),
@@ -898,15 +1146,47 @@ if __name__ == "__main__":
     print("\n7. Saving outputs...")
 
     # Per-split summary (no nested dicts), ordered pairwise -> hypergraph -> hb_graph
+    plot_testA_decomposition(all_results, stats, output_dir)
+
     summary_cols = ['split_index', 'n_train', 'n_test', 'train_ess_pct', 'test_ess_pct',
                     'pairwise_pr_auc',   'pairwise_f1',
                     'hypergraph_pr_auc', 'hypergraph_f1',
+                    'hyper_flag_pr_auc', 'hyper_flag_f1',
                     'hb_graph_pr_auc',   'hb_graph_f1',
                     'pr_auc_diff', 'f1_diff',
-                    'stoich_pr_auc_diff', 'stoich_f1_diff']
+                    'stoich_pr_auc_diff', 'stoich_f1_diff',
+                    'annot_pr_auc_diff', 'value_pr_auc_diff']
     summary_df = pd.DataFrame([{k: r[k] for k in summary_cols} for r in all_results])
     summary_df.to_csv(output_dir / 'split_results.csv', index=False)
     print("   Saved: split_results.csv")
+
+    # Tidy one-row-per-comparison stats table (feeds the LaTeX results tables)
+    comparison_map = {
+        'hb_graph_vs_pairwise': {
+            'mean_diff':  stats['mean_difference'],
+            'std_diff':   stats['std_difference'],
+            'wins':       stats['hb_graph_wins'],
+            'losses':     stats['pairwise_wins'],
+            'ties':       stats['ties'],
+            'p_greater':  stats['sign_test_p_greater'],
+            'p_two_sided': stats['sign_test_p_two_sided'],
+            'cohens_dz':  stats['cohens_dz'],
+        },
+        'hb_graph_vs_hypergraph':  stats['stoich_effect'],
+        'hypergraph_vs_pairwise':  stats['hyper_vs_pair'],
+        'hyper_flag_vs_hypergraph': stats['annot_effect'],
+        'hb_graph_vs_hyper_flag':   stats['value_effect'],
+    }
+    stats_rows = []
+    for name, d in comparison_map.items():
+        row = {'comparison': name, 'splits_file': CONFIG['SPLITS_FILE'],
+               'n_splits': stats['n_runs'], 'model': CONFIG['MODEL_TYPE']}
+        row.update({k: d[k] for k in
+                    ['mean_diff', 'std_diff', 'cohens_dz', 'wins', 'losses', 'ties',
+                     'p_greater', 'p_two_sided']})
+        stats_rows.append(row)
+    pd.DataFrame(stats_rows).to_csv(output_dir / 'comparison_stats.csv', index=False)
+    print("   Saved: comparison_stats.csv")
 
     # Per-protein predictions — pairwise
     pair_preds_all = pd.concat(
@@ -935,13 +1215,50 @@ if __name__ == "__main__":
     hbg_imp_df.to_csv(output_dir / 'hb_graph_feature_importance.csv', index=False)
     print("   Saved: pairwise_feature_importance.csv")
     print("   Saved: hypergraph_feature_importance.csv")
+
+    hf_imp_df.to_csv(output_dir / 'hyper_flag_feature_importance.csv', index=False)
+    print("   Saved: hyper_flag_feature_importance.csv")
     print("   Saved: hb_graph_feature_importance.csv")
 
     with open(output_dir / 'statistical_summary.txt', 'w') as f:
-            f.write("REPRESENTATION COMPARISON: PAIRWISE vs HYPERGRAPH vs HB-GRAPH\n")
+            f.write("REPRESENTATION COMPARISON: PAIRWISE vs HYPERGRAPH vs HYPER+FLAG vs HB-GRAPH\n")
             f.write("Task: Gene Essentiality\n")
-            f.write(f"Model: {CONFIG['MODEL_TYPE']}\n")
-            f.write(f"Number of splits: {stats['n_runs']}\n\n")
+            f.write("\nRUN PROVENANCE\n")
+            f.write(f"{'-'*70}\n")
+            f.write(f"Run at              : "
+                    f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))}\n")
+            f.write(f"Model               : {CONFIG['MODEL_TYPE']}\n")
+            f.write(f"Random state        : {CONFIG['RANDOM_STATE']}\n")
+            f.write(f"Inner CV folds      : {CONFIG['N_SPLITS_CV']}\n")
+            f.write(f"Splits file         : {splits_path}\n")
+            f.write(f"Splits file mtime   : "
+                    f"{pd.Timestamp(os.path.getmtime(splits_path), unit='s')}\n")
+            f.write(f"Data directory      : {CONFIG['DATA_DIR']}\n")
+            f.write(f"Feature files       : {CONFIG['PROTEIN_FEATURES_FILE']}, "
+                    f"{CONFIG['PAIRWISE_FEATURES_FILE']}\n")
+            f.write(f"Splits in file      : "
+                    f"{splits_df['split_index'].nunique()}\n")
+            f.write(f"Splits attempted    : {len(split_indices)}\n")
+            f.write(f"Splits completed    : {stats['n_runs']}\n")
+            if failed_splits:
+                f.write(f"FAILED splits (excluded from all statistics): "
+                        f"{failed_splits}\n")
+            f.write(f"Annotation flag     : {CONFIG['ANNOTATION_FLAG']} "
+                    f"(derived from {CONFIG['FLAG_SOURCE_FEATURE']})\n")
+            f.write(f"Hyperparameter grid : "
+                    f"{CONFIG['PARAM_GRIDS'][CONFIG['MODEL_TYPE']]}\n")
+            f.write("\n")
+
+            f.write("CLASS BALANCE (mean over splits)\n")
+            f.write(f"{'-'*70}\n")
+            f.write(f"Train positives     : {summary_df['train_ess_pct'].mean():.2f}% "
+                    f"(range {summary_df['train_ess_pct'].min():.2f}"
+                    f"-{summary_df['train_ess_pct'].max():.2f}%)\n")
+            f.write(f"Test  positives     : {summary_df['test_ess_pct'].mean():.2f}% "
+                    f"(range {summary_df['test_ess_pct'].min():.2f}"
+                    f"-{summary_df['test_ess_pct'].max():.2f}%)\n")
+            f.write(f"Mean train / test n : {summary_df['n_train'].mean():.0f} / "
+                    f"{summary_df['n_test'].mean():.0f}\n\n")
             f.write(f"Pairwise features ({len(pairwise_features)}):\n")
             for feat in pairwise_features:
                 f.write(f"  - {feat}\n")
@@ -953,21 +1270,22 @@ if __name__ == "__main__":
                 tag = ' [stoich]' if feat in stoich_features else ''
                 f.write(f"  - {feat}{tag}\n")
 
-            f.write(f"\nRandom baseline (PR-AUC of a random classifier\n")
-            f.write(f"  = positive-class prevalence in test set): {stats['random_baseline']:.4f}\n")
             f.write(f"\nPR-AUC Mean \u00b1 Std:\n")
             f.write(f"  Pairwise   : {stats['pairwise_pr_auc_mean']:.4f} \u00b1 {stats['pairwise_pr_auc_std']:.4f}\n")
             f.write(f"  Hypergraph : {stats['hypergraph_pr_auc_mean']:.4f} \u00b1 {stats['hypergraph_pr_auc_std']:.4f}\n")
+            f.write(f"  Hyper+flag : {stats['hyper_flag_pr_auc_mean']:.4f} \u00b1 {stats['hyper_flag_pr_auc_std']:.4f}\n")
             f.write(f"  HB-graph   : {stats['hb_graph_pr_auc_mean']:.4f} \u00b1 {stats['hb_graph_pr_auc_std']:.4f}\n")
 
             f.write(f"\nF1 (positive class) Mean \u00b1 Std:\n")
             f.write(f"  Pairwise   : {stats['pairwise_f1_mean']:.4f} \u00b1 {stats['pairwise_f1_std']:.4f}\n")
             f.write(f"  Hypergraph : {stats['hypergraph_f1_mean']:.4f} \u00b1 {stats['hypergraph_f1_std']:.4f}\n")
+            f.write(f"  Hyper+flag : {stats['hyper_flag_f1_mean']:.4f} \u00b1 {stats['hyper_flag_f1_std']:.4f}\n")
             f.write(f"  HB-graph   : {stats['hb_graph_f1_mean']:.4f} \u00b1 {stats['hb_graph_f1_std']:.4f}\n")
 
             def _write_comparison(label, d):
                 f.write(f"\n{label}:\n")
                 f.write(f"  Mean diff : {d['mean_diff']:+.4f} \u00b1 {d['std_diff']:.4f}\n")
+                f.write(f"  Cohen's dz : {d.get('cohens_dz', float('nan')):+.3f}\n")
                 f.write(f"  Wins/Losses/Ties : {d['wins']}/{d['losses']}/{d['ties']}\n")
                 f.write(f"  Sign test p (one-sided) : {d['p_greater']:.6f}\n")
                 f.write(f"  Sign test p (two-sided) : {d['p_two_sided']:.6f}\n")
@@ -979,11 +1297,97 @@ if __name__ == "__main__":
                                'losses':    stats['pairwise_wins'],
                                'ties':      stats['ties'],
                                'p_greater': stats['sign_test_p_greater'],
-                               'p_two_sided': stats['sign_test_p_two_sided']})
+                               'p_two_sided': stats['sign_test_p_two_sided'],
+                               'cohens_dz':   stats['cohens_dz']})
             _write_comparison("HB-graph vs Hypergraph \u2014 stoichiometry effect",
                               stats['stoich_effect'])
             _write_comparison("Hypergraph vs Pairwise \u2014 representation effect alone",
                               stats['hyper_vs_pair'])
+
+            # ---------------- TEST A: decomposition ----------------
+            ann, val, tot = stats['annot_effect'], stats['value_effect'], stats['stoich_effect']
+            _write_comparison("[TEST A] Hyper+flag vs Hypergraph \u2014 ANNOTATION PRESENCE alone",
+                              ann)
+            _write_comparison("[TEST A] HB-graph vs Hyper+flag \u2014 STOICHIOMETRY VALUES, "
+                              "net of annotation", val)
+
+            f.write(f"\n{'='*70}\n")
+            f.write("TEST A \u2014 DECOMPOSITION OF THE STOICHIOMETRY EFFECT\n")
+            f.write(f"{'='*70}\n\n")
+            f.write(f"{'Component':<44} {'dPR-AUC':>9} {'W/L':>7} {'p (1-sided)':>12}\n")
+            f.write(f"{'-'*78}\n")
+            f.write(f"{'Annotation presence   (flag - hypergraph)':<44} "
+                    f"{ann['mean_diff']:>+9.4f} {ann['wins']:>3}/{ann['losses']:<3} "
+                    f"{ann['p_greater']:>12.4f}\n")
+            f.write(f"{'Stoichiometry values  (hb-graph - flag)':<44} "
+                    f"{val['mean_diff']:>+9.4f} {val['wins']:>3}/{val['losses']:<3} "
+                    f"{val['p_greater']:>12.4f}\n")
+            f.write(f"{'-'*78}\n")
+            f.write(f"{'TOTAL  (hb-graph - hypergraph)':<44} "
+                    f"{tot['mean_diff']:>+9.4f} {tot['wins']:>3}/{tot['losses']:<3} "
+                    f"{tot['p_greater']:>12.4f}\n")
+
+            if abs(tot['mean_diff']) > 1e-9:
+                share = 100 * ann['mean_diff'] / tot['mean_diff']
+                f.write(f"\nAnnotation presence accounts for {share:.0f}% of the total "
+                        f"stoichiometry effect.\n")
+
+            f.write("\nVERDICT:\n")
+            if val['p_greater'] < 0.05:
+                f.write("  Stoichiometry VALUES add signal beyond annotation presence.\n")
+                f.write("  Finding 2 survives \u2014 report net of the flag; confirm with Test B.\n")
+            else:
+                f.write("  Stoichiometry VALUES add NO significant signal beyond annotation "
+                        "presence.\n")
+                f.write("  The apparent stoichiometry effect is substantially an ascertainment "
+                        "artefact.\n")
+            f.write(f"{'='*70}\n")
+
+            # ---------------- FEATURE IMPORTANCE (all four tiers) -------------
+            f.write("\n\n")
+            f.write(f"{'='*70}\n")
+            f.write("FEATURE IMPORTANCE (permutation \u2014 mean PR-AUC drop)\n")
+            f.write(f"{'='*70}\n")
+            for label, imp_df in [("Pairwise", pair_imp_df),
+                                  ("Hypergraph", hyper_imp_df),
+                                  ("Hypergraph + flag [TEST A]", hf_imp_df),
+                                  ("HB-graph", hbg_imp_df)]:
+                if imp_df.empty:
+                    continue
+                f.write(f"\n{label}\n")
+                f.write(f"{'Rank':<6} {'Feature':<36} {'Mean':>10} {'Std':>10} "
+                        f"{'Median':>10}\n")
+                f.write(f"{'-'*74}\n")
+                for _, row in imp_df.iterrows():
+                    f.write(f"{int(row['rank']):<6} {row['feature']:<36} "
+                            f"{row['mean']:>10.5f} {row['std']:>10.5f} "
+                            f"{row['median']:>10.5f}\n")
+            if not hf_imp_df.empty and flag in set(hf_imp_df['feature']):
+                _row = hf_imp_df[hf_imp_df['feature'] == flag].iloc[0]
+                f.write(f"\n'{flag}' ranks {int(_row['rank'])} of {len(hf_imp_df)} "
+                        f"in the hypergraph+flag model "
+                        f"(mean importance {_row['mean']:.5f}).\n")
+            f.write("\nNote: higher = more important; negative = likely noise.\n")
+
+            # ---------------- PER-SPLIT RESULTS -------------------------------
+            f.write("\n\n")
+            f.write(f"{'='*70}\n")
+            f.write("PER-SPLIT PR-AUC (also in split_results.csv)\n")
+            f.write(f"{'='*70}\n\n")
+            f.write(f"{'Split':>6} {'Pairwise':>10} {'Hyper':>10} {'Hyper+flag':>11} "
+                    f"{'HB-graph':>10} {'HBG-Pair':>10} {'HBG-Hyper':>10}\n")
+            f.write(f"{'-'*72}\n")
+            for _, row in summary_df.sort_values('split_index').iterrows():
+                f.write(f"{int(row['split_index']):>6} "
+                        f"{row['pairwise_pr_auc']:>10.4f} "
+                        f"{row['hypergraph_pr_auc']:>10.4f} "
+                        f"{row['hyper_flag_pr_auc']:>11.4f} "
+                        f"{row['hb_graph_pr_auc']:>10.4f} "
+                        f"{row['pr_auc_diff']:>+10.4f} "
+                        f"{row['stoich_pr_auc_diff']:>+10.4f}\n")
+
+            f.write(f"\n\nRuntime to this point: "
+                    f"{(time.time() - start_time)/60:.1f} min\n")
 
     print(f"\n{'='*70}")
     print("  COMPLETE")

@@ -44,18 +44,9 @@ plt.rcParams.update({
 # TASK METADATA
 # =======================================================
 TASK_META = {
-    "ess": {
-        "SPLITS_FILE":  "ess_protein_merged_splits.csv",
-        "DISPLAY_NAME": "Gene Essentiality",
-    },
-    "chembl": {
-        "SPLITS_FILE":  "chembl_protein_merged_splits.csv",
-        "DISPLAY_NAME": "Drug Target Prediction (ChEMBL)",
-    },
-    "hpa": {
-        "SPLITS_FILE":  "hpa_protein_merged_splits.csv",
-        "DISPLAY_NAME": "Drug Target Prediction (HPA)",
-    },
+    "ess":    {"SPLITS_FILE": "ess_protein_splits.csv",    "DISPLAY_NAME": "Gene Essentiality"},
+    "chembl": {"SPLITS_FILE": "chembl_protein_splits.csv", "DISPLAY_NAME": "Drug Target Prediction (ChEMBL)"},
+    "hpa":    {"SPLITS_FILE": "hpa_protein_splits.csv",    "DISPLAY_NAME": "Drug Target Prediction (HPA)"},
 }
 
 # =======================================================
@@ -63,11 +54,11 @@ TASK_META = {
 # =======================================================
 CONFIG = {
     # --- Task: "ess" | "chembl" | "hpa" ---
-    "TASK": "hpa",
+    "TASK": "chembl",
 
     # --- Paths ---
     "DATA_DIR":        Path("/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/"),
-    "BASE_OUTPUT_DIR": Path("./randomforest"),
+    "BASE_OUTPUT_DIR": Path("./randomforest/noise_injection"),
 
     # --- Feature files ---
     "PROTEIN_FEATURES_FILE":  "hypergraph_features.csv",
@@ -113,7 +104,7 @@ CONFIG = {
     },
 
     # --- Feature lists ---
-    # "HYPERGRAPH" here is the full 15-feature hb-graph set (structural +
+    # "HYPERGRAPH" here is the full 14-feature hb-graph set (structural +
     # stoichiometry + participation) that the "Hypergraph + noise" panel plots.
     "FEATURES": {
         "HYPERGRAPH": [
@@ -131,7 +122,6 @@ CONFIG = {
             'protein_RangeUniqueRatio',
             'protein_MedComplexNodes',
             'protein_RangeComplexNodes',
-            'protein_NormUniqueSum',      # replaces protein_MedianUniqueRatio
         ],
         "PAIRWISE": [
             'pair_Degree',

@@ -37,7 +37,7 @@ CONFIG = {
     "BASE_OUTPUT_DIR": Path("./randomforest/ess_one_hop_stoich_features"),
 
     # --- File Names ---
-    "SPLITS_FILE":           "ess_merged_splits.csv",
+    "SPLITS_FILE":           "ess_protein_merged_splits.csv",
     "PROTEIN_FEATURES_FILE": "hypergraph_features.csv",
     "PAIRWISE_FEATURES_FILE":"pairwise_features.csv",
 
@@ -765,6 +765,7 @@ if __name__ == "__main__":
 
     with open(output_dir / 'statistical_summary.txt', 'w') as f:
             f.write("PAIRED COMPARISON: HYPERGRAPH vs PAIRWISE (with stoichiometry ablation)\n")
+            f.write("Database: CORUM\n")
             f.write("Task: Gene Essentiality\n")
             f.write(f"Model: {CONFIG['MODEL_TYPE']}\n")
             f.write(f"Number of splits: {stats['n_runs']}\n\n")
