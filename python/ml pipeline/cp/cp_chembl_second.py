@@ -34,7 +34,7 @@ plt.rcParams.update({
 CONFIG = {
     # --- Paths ---
     "DATA_DIR": Path("/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/"),
-    "BASE_OUTPUT_DIR": Path("./randomforest/cp_chembl_second_testA"),
+    "BASE_OUTPUT_DIR": Path("./xgboost/cp_chembl_second_testA"),
 
     # --- TEST A: annotation-presence control -------------------------------
     # A fourth tier, HYPER_FLAG = HYPERGRAPH + a single binary feature marking
@@ -71,7 +71,7 @@ CONFIG = {
 
     # --- Model ---
     # Options: "RandomForest" | "LightGBM" | "XGBoost"
-    "MODEL_TYPE": "RandomForest",
+    "MODEL_TYPE": "XGBoost",
 
     # --- Fixed settings ---
     "RANDOM_STATE": 42,

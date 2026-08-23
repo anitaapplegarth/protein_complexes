@@ -34,13 +34,13 @@ CONFIG = {
     'structures_dir': '/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum_protein_structures/',
 
     # Structure coverage report from the retrieval script
-    'coverage_report': '/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum_structure_coverage_report.csv',
+    'coverage_report': '/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum/structure_coverage_report.csv',
 
     # Working directory for Foldseek temp files (will be created)
     'foldseek_work_dir': '/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum_foldseek_work/',
 
     # Output: protein -> group mapping
-    'output_group_mapping': '/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum_mapping_struct.csv',
+    'output_group_mapping': '/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum/mapping_struct.csv',
 
     # Foldseek clustering parameters
     'min_seq_id': 0.0,      # minimum sequence identity (none)

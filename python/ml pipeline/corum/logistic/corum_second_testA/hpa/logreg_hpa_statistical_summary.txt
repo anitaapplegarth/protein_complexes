@@ -1,0 +1,315 @@
+REPRESENTATION COMPARISON — LOGISTIC REGRESSION BASELINE
+Database: CORUM
+Task: Drug Target Prediction (HPA)
+
+RUN PROVENANCE
+----------------------------------------------------------------------
+Run at              : 2026-08-10 18:27:44
+Model               : LogisticRegression (StandardScaler pipeline)
+LogReg settings     : {'solver': 'lbfgs', 'class_weight': 'balanced', 'max_iter': 5000}
+Hyperparameter grid : {'clf__C': [np.float64(1e-06), np.float64(1e-05), np.float64(0.0001), np.float64(0.001), np.float64(0.01), np.float64(0.1), np.float64(1.0), np.float64(10.0), np.float64(100.0), np.float64(1000.0), np.float64(10000.0)]}
+Random state        : 42
+Inner CV folds      : 5
+Permutation repeats : 10
+Splits file         : /Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum/hpa_protein_splits.csv
+Splits file mtime   : 2026-08-03 15:47:51.526610851
+Data directory      : /Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/corum
+Feature files       : hypergraph_features.csv, pairwise_features.csv
+Splits in file      : 50
+Splits attempted    : 50
+Splits completed    : 50
+Annotation flag     : flag_HasStoich (derived from stoich_MedianRatio)
+hyper_recip tier    : included (recip_MedComplexNodes = 1/(1+protein_MedComplexNodes))
+hyper_flag tier     : included
+
+CLASS BALANCE (mean over splits)
+----------------------------------------------------------------------
+Train positives     : 11.53% (range 11.20-11.90%)
+Test  positives     : 11.67% (range 10.11-13.04%)
+Mean train / test n : 4107 / 1015
+
+Pairwise features (4):
+  - pair_Degree
+  - pair_LocalClustCoeff
+  - pair_TriangleCount
+  - pair_AvgNeighborDegree
+
+Hypergraph features (8):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+Hypergraph + flag features (9):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+  - flag_HasStoich [annotation flag]
+
+Hypergraph + 1/size features (9):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+  - recip_MedComplexNodes [1/size control]
+
+HB-graph features (14):
+  - base_Degree
+  - base_LocalClustCoeff
+  - base_TriangleCount
+  - base_UniquePartners
+  - base_AvgNeighbourDegree
+  - stoich_WeightedTriangles [stoich]
+  - stoich_AvgNeighbourDegreeStoich [stoich]
+  - stoich_RangeComplexSize [stoich]
+  - stoich_MedComplexSize [stoich]
+  - stoich_MedianRatio [stoich]
+  - stoich_RangeRatio [stoich]
+  - protein_RangeUniqueRatio
+  - protein_MedComplexNodes
+  - protein_RangeComplexNodes
+
+
+======================================================================
+  STATISTICAL COMPARISON
+======================================================================
+
+  Task            : Drug Target Prediction (HPA)
+  Model           : Logistic regression (L2, standardised)
+  Number of splits: 50
+
+  PR-AUC
+  Representation       Mean +/- Std
+  ---------------------------------------------
+  Pairwise             0.2662 +/- 0.0350
+  Hypergraph           0.3591 +/- 0.0435
+  Hypergraph + flag    0.3903 +/- 0.0400
+  Hypergraph + 1/size  0.4276 +/- 0.0489
+  HB-graph             0.3954 +/- 0.0397
+
+  F1 (positive class)
+  Representation       Mean +/- Std
+  ---------------------------------------------
+  Pairwise             0.3378 +/- 0.0249
+  Hypergraph           0.3469 +/- 0.0257
+  Hypergraph + flag    0.3928 +/- 0.0342
+  Hypergraph + 1/size  0.3580 +/- 0.0237
+  HB-graph             0.3913 +/- 0.0333
+
+  --- HB-graph vs Pairwise — headline representation effect ---
+  Mean diff : +0.1291 +/- 0.0482   (Cohen's dz = +2.676)
+  Wins/Losses/Ties : 50/0/0   (n paired = 50)
+  Sign test p (one-sided) : 0.000000   (two-sided: 0.000000)
+
+
+  --- HB-graph vs Hypergraph — stoichiometry effect ---
+  Mean diff : +0.0362 +/- 0.0286   (Cohen's dz = +1.265)
+  Wins/Losses/Ties : 44/6/0   (n paired = 50)
+  Sign test p (one-sided) : 0.000000   (two-sided: 0.000000)
+
+
+  --- Hypergraph vs Pairwise — representation effect alone ---
+  Mean diff : +0.0929 +/- 0.0555   (Cohen's dz = +1.674)
+  Wins/Losses/Ties : 49/1/0   (n paired = 50)
+  Sign test p (one-sided) : 0.000000   (two-sided: 0.000000)
+
+
+  --- [TEST A] Hyper+flag vs Hypergraph — ANNOTATION PRESENCE alone ---
+  Mean diff : +0.0311 +/- 0.0219   (Cohen's dz = +1.423)
+  Wins/Losses/Ties : 48/2/0   (n paired = 50)
+  Sign test p (one-sided) : 0.000000   (two-sided: 0.000000)
+
+
+  --- [TEST A] HB-graph vs Hyper+flag — STOICHIOMETRY VALUES, net of annotation ---
+  Mean diff : +0.0051 +/- 0.0158   (Cohen's dz = +0.323)
+  Wins/Losses/Ties : 36/14/0   (n paired = 50)
+  Sign test p (one-sided) : 0.001301   (two-sided: 0.002602)
+
+
+  --- [TEST C] Hyper+1/size vs Hypergraph — what a pure size recoding buys ---
+  Mean diff : +0.0685 +/- 0.0322   (Cohen's dz = +2.129)
+  Wins/Losses/Ties : 49/1/0   (n paired = 50)
+  Sign test p (one-sided) : 0.000000   (two-sided: 0.000000)
+
+
+  --- [TEST C] HB-graph vs Hyper+1/size — STOICHIOMETRY net of size recoding ---
+  Mean diff : -0.0323 +/- 0.0314   (Cohen's dz = -1.029)
+  Wins/Losses/Ties : 6/44/0   (n paired = 50)
+  Sign test p (one-sided) : 1.000000   (two-sided: 0.000000)
+
+
+======================================================================
+  TEST A — DECOMPOSITION OF THE STOICHIOMETRY EFFECT
+======================================================================
+
+  Component                                      dPR-AUC     W/L  p (1-sided)
+  ------------------------------------------------------------------------------
+  Annotation presence   (flag - hypergraph)      +0.0311  48/2         0.0000
+  Stoichiometry values  (hb-graph - flag)        +0.0051  36/14        0.0013
+  ------------------------------------------------------------------------------
+  TOTAL  (hb-graph - hypergraph)                 +0.0362  44/6         0.0000
+
+  Annotation presence accounts for 86% of the total stoichiometry effect.
+======================================================================
+
+======================================================================
+  TEST C — RECIPROCAL-OF-SIZE CONTROL
+======================================================================
+
+  Component                                      dPR-AUC     W/L  p (1-sided)
+  ------------------------------------------------------------------------------
+  1/size alone   (recip - hypergraph)            +0.0685  49/1         0.0000
+  Stoichiometry  (hb-graph - recip)              -0.0323   6/44        1.0000
+  ------------------------------------------------------------------------------
+  TOTAL  (hb-graph - hypergraph)                 +0.0362  44/6         0.0000
+
+  The reciprocal absorbs 189% of the total apparent stoichiometry effect.
+
+  VERDICT: DOES NOT SURVIVE. The apparent stoichiometric gain is accounted
+  for by 1/(complex size), which carries no copy-number information. H2
+  cannot be supported from these features under this model.
+======================================================================
+
+
+======================================================================
+  FEATURE IMPORTANCE (Permutation — mean PR-AUC drop)
+======================================================================
+
+  Pairwise
+  Rank   Feature                                    Mean        Std     Median
+  --------------------------------------------------------------------------
+  1      pair_LocalClustCoeff                    0.09423    0.02553    0.09244
+  2      pair_AvgNeighborDegree                  0.08688    0.02970    0.08390
+  3      pair_Degree                             0.04748    0.02566    0.04445
+  4      pair_TriangleCount                      0.00150    0.00838    0.00007
+
+  Hypergraph
+  Rank   Feature                                    Mean        Std     Median
+  --------------------------------------------------------------------------
+  1      base_UniquePartners                     0.13891    0.03251    0.13857
+  2      protein_RangeUniqueRatio                0.13118    0.03952    0.12912
+  3      base_Degree                             0.12312    0.05018    0.11567
+  4      base_TriangleCount                      0.11556    0.03354    0.11828
+  5      protein_MedComplexNodes                 0.05885    0.02706    0.05510
+  6      protein_RangeComplexNodes               0.03480    0.03264    0.02872
+  7      base_AvgNeighbourDegree                 0.03106    0.01293    0.03253
+  8      base_LocalClustCoeff                    0.00523    0.00361    0.00519
+
+  Hypergraph + flag
+  Rank   Feature                                    Mean        Std     Median
+  --------------------------------------------------------------------------
+  1      base_UniquePartners                     0.14132    0.03741    0.14679
+  2      base_TriangleCount                      0.11735    0.03462    0.11879
+  3      base_Degree                             0.11282    0.04195    0.10925
+  4      flag_HasStoich                          0.09549    0.02014    0.09555
+  5      protein_MedComplexNodes                 0.04484    0.02002    0.04569
+  6      protein_RangeUniqueRatio                0.04404    0.02148    0.04247
+  7      protein_RangeComplexNodes               0.02353    0.02937    0.01206
+  8      base_AvgNeighbourDegree                 0.02053    0.01090    0.02163
+  9      base_LocalClustCoeff                    0.00254    0.00280    0.00266
+
+  Hypergraph + 1/size
+  Rank   Feature                                    Mean        Std     Median
+  --------------------------------------------------------------------------
+  1      recip_MedComplexNodes                   0.22324    0.03528    0.22403
+  2      protein_RangeUniqueRatio                0.10968    0.03218    0.10200
+  3      base_Degree                             0.06804    0.03770    0.06416
+  4      base_AvgNeighbourDegree                 0.02191    0.01234    0.02318
+  5      protein_MedComplexNodes                 0.01418    0.02080    0.00538
+  6      base_UniquePartners                     0.01385    0.02482    0.00399
+  7      protein_RangeComplexNodes               0.00320    0.00637    0.00237
+  8      base_TriangleCount                      0.00030    0.00562   -0.00118
+  9      base_LocalClustCoeff                   -0.00053    0.00218   -0.00087
+
+  HB-graph
+  Rank   Feature                                    Mean        Std     Median
+  --------------------------------------------------------------------------
+  1      base_UniquePartners                     0.13277    0.03985    0.13788
+  2      base_TriangleCount                      0.10958    0.03664    0.10563
+  3      base_Degree                             0.10753    0.04025    0.10560
+  4      stoich_MedianRatio                      0.10615    0.02308    0.10687
+  5      protein_MedComplexNodes                 0.03655    0.01595    0.03622
+  6      protein_RangeUniqueRatio                0.02514    0.01385    0.02386
+  7      base_AvgNeighbourDegree                 0.02098    0.01188    0.02192
+  8      protein_RangeComplexNodes               0.01755    0.02202    0.00883
+  9      stoich_AvgNeighbourDegreeStoich         0.00442    0.00659    0.00481
+  10     stoich_RangeComplexSize                 0.00277    0.00513    0.00286
+  11     stoich_WeightedTriangles                0.00255    0.00390    0.00225
+  12     base_LocalClustCoeff                    0.00207    0.00246    0.00246
+  13     stoich_RangeRatio                       0.00148    0.00621    0.00169
+  14     stoich_MedComplexSize                  -0.00187    0.00386   -0.00032
+
+  Note: higher = more important; negative = likely noise.
+
+======================================================================
+PER-SPLIT PR-AUC (also in split_results.csv)
+======================================================================
+
+ Split   Pairwise      Hyper  Hyper+flag  Hyper+1/sz   HB-graph   HBG-Pair  HBG-Hyper   HBG-1/sz
+----------------------------------------------------------------------------------------------
+     1     0.2413     0.3933      0.4255      0.4604     0.4465    +0.2051    +0.0532    -0.0139
+     2     0.3272     0.4293      0.4425      0.5657     0.4533    +0.1261    +0.0240    -0.1124
+     3     0.2537     0.3949      0.4192      0.4592     0.4313    +0.1776    +0.0364    -0.0278
+     4     0.2377     0.4277      0.4537      0.4720     0.4517    +0.2140    +0.0240    -0.0203
+     5     0.2000     0.3390      0.3504      0.3380     0.3525    +0.1525    +0.0135     0.0145
+     6     0.2685     0.4147      0.4561      0.4636     0.4835    +0.2150    +0.0688     0.0199
+     7     0.2726     0.3295      0.3861      0.4392     0.3883    +0.1158    +0.0588    -0.0508
+     8     0.2392     0.2998      0.3782      0.3767     0.3880    +0.1488    +0.0882     0.0112
+     9     0.2507     0.3987      0.4609      0.4867     0.4739    +0.2232    +0.0752    -0.0127
+    10     0.2878     0.3342      0.3819      0.4119     0.3994    +0.1116    +0.0652    -0.0126
+    11     0.2659     0.3884      0.4232      0.4310     0.4152    +0.1493    +0.0269    -0.0158
+    12     0.2728     0.3459      0.3744      0.4027     0.3857    +0.1129    +0.0397    -0.0170
+    13     0.2959     0.3595      0.4021      0.4541     0.4171    +0.1211    +0.0575    -0.0371
+    14     0.3040     0.3358      0.3826      0.3978     0.3911    +0.0872    +0.0553    -0.0066
+    15     0.2402     0.4298      0.4348      0.4919     0.4024    +0.1622    -0.0274    -0.0894
+    16     0.2137     0.2967      0.3291      0.3414     0.3369    +0.1233    +0.0402    -0.0045
+    17     0.2853     0.3869      0.4048      0.4441     0.3730    +0.0877    -0.0140    -0.0711
+    18     0.3510     0.2732      0.3567      0.4019     0.3553    +0.0044    +0.0822    -0.0466
+    19     0.2636     0.3712      0.3867      0.4683     0.3392    +0.0756    -0.0320    -0.1290
+    20     0.2464     0.3526      0.3724      0.4209     0.3863    +0.1400    +0.0337    -0.0346
+    21     0.2583     0.3666      0.4082      0.4387     0.4252    +0.1669    +0.0586    -0.0135
+    22     0.2548     0.3636      0.3706      0.4286     0.3856    +0.1307    +0.0220    -0.0431
+    23     0.2799     0.3130      0.3311      0.3887     0.3418    +0.0619    +0.0288    -0.0469
+    24     0.2886     0.4156      0.4541      0.4419     0.4199    +0.1314    +0.0043    -0.0220
+    25     0.2578     0.3792      0.4020      0.4659     0.4123    +0.1545    +0.0330    -0.0537
+    26     0.2178     0.2705      0.2803      0.3185     0.2866    +0.0688    +0.0161    -0.0319
+    27     0.3371     0.3429      0.4072      0.4632     0.4324    +0.0953    +0.0895    -0.0308
+    28     0.2255     0.3068      0.3396      0.3680     0.3473    +0.1218    +0.0404    -0.0207
+    29     0.3172     0.3488      0.3658      0.4133     0.3773    +0.0601    +0.0285    -0.0360
+    30     0.2414     0.2863      0.3592      0.3371     0.3534    +0.1120    +0.0672     0.0163
+    31     0.2526     0.4404      0.4280      0.4690     0.4203    +0.1677    -0.0200    -0.0487
+    32     0.2673     0.3100      0.3392      0.3759     0.3497    +0.0824    +0.0397    -0.0262
+    33     0.3213     0.3361      0.3928      0.4520     0.3910    +0.0697    +0.0549    -0.0611
+    34     0.2293     0.3429      0.3674      0.4181     0.3816    +0.1523    +0.0387    -0.0365
+    35     0.2702     0.3258      0.3375      0.3956     0.3485    +0.0782    +0.0227    -0.0471
+    36     0.2922     0.3399      0.3719      0.4178     0.3904    +0.0982    +0.0505    -0.0274
+    37     0.2045     0.3278      0.3450      0.3692     0.3555    +0.1510    +0.0277    -0.0137
+    38     0.3109     0.4073      0.4243      0.4091     0.4055    +0.0946    -0.0018    -0.0036
+    39     0.2240     0.3141      0.3472      0.3517     0.3524    +0.1283    +0.0382     0.0007
+    40     0.3433     0.3603      0.4068      0.4920     0.4136    +0.0702    +0.0532    -0.0785
+    41     0.2868     0.3542      0.3781      0.3999     0.3911    +0.1043    +0.0369    -0.0088
+    42     0.2474     0.3476      0.3672      0.3907     0.3663    +0.1189    +0.0188    -0.0244
+    43     0.2273     0.4360      0.4802      0.4470     0.4637    +0.2364    +0.0277     0.0166
+    44     0.2520     0.3752      0.4394      0.4952     0.4515    +0.1995    +0.0763    -0.0437
+    45     0.2595     0.4144      0.4232      0.4762     0.4375    +0.1780    +0.0231    -0.0388
+    46     0.2880     0.3650      0.3892      0.4622     0.3889    +0.1009    +0.0239    -0.0734
+    47     0.2890     0.3519      0.3742      0.4134     0.3843    +0.0953    +0.0324    -0.0291
+    48     0.2441     0.4167      0.3898      0.4546     0.4087    +0.1646    -0.0080    -0.0459
+    49     0.2547     0.3168      0.3702      0.4083     0.3991    +0.1443    +0.0822    -0.0093
+    50     0.2512     0.3785      0.4021      0.4928     0.4162    +0.1650    +0.0377    -0.0766
+
+
+Runtime to this point: 4.0 min
