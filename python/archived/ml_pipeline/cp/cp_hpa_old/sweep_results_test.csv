@@ -1,0 +1,4 @@
+model,family,tier,split_index,pr_auc,n_train,n_test,n_features,seed,best_params
+RandomForest,Bagged trees,pairwise,1,0.2893379239841867,2763,625,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,1,0.3773790504567687,2763,625,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,1,0.4332264587391447,2763,625,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"

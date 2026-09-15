@@ -1,0 +1,22 @@
+task,model,Pairwise,Hypergraph,HB-graph
+Gene essentiality,LogisticRegression,-0.019,-0.000,+0.014
+Gene essentiality,RBF-SVM,-0.021,-0.056,+0.002
+Gene essentiality,MLP,-0.003,+0.019,+0.025
+Gene essentiality,RandomForest,+0.049,+0.051,+0.056
+Gene essentiality,XGBoost,+0.070,+0.076,+0.067
+Gene essentiality,LightGBM,+0.079,+0.086,+0.059
+Gene essentiality,TabPFN,+0.085,+0.065,+0.079
+Drug target (HPA),LogisticRegression,-0.015,-0.004,+0.001
+Drug target (HPA),RBF-SVM,+0.006,+0.013,+0.006
+Drug target (HPA),MLP,-0.008,+0.036,+0.036
+Drug target (HPA),RandomForest,+0.050,+0.045,+0.033
+Drug target (HPA),XGBoost,+0.055,+0.040,+0.049
+Drug target (HPA),LightGBM,+0.066,+0.024,+0.038
+Drug target (HPA),TabPFN,+0.061,+0.066,+0.074
+Drug target (ChEMBL),LogisticRegression,-0.002,-0.005,-0.005
+Drug target (ChEMBL),RBF-SVM,+0.018,-0.011,-0.011
+Drug target (ChEMBL),MLP,-0.003,+0.007,-0.015
+Drug target (ChEMBL),RandomForest,+0.007,+0.010,+0.000
+Drug target (ChEMBL),XGBoost,+0.010,-0.013,+0.009
+Drug target (ChEMBL),LightGBM,-0.000,-0.002,-0.004
+Drug target (ChEMBL),TabPFN,+0.009,-0.011,-0.004

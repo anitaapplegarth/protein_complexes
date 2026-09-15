@@ -19,15 +19,15 @@ import matplotlib.patches as mpatches
 CONFIG = {
     # --- Inputs: one figure per entry -----------------------------------
     "TASKS": [
-        # {"key": "hpa",
-        #  "display": "Drug target prediction (HPA)",
-        #  "csv": Path("./randomforest/noise_injection/randomforest_hpa_noise_injection/noise_injection_records.csv")},
+        {"key": "hpa",
+         "display": "Drug target prediction (HPA)",
+         "csv": Path("./randomforest_hpa_noise_injection/noise_injection_records.csv")},
         # {"key": "ess",
         #  "display": "Gene essentiality",
-        #  "csv": Path("./randomforest/noise_injection/randomforest_ess_noise_injection/noise_injection_records_ess.csv")},
-        {"key": "chembl",
-         "display": "Drug target prediction (ChEMBL)",
-         "csv": Path("./randomforest/noise_injection/randomforest_chembl_noise_injection/noise_injection_records_chembl.csv")},
+        #  "csv": Path("./randomforest_ess_noise_injection/noise_injection_records.csv")},
+        # {"key": "chembl",
+        #  "display": "Drug target prediction (ChEMBL)",
+        #  "csv": Path("./randomforest_chembl_noise_injection/noise_injection_records.csv")},
     ],
 
     # --- Output ----------------------------------------------------------

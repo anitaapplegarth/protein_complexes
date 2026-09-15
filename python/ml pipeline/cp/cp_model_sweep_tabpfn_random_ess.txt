@@ -1,0 +1,31 @@
+======================================================================
+  MODEL-VARIANCE SWEEP  —  ESS
+======================================================================
+
+1. Loading data
+   Features merged: (3394, 43)
+   Splits file    : ess_protein_splits_randomprotein.csv  (50 splits)
+   pairwise   : 4 features
+   hypergraph : 8 features
+   hb_graph   : 14 features
+
+2. Building model registry
+   Running 1 models x 50 splits x 3 tiers = 150 cells
+   Resuming: 300 (model, split) pairs already done
+
+3. Running sweep
+
+   TabPFN  [Amortised]  budget n_iter=none, scaled=False
+      split   1: pair 0.6572  hyper 0.6855  hb 0.7179   (513.0s)
+      split  10: pair 0.6677  hyper 0.6748  hb 0.6939   (498.3s)
+      split  20: pair 0.6497  hyper 0.6806  hb 0.7081   (517.6s)
+      split  30: pair 0.6356  hyper 0.6900  hb 0.7144   (507.9s)
+      split  40: pair 0.6598  hyper 0.6975  hb 0.7286   (512.8s)
+      split  50: pair 0.6782  hyper 0.7151  hb 0.7491   (495.8s)
+      -> TabPFN done in 425.7 min
+
+======================================================================
+  COMPLETE — 425.9 min
+  Results:     model_sweep/cp_ess/randomprotein/sweep_results_randomprotein.csv
+  Predictions: model_sweep/cp_ess/randomprotein/predictions_randomprotein.csv
+======================================================================

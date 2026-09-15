@@ -1,8 +1,0 @@
-database,task,comparison,splits_file,n_splits,model,mean_diff,std_diff,cohens_dz,wins,losses,ties,n_pairs,p_greater,p_two_sided
-CORUM,chembl,hb_graph_vs_pairwise,chembl_protein_splits.csv,50,LogisticRegression,0.13794506030206422,0.03887430242456884,3.5484896627979605,50,0,0,50,8.881784197001252e-16,1.7763568394002505e-15
-CORUM,chembl,hb_graph_vs_hypergraph,chembl_protein_splits.csv,50,LogisticRegression,0.039149236133641435,0.02023145227045003,1.935068012434413,50,0,0,50,8.881784197001252e-16,1.7763568394002505e-15
-CORUM,chembl,hypergraph_vs_pairwise,chembl_protein_splits.csv,50,LogisticRegression,0.0987958241684228,0.04029545170790448,2.4517859952179837,50,0,0,50,8.881784197001252e-16,1.7763568394002505e-15
-CORUM,chembl,hyper_flag_vs_hypergraph,chembl_protein_splits.csv,50,LogisticRegression,0.019391832354755105,0.017873481967481775,1.0849498933691684,45,5,0,50,2.104926011270436e-09,4.209852022540872e-09
-CORUM,chembl,hb_graph_vs_hyper_flag,chembl_protein_splits.csv,50,LogisticRegression,0.01975740377888633,0.012288070449152678,1.6078524175655828,47,3,0,50,1.8541612689659814e-11,3.708322537931963e-11
-CORUM,chembl,hyper_recip_vs_hypergraph,chembl_protein_splits.csv,50,LogisticRegression,0.056684111249780476,0.024938433845440335,2.2729619510627135,50,0,0,50,8.881784197001252e-16,1.7763568394002505e-15
-CORUM,chembl,hb_graph_vs_hyper_recip,chembl_protein_splits.csv,50,LogisticRegression,-0.017534875116139027,0.02108562656919035,-0.8316032278481319,9,41,0,50,0.9999994182220977,5.614100093254137e-06

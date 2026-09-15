@@ -1,0 +1,39 @@
+======================================================================
+  MODEL-VARIANCE SWEEP  —  CHEMBL
+======================================================================
+
+1. Loading data
+   Features merged: (3394, 43)
+   Splits file    : chembl_protein_splits.csv  (50 splits)
+   pairwise   : 4 features
+   hypergraph : 8 features
+   hb_graph   : 14 features
+
+2. Building model registry
+   Running 2 models x 50 splits x 3 tiers = 300 cells
+
+3. Running sweep
+
+   RBF-SVM  [Kernel]  budget n_iter=none, scaled=True
+      split   1: pair 0.1736  hyper 0.2293  hb 0.2565   (34.3s)
+      split  10: pair 0.1433  hyper 0.2169  hb 0.2702   (26.6s)
+      split  20: pair 0.1434  hyper 0.1909  hb 0.1787   (27.3s)
+      split  30: pair 0.1838  hyper 0.2695  hb 0.2310   (35.5s)
+      split  40: pair 0.1116  hyper 0.2641  hb 0.1872   (29.6s)
+      split  50: pair 0.1187  hyper 0.1181  hb 0.2275   (27.7s)
+      -> RBF-SVM done in 23.7 min
+
+   TabPFN  [Amortised]  budget n_iter=none, scaled=False
+      split   1: pair 0.2693  hyper 0.2536  hb 0.2941   (645.1s)
+      split  10: pair 0.1974  hyper 0.3332  hb 0.4270   (543.1s)
+      split  20: pair 0.1580  hyper 0.2485  hb 0.3094   (529.8s)
+      split  30: pair 0.2683  hyper 0.4028  hb 0.4673   (508.2s)
+      split  40: pair 0.2612  hyper 0.3601  hb 0.3614   (492.7s)
+      split  50: pair 0.1157  hyper 0.2991  hb 0.2740   (496.4s)
+      -> TabPFN done in 437.2 min
+
+======================================================================
+  COMPLETE — 461.4 min
+  Results:     model_sweep/cp_chembl/sweep_results_tabpfn_svm.csv
+  Predictions: model_sweep/cp_chembl/predictions.csv
+======================================================================

@@ -6,14 +6,18 @@ from pathlib import Path
 from typing import List, Dict
 import time
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, StratifiedKFold
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import QuantileTransformer
 from lightgbm import LGBMClassifier
 from xgboost import XGBClassifier
 
 from sklearn.metrics import classification_report, average_precision_score
 from sklearn.inspection import permutation_importance
-from scipy.stats import binomtest
+from scipy.stats import binomtest, loguniform
 
 # =======================================================
 # Plotting Style Configuration
@@ -34,7 +38,7 @@ plt.rcParams.update({
 CONFIG = {
     # --- Paths ---
     "DATA_DIR": Path("/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/"),
-    "BASE_OUTPUT_DIR": Path("./xgboost/cp_hpa_second_testA"),
+    "BASE_OUTPUT_DIR": Path("./logisticregression/cp_hpa_second_testA"),
 
     # --- TEST A: annotation-presence control -------------------------------
     # A fourth tier, HYPER_FLAG = HYPERGRAPH + a single binary feature marking
@@ -70,8 +74,8 @@ CONFIG = {
     "PAIRWISE_FEATURES_FILE":"pairwise_features.csv",
 
     # --- Model ---
-    # Options: "RandomForest" | "LightGBM" | "XGBoost"
-    "MODEL_TYPE": "XGBoost",
+    # Options: "RandomForest" | "LightGBM" | "XGBoost" | "LogisticRegression"
+    "MODEL_TYPE": "LogisticRegression",
 
     # --- Fixed settings ---
     "RANDOM_STATE": 42,
@@ -98,6 +102,11 @@ CONFIG = {
             'max_depth':     [None, 5, 10],
             'subsample':     [0.75, 0.8, 1.0],
             # scale_pos_weight is set automatically from training data (see tune_and_train_model)
+        },
+        # Matches cp_model_sweep.py's LogisticRegression entry exactly: a
+        # RandomizedSearchCV (not grid) over C on a log scale, 20 candidates.
+        "LogisticRegression": {
+            'C': loguniform(1e-3, 1e2)
         }
     },
 
@@ -304,17 +313,62 @@ def tune_and_train_model(X_train: pd.DataFrame, y_train: pd.Series):
         )
         param_grid = CONFIG["PARAM_GRIDS"]["XGBoost"]
 
+    elif model_type == "LogisticRegression":
+        # Matches cp_model_sweep.py's LogisticRegression entry: lbfgs solver,
+        # balanced class weight, C searched via RandomizedSearchCV (20
+        # candidates) rather than GridSearchCV. Unlike the tree models above,
+        # LogReg needs features on a common scale, so it's wrapped in a
+        # Pipeline with a QuantileTransformer refit inside each CV fold
+        # (never on the held-out fold or the test set) -- same n_quantiles
+        # formula as the sweep script.
+        k = CONFIG["N_SPLITS_CV"]
+        n_q = max(10, min(500, int(len(y_train) * (k - 1) / k)))
+        pre = ColumnTransformer(
+            transformers=[('qt', QuantileTransformer(
+                output_distribution='normal', n_quantiles=n_q,
+                random_state=CONFIG["RANDOM_STATE"]), list(X_train.columns))],
+            remainder='drop',
+        )
+        base_model = Pipeline([
+            ('pre', pre),
+            ('clf', LogisticRegression(
+                solver='lbfgs', max_iter=5000,
+                class_weight='balanced',
+                random_state=CONFIG["RANDOM_STATE"]))
+        ])
+        # Prefix params for the pipeline step, as the sweep script does.
+        param_grid = {f'clf__{name}': dist for name, dist in
+                      CONFIG["PARAM_GRIDS"]["LogisticRegression"].items()}
+
     else:
         raise ValueError(f"Unknown MODEL_TYPE: '{model_type}'")
 
-    gs = GridSearchCV(
-        estimator=base_model,
-        param_grid=param_grid,
-        scoring='average_precision',
-        cv=CONFIG["N_SPLITS_CV"],
-        n_jobs=-1,
-        verbose=0
-    )
+    # Explicit StratifiedKFold (unshuffled) rather than passing an int:
+    # this is what GridSearchCV/RandomizedSearchCV resolve an int cv to
+    # internally for classifiers, so it's a no-op for RF/LightGBM/XGBoost,
+    # but it lets LogisticRegression share exactly the same cv object.
+    cv = StratifiedKFold(n_splits=CONFIG["N_SPLITS_CV"])
+
+    if model_type == "LogisticRegression":
+        gs = RandomizedSearchCV(
+            estimator=base_model,
+            param_distributions=param_grid,
+            n_iter=20,
+            scoring='average_precision',
+            cv=cv,
+            random_state=CONFIG["RANDOM_STATE"],
+            n_jobs=-1,
+            verbose=0
+        )
+    else:
+        gs = GridSearchCV(
+            estimator=base_model,
+            param_grid=param_grid,
+            scoring='average_precision',
+            cv=cv,
+            n_jobs=-1,
+            verbose=0
+        )
     gs.fit(X_train, y_train)
     return gs.best_estimator_, gs.best_params_
 

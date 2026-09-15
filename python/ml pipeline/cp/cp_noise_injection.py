@@ -54,11 +54,11 @@ TASK_META = {
 # =======================================================
 CONFIG = {
     # --- Task: "ess" | "chembl" | "hpa" ---
-    "TASK": "chembl",
+    "TASK": "ess",
 
     # --- Paths ---
     "DATA_DIR":        Path("/Users/anitaapplegarth/github/dphil/protein_complexes/data/lookup_tables/cp/"),
-    "BASE_OUTPUT_DIR": Path("./randomforest/noise_injection"),
+    "BASE_OUTPUT_DIR": Path("."),
 
     # --- Feature files ---
     "PROTEIN_FEATURES_FILE":  "hypergraph_features.csv",

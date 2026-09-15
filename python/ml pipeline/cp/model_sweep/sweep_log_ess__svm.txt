@@ -1,0 +1,30 @@
+======================================================================
+  MODEL-VARIANCE SWEEP  —  ESS
+======================================================================
+
+1. Loading data
+   Features merged: (3394, 43)
+   Splits file    : ess_protein_splits.csv  (50 splits)
+   pairwise   : 4 features
+   hypergraph : 8 features
+   hb_graph   : 14 features
+
+2. Building model registry
+   Running 1 models x 50 splits x 3 tiers = 150 cells
+
+3. Running sweep
+
+   RBF-SVM  [Kernel]  budget n_iter=none, scaled=True
+      split   1: pair 0.4267  hyper 0.4404  hb 0.4415   (58.1s)
+      split  10: pair 0.6602  hyper 0.6882  hb 0.6916   (56.3s)
+      split  20: pair 0.2584  hyper 0.2767  hb 0.2779   (42.5s)
+      split  30: pair 0.5346  hyper 0.6805  hb 0.6806   (37.6s)
+      split  40: pair 0.5819  hyper 0.6035  hb 0.6332   (39.5s)
+      split  50: pair 0.2862  hyper 0.2802  hb 0.2973   (34.3s)
+      -> RBF-SVM done in 35.2 min
+
+======================================================================
+  COMPLETE — 35.6 min
+  Results:     model_sweep/cp_ess/sweep_results_tabpfn_svm.csv
+  Predictions: model_sweep/cp_ess/predictions.csv
+======================================================================
