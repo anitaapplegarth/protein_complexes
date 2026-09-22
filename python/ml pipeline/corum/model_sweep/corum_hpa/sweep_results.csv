@@ -1,0 +1,607 @@
+model,family,tier,split_index,pr_auc,n_train,n_test,n_features,seed,best_params
+LogisticRegression,Linear,pairwise,1,0.22678029747649428,4163,959,4,42,{'clf__C': np.float64(0.008111941985431923)}
+LogisticRegression,Linear,hypergraph,1,0.4405048087162966,4163,959,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,1,0.4311024289616255,4163,959,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,2,0.25127279983757533,4149,973,4,42,{'clf__C': np.float64(0.0060252157362038605)}
+LogisticRegression,Linear,hypergraph,2,0.474869970081502,4149,973,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,2,0.454507668322217,4149,973,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,3,0.2472518605662042,4087,1035,4,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hypergraph,3,0.43696210700885546,4087,1035,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,3,0.4246482550971905,4087,1035,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,4,0.31896990322910085,4127,995,4,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,hypergraph,4,0.40745781312894574,4127,995,8,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,hb_graph,4,0.4189083824738507,4127,995,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,5,0.27130632067812177,4120,1002,4,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,hypergraph,5,0.43528716198745204,4120,1002,8,42,{'clf__C': np.float64(0.008260808399079604)}
+LogisticRegression,Linear,hb_graph,5,0.4927332460218325,4120,1002,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,6,0.2037932156543367,4132,990,4,42,{'clf__C': np.float64(0.008260808399079604)}
+LogisticRegression,Linear,hypergraph,6,0.3431884593859507,4132,990,8,42,{'clf__C': np.float64(70.72114131472235)}
+LogisticRegression,Linear,hb_graph,6,0.3560710389129792,4132,990,14,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,pairwise,7,0.2480784845521503,4156,966,4,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,hypergraph,7,0.45086032276128596,4156,966,8,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hb_graph,7,0.47164670915094364,4156,966,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,8,0.21944417111622144,4097,1025,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,8,0.40044105061087815,4097,1025,8,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hb_graph,8,0.39362991086410104,4097,1025,14,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,pairwise,9,0.2495226536339409,4106,1016,4,42,{'clf__C': np.float64(0.006026889128682512)}
+LogisticRegression,Linear,hypergraph,9,0.4902697542189566,4106,1016,8,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hb_graph,9,0.5179511381058509,4106,1016,14,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,pairwise,10,0.28824256900781536,4108,1014,4,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hypergraph,10,0.4995746535833053,4108,1014,8,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hb_graph,10,0.5156880097052338,4108,1014,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,11,0.19485777026381018,4055,1067,4,42,{'clf__C': np.float64(0.008111941985431923)}
+LogisticRegression,Linear,hypergraph,11,0.43196256459091265,4055,1067,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,11,0.4337281802382344,4055,1067,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,12,0.23450816444989322,4060,1062,4,42,{'clf__C': np.float64(0.008260808399079604)}
+LogisticRegression,Linear,hypergraph,12,0.46760184441513114,4060,1062,8,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,hb_graph,12,0.4630045446975823,4060,1062,14,42,{'clf__C': np.float64(70.72114131472235)}
+LogisticRegression,Linear,pairwise,13,0.27510570573918536,4122,1000,4,42,{'clf__C': np.float64(0.006026889128682512)}
+LogisticRegression,Linear,hypergraph,13,0.4146737643849216,4122,1000,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,13,0.4400779496323515,4122,1000,14,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,pairwise,14,0.2179445666702688,4106,1016,4,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hypergraph,14,0.4076445697261018,4106,1016,8,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,hb_graph,14,0.41258703901394966,4106,1016,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,15,0.20725572928665464,4065,1057,4,42,{'clf__C': np.float64(0.033205591037519584)}
+LogisticRegression,Linear,hypergraph,15,0.38335548151897847,4065,1057,8,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hb_graph,15,0.35669581744474327,4065,1057,14,42,{'clf__C': np.float64(0.033205591037519584)}
+LogisticRegression,Linear,pairwise,16,0.23660364599968306,4085,1037,4,42,{'clf__C': np.float64(0.0060252157362038605)}
+LogisticRegression,Linear,hypergraph,16,0.388307280153538,4085,1037,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,16,0.4077524443580892,4085,1037,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,17,0.3048976828141844,4079,1043,4,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hypergraph,17,0.4541428786228111,4079,1043,8,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,hb_graph,17,0.4670869397963251,4079,1043,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,18,0.2199418988042429,4086,1036,4,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hypergraph,18,0.3849050302038004,4086,1036,8,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hb_graph,18,0.4383031362780519,4086,1036,14,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,pairwise,19,0.22759013783770748,3921,1201,4,42,{'clf__C': np.float64(0.028585493941961918)}
+LogisticRegression,Linear,hypergraph,19,0.36701424061914945,3921,1201,8,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,hb_graph,19,0.38163316607229947,3921,1201,14,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,pairwise,20,0.2872007062989836,4052,1070,4,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hypergraph,20,0.36811836191578856,4052,1070,8,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,hb_graph,20,0.40102977530160705,4052,1070,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,21,0.189514859367175,4097,1025,4,42,{'clf__C': np.float64(0.028585493941961918)}
+LogisticRegression,Linear,hypergraph,21,0.42287318500049575,4097,1025,8,42,{'clf__C': np.float64(70.72114131472235)}
+LogisticRegression,Linear,hb_graph,21,0.45263940957060184,4097,1025,14,42,{'clf__C': np.float64(14.528246637516036)}
+LogisticRegression,Linear,pairwise,22,0.18878847129695017,4148,974,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,22,0.39808901200834124,4148,974,8,42,{'clf__C': np.float64(0.0745934328572655)}
+LogisticRegression,Linear,hb_graph,22,0.43806452828679054,4148,974,14,42,{'clf__C': np.float64(0.0745934328572655)}
+LogisticRegression,Linear,pairwise,23,0.20102350706079042,4072,1050,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,23,0.4205425561678404,4072,1050,8,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,hb_graph,23,0.44611178026629333,4072,1050,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,24,0.24572143730470172,4147,975,4,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,hypergraph,24,0.4297216809415465,4147,975,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,24,0.4448148750793982,4147,975,14,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,pairwise,25,0.2557515002196647,4069,1053,4,42,{'clf__C': np.float64(0.008111941985431923)}
+LogisticRegression,Linear,hypergraph,25,0.4695557672006156,4069,1053,8,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hb_graph,25,0.47788264591714724,4069,1053,14,42,{'clf__C': np.float64(0.0745934328572655)}
+LogisticRegression,Linear,pairwise,26,0.25253093946653793,4092,1030,4,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hypergraph,26,0.4543274974088232,4092,1030,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,26,0.48181447681362377,4092,1030,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,27,0.269317520161659,4156,966,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,27,0.4379787349836024,4156,966,8,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hb_graph,27,0.4402236189397563,4156,966,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,28,0.19993697269341973,4010,1112,4,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hypergraph,28,0.33597322969156007,4010,1112,8,42,{'clf__C': np.float64(0.028585493941961918)}
+LogisticRegression,Linear,hb_graph,28,0.3792986303376542,4010,1112,14,42,{'clf__C': np.float64(0.028585493941961918)}
+LogisticRegression,Linear,pairwise,29,0.21943084594812817,4080,1042,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,29,0.321756526496889,4080,1042,8,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,hb_graph,29,0.33801627786646604,4080,1042,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,30,0.2248882090094211,3976,1146,4,42,{'clf__C': np.float64(0.0060252157362038605)}
+LogisticRegression,Linear,hypergraph,30,0.39905352828128926,3976,1146,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,30,0.4238416145459039,3976,1146,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,31,0.2833405320488573,4044,1078,4,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,hypergraph,31,0.47683257845496047,4044,1078,8,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,hb_graph,31,0.49166905048555876,4044,1078,14,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,pairwise,32,0.2815871280802445,3990,1132,4,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hypergraph,32,0.4852014933612047,3990,1132,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,32,0.496954866195524,3990,1132,14,42,{'clf__C': np.float64(0.0745934328572655)}
+LogisticRegression,Linear,pairwise,33,0.26375357341433575,4050,1072,4,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hypergraph,33,0.46214589847037424,4050,1072,8,42,{'clf__C': np.float64(70.72114131472235)}
+LogisticRegression,Linear,hb_graph,33,0.4528586318587767,4050,1072,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,34,0.20606100972977862,4065,1057,4,42,{'clf__C': np.float64(56.69849511478853)}
+LogisticRegression,Linear,hypergraph,34,0.3385799224669128,4065,1057,8,42,{'clf__C': np.float64(70.72114131472235)}
+LogisticRegression,Linear,hb_graph,34,0.3610833688705297,4065,1057,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,35,0.26065709612376964,3985,1137,4,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hypergraph,35,0.4096162668214244,3985,1137,8,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,hb_graph,35,0.42526772797896895,3985,1137,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,36,0.1987739336270229,4103,1019,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,36,0.38922259898813966,4103,1019,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,36,0.39638753864997284,4103,1019,14,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,pairwise,37,0.1861240304179048,4102,1020,4,42,{'clf__C': np.float64(14.528246637516036)}
+LogisticRegression,Linear,hypergraph,37,0.44017436626998835,4102,1020,8,42,{'clf__C': np.float64(14.528246637516036)}
+LogisticRegression,Linear,hb_graph,37,0.45503379157949114,4102,1020,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,38,0.22786556021847781,4085,1037,4,42,{'clf__C': np.float64(14.528246637516036)}
+LogisticRegression,Linear,hypergraph,38,0.42463358549707436,4085,1037,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,38,0.4426012660909957,4085,1037,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,39,0.24982124282630122,4126,996,4,42,{'clf__C': np.float64(0.0019517224641449498)}
+LogisticRegression,Linear,hypergraph,39,0.37846001940297574,4126,996,8,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,hb_graph,39,0.3793369377895284,4126,996,14,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,pairwise,40,0.2571333565183227,4036,1086,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,40,0.4054927050083645,4036,1086,8,42,{'clf__C': np.float64(14.528246637516036)}
+LogisticRegression,Linear,hb_graph,40,0.4087828804305522,4036,1086,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,41,0.3145059926467035,4157,965,4,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,hypergraph,41,0.547306148351827,4157,965,8,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,hb_graph,41,0.5679653857835525,4157,965,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,42,0.21604327942985888,4108,1014,4,42,{'clf__C': np.float64(0.033205591037519584)}
+LogisticRegression,Linear,hypergraph,42,0.3814667209216203,4108,1014,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,42,0.3762733480617717,4108,1014,14,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,pairwise,43,0.2732964798044594,4136,986,4,42,{'clf__C': np.float64(0.011526449540315618)}
+LogisticRegression,Linear,hypergraph,43,0.4547751920232658,4136,986,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,43,0.45865741213970956,4136,986,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,44,0.22313549808177655,4058,1064,4,42,{'clf__C': np.float64(0.008260808399079604)}
+LogisticRegression,Linear,hypergraph,44,0.4115109498697242,4058,1064,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,44,0.43226879044242544,4058,1064,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,45,0.26126917293804913,4060,1062,4,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,hypergraph,45,0.4043560582440285,4060,1062,8,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,hb_graph,45,0.42769639640645846,4060,1062,14,42,{'clf__C': np.float64(0.9846738873614566)}
+LogisticRegression,Linear,pairwise,46,0.2549624996816975,4132,990,4,42,{'clf__C': np.float64(0.008111941985431923)}
+LogisticRegression,Linear,hypergraph,46,0.45380094838766105,4132,990,8,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,hb_graph,46,0.4585750534076141,4132,990,14,42,{'clf__C': np.float64(3.4702669886504163)}
+LogisticRegression,Linear,pairwise,47,0.24829230316537473,4193,929,4,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hypergraph,47,0.44965838750224796,4193,929,8,42,{'clf__C': np.float64(21.42302175774105)}
+LogisticRegression,Linear,hb_graph,47,0.4902880832311294,4193,929,14,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,pairwise,48,0.23033273010784083,4114,1008,4,42,{'clf__C': np.float64(0.006026889128682512)}
+LogisticRegression,Linear,hypergraph,48,0.3951987492535846,4114,1008,8,42,{'clf__C': np.float64(1.0129197956845732)}
+LogisticRegression,Linear,hb_graph,48,0.42418890391458586,4114,1008,14,42,{'clf__C': np.float64(4.5705630998014515)}
+LogisticRegression,Linear,pairwise,49,0.2375293568922645,4158,964,4,42,{'clf__C': np.float64(0.0060252157362038605)}
+LogisticRegression,Linear,hypergraph,49,0.5217707599895106,4158,964,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,49,0.5419093906841159,4158,964,14,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,pairwise,50,0.3353785146141505,4100,1022,4,42,{'clf__C': np.float64(0.14445251022763064)}
+LogisticRegression,Linear,hypergraph,50,0.5246734698401871,4100,1022,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,50,0.519850611567227,4100,1022,14,42,{'clf__C': np.float64(70.72114131472235)}
+RBF-SVM,Kernel,pairwise,1,0.2732452238150428,4163,959,4,42,"{'clf__C': 1, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,1,0.4234154563707965,4163,959,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,1,0.3897754905831798,4163,959,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,2,0.3005466719265794,4149,973,4,42,"{'clf__C': 1, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,2,0.4815269427313788,4149,973,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,2,0.4738661624612017,4149,973,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,3,0.3797775217520072,4087,1035,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,3,0.43480265906933135,4087,1035,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,3,0.4596726062080212,4087,1035,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,4,0.2492321530950827,4127,995,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,4,0.3752112238767054,4127,995,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,4,0.41324632432839253,4127,995,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,5,0.2888950253579142,4120,1002,4,42,"{'clf__C': 100, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hypergraph,5,0.4519395772365733,4120,1002,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,5,0.49167461909932675,4120,1002,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,6,0.23542361575783216,4132,990,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,6,0.3265459951045692,4132,990,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,6,0.3650596368245666,4132,990,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,7,0.30109709836516035,4156,966,4,42,"{'clf__C': 100, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hypergraph,7,0.4486247230186854,4156,966,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,7,0.45158438003070017,4156,966,14,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,8,0.2579157775753848,4097,1025,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,8,0.38065126657467385,4097,1025,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,8,0.3555636463539507,4097,1025,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,9,0.34385768254091276,4106,1016,4,42,"{'clf__C': 1000, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hypergraph,9,0.5020601502699662,4106,1016,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,9,0.5335758769712045,4106,1016,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,10,0.3352242808735803,4108,1014,4,42,"{'clf__C': 1000, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,10,0.495063659499971,4108,1014,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,10,0.5095774444033899,4108,1014,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,11,0.3069327823607644,4055,1067,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,11,0.44114263405711923,4055,1067,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,11,0.4107607042393065,4055,1067,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,12,0.3090360528137118,4060,1062,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,12,0.41008704425871356,4060,1062,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,12,0.4357620472824725,4060,1062,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,13,0.25407941445027615,4122,1000,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,13,0.3978229772938402,4122,1000,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,13,0.39162384049022897,4122,1000,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,14,0.3056422000513328,4106,1016,4,42,"{'clf__C': 1000, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,14,0.4631608860748957,4106,1016,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,14,0.4449379295137123,4106,1016,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,15,0.29199819090433293,4065,1057,4,42,"{'clf__C': 1, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,15,0.36805761324045166,4065,1057,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,15,0.41209066998220656,4065,1057,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,16,0.30847941261388273,4085,1037,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,16,0.3725847731932256,4085,1037,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,16,0.4466944294208312,4085,1037,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,17,0.3525915297993399,4079,1043,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,17,0.42174816771940715,4079,1043,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,17,0.461367563231565,4079,1043,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,18,0.33008737387878007,4086,1036,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,18,0.4230946222089416,4086,1036,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,18,0.3521103760108966,4086,1036,14,42,"{'clf__C': 100, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,19,0.29963479411202326,3921,1201,4,42,"{'clf__C': 1000, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hypergraph,19,0.36050884258174115,3921,1201,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,19,0.4046547860829374,3921,1201,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,20,0.24794798411585872,4052,1070,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,20,0.347424117929238,4052,1070,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,20,0.32292023933928127,4052,1070,14,42,"{'clf__C': 100, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,21,0.32880615246929784,4097,1025,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,21,0.39793907347682,4097,1025,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,21,0.4673596265616086,4097,1025,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,22,0.2990670187130841,4148,974,4,42,"{'clf__C': 100, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,22,0.4382039535503834,4148,974,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,22,0.45137995844761497,4148,974,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,23,0.24989105102245335,4072,1050,4,42,"{'clf__C': 1, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,23,0.3633863957829243,4072,1050,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,23,0.4048392466865166,4072,1050,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,24,0.3298747194810845,4147,975,4,42,"{'clf__C': 100, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,24,0.4023585568259562,4147,975,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,24,0.3919488051563211,4147,975,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,25,0.3466194403631494,4069,1053,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,25,0.4315862688146603,4069,1053,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,25,0.4830314006476539,4069,1053,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,26,0.2982137087486878,4092,1030,4,42,"{'clf__C': 0.1, 'clf__gamma': 1}"
+RBF-SVM,Kernel,hypergraph,26,0.4125084983488785,4092,1030,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,26,0.45835586846756216,4092,1030,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,27,0.38132316333696825,4156,966,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,27,0.43136729559758885,4156,966,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,27,0.47976388111266555,4156,966,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,28,0.3282577515001481,4010,1112,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,28,0.33495028362100077,4010,1112,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,28,0.3384612223398323,4010,1112,14,42,"{'clf__C': 1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,pairwise,29,0.29411789353598694,4080,1042,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,29,0.3156151445762583,4080,1042,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,29,0.3360663275541254,4080,1042,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,30,0.27907734646286025,3976,1146,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,30,0.37587925402233047,3976,1146,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,30,0.4072327845446473,3976,1146,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,31,0.33377272018081267,4044,1078,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,31,0.45299860701536865,4044,1078,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,31,0.5057786307232915,4044,1078,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,32,0.40402061533727235,3990,1132,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,32,0.4425744940702592,3990,1132,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,32,0.4364890547382161,3990,1132,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,33,0.3284128901312396,4050,1072,4,42,"{'clf__C': 100, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,33,0.44082646619808885,4050,1072,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,33,0.45592074921677345,4050,1072,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,34,0.28846910539676085,4065,1057,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,34,0.3512184922172192,4065,1057,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,34,0.3524107614072004,4065,1057,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,35,0.392322226543161,3985,1137,4,42,"{'clf__C': 100, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,35,0.43549922638668326,3985,1137,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,35,0.464803433636565,3985,1137,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,36,0.32119970986561514,4103,1019,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,36,0.3719612419618315,4103,1019,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,36,0.3659935450344896,4103,1019,14,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,37,0.27652000796392895,4102,1020,4,42,"{'clf__C': 1000, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hypergraph,37,0.40578414083468306,4102,1020,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,37,0.4316860814264282,4102,1020,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,38,0.29356235203907355,4085,1037,4,42,"{'clf__C': 1, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,38,0.415182872495119,4085,1037,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,38,0.42233679425164283,4085,1037,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,39,0.2664340338227359,4126,996,4,42,"{'clf__C': 100, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,39,0.364168219778724,4126,996,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,39,0.3996043181337607,4126,996,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,40,0.283621603384852,4036,1086,4,42,"{'clf__C': 10, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hypergraph,40,0.38851469253051674,4036,1086,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,40,0.4150046427460806,4036,1086,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,41,0.3546127118874535,4157,965,4,42,"{'clf__C': 10, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,41,0.4903418571334023,4157,965,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,41,0.5408708028078923,4157,965,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,42,0.2466212478010173,4108,1014,4,42,"{'clf__C': 1, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,42,0.34086492955271136,4108,1014,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,42,0.3522608552971689,4108,1014,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,43,0.32370443709498115,4136,986,4,42,"{'clf__C': 10, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hypergraph,43,0.42911532941554353,4136,986,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,43,0.4368019122617838,4136,986,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,44,0.3093888119850756,4058,1064,4,42,"{'clf__C': 10, 'clf__gamma': 0.1}"
+RBF-SVM,Kernel,hypergraph,44,0.3297175657566267,4058,1064,8,42,"{'clf__C': 0.1, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hb_graph,44,0.37922206858756974,4058,1064,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,45,0.23046348806405412,4060,1062,4,42,"{'clf__C': 1000, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,45,0.37016737011923334,4060,1062,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,45,0.37637908628979033,4060,1062,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,46,0.3181802448952678,4132,990,4,42,"{'clf__C': 1000, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hypergraph,46,0.4061370639154038,4132,990,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,46,0.4194885904090346,4132,990,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,47,0.33976088365971446,4193,929,4,42,"{'clf__C': 1000, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,47,0.4216885876324558,4193,929,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,47,0.4265769900188959,4193,929,14,42,"{'clf__C': 100, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,48,0.26564762796893426,4114,1008,4,42,"{'clf__C': 1000, 'clf__gamma': 'scale'}"
+RBF-SVM,Kernel,hypergraph,48,0.34496029999137073,4114,1008,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,48,0.4548411456297495,4114,1008,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,49,0.2844967584705064,4158,964,4,42,"{'clf__C': 1000, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hypergraph,49,0.5070221851848715,4158,964,8,42,"{'clf__C': 1, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hb_graph,49,0.5568442876008046,4158,964,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,pairwise,50,0.38200324358094895,4100,1022,4,42,"{'clf__C': 1000, 'clf__gamma': 0.001}"
+RBF-SVM,Kernel,hypergraph,50,0.4776250788459369,4100,1022,8,42,"{'clf__C': 0.1, 'clf__gamma': 0.01}"
+RBF-SVM,Kernel,hb_graph,50,0.4810330659330168,4100,1022,14,42,"{'clf__C': 10, 'clf__gamma': 0.001}"
+MLP,Neural,pairwise,1,0.3406717238176155,4163,959,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,1,0.4518390729588766,4163,959,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,1,0.4157452091033286,4163,959,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,2,0.36059916082912113,4149,973,4,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,hypergraph,2,0.5066871854452769,4149,973,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,2,0.5275789857238733,4149,973,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,3,0.3356996094036552,4087,1035,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,3,0.4301737210660983,4087,1035,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,3,0.42941781350950975,4087,1035,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,4,0.33228979951700494,4127,995,4,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,hypergraph,4,0.41982150852757,4127,995,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,4,0.4339459426224411,4127,995,14,42,"{'clf__alpha': np.float64(4.207053950287933e-05), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0008288916866885138)}"
+MLP,Neural,pairwise,5,0.36151478070119963,4120,1002,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,5,0.4615633127212889,4120,1002,8,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,hb_graph,5,0.46891051663767247,4120,1002,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,6,0.29618686113003223,4132,990,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,6,0.3264500409613095,4132,990,8,42,"{'clf__alpha': np.float64(0.07852755494724252), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0008168455894760156)}"
+MLP,Neural,hb_graph,6,0.3691031035429195,4132,990,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,7,0.37947454267792097,4156,966,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,7,0.45127949311210314,4156,966,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,7,0.4480845436714184,4156,966,14,42,"{'clf__alpha': np.float64(0.004467752817973905), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0007084541505250223)}"
+MLP,Neural,pairwise,8,0.3360900591107052,4097,1025,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,8,0.4075731253890087,4097,1025,8,42,"{'clf__alpha': np.float64(8.386394780402559e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0007591104805282694)}"
+MLP,Neural,hb_graph,8,0.3777931596889434,4097,1025,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,9,0.39519685028999363,4106,1016,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,9,0.4989742875065331,4106,1016,8,42,"{'clf__alpha': np.float64(4.207053950287933e-05), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0008288916866885138)}"
+MLP,Neural,hb_graph,9,0.5042218309429799,4106,1016,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,10,0.39196429769081476,4108,1014,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,10,0.5116203075091441,4108,1014,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,10,0.5301251040753502,4108,1014,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,11,0.3686028937171748,4055,1067,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,11,0.4468878888942402,4055,1067,8,42,"{'clf__alpha': np.float64(1.067247683632372e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00038234752246751815)}"
+MLP,Neural,hb_graph,11,0.456309913372714,4055,1067,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,12,0.36570619743942173,4060,1062,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,12,0.3966608159888712,4060,1062,8,42,"{'clf__alpha': np.float64(8.386394780402559e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0007591104805282694)}"
+MLP,Neural,hb_graph,12,0.4508382961068726,4060,1062,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,13,0.3500376032841969,4122,1000,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,13,0.4016571170114428,4122,1000,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,13,0.3953871470351365,4122,1000,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,14,0.3259943229730802,4106,1016,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,14,0.4204735938644813,4106,1016,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,14,0.4214122328066653,4106,1016,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,15,0.3424333527760863,4065,1057,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,15,0.41709061699116073,4065,1057,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,15,0.3291319868168414,4065,1057,14,42,"{'clf__alpha': np.float64(0.013826232179369865), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0005820013372709848)}"
+MLP,Neural,pairwise,16,0.349608739285407,4085,1037,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,16,0.4183253936372142,4085,1037,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,16,0.4272954579205317,4085,1037,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,17,0.39078978712884294,4079,1043,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,17,0.4535332696956664,4079,1043,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,17,0.4648485440854541,4079,1043,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,18,0.30591978911556067,4086,1036,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,18,0.39687091643307965,4086,1036,8,42,"{'clf__alpha': np.float64(8.386394780402559e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0007591104805282694)}"
+MLP,Neural,hb_graph,18,0.4238127092415878,4086,1036,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,19,0.35467876467686926,3921,1201,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,19,0.36414563420168666,3921,1201,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,19,0.34679957995696736,3921,1201,14,42,"{'clf__alpha': np.float64(4.207053950287933e-05), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0008288916866885138)}"
+MLP,Neural,pairwise,20,0.29012389261848204,4052,1070,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,20,0.37364098960628706,4052,1070,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,20,0.3643161627079517,4052,1070,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,21,0.3941683667836531,4097,1025,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,21,0.45347008183890863,4097,1025,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,21,0.45835869714679683,4097,1025,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,22,0.3138946816418532,4148,974,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,22,0.4230688820136098,4148,974,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,22,0.48402701459295006,4148,974,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,23,0.3134455519707617,4072,1050,4,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hypergraph,23,0.3115737239632711,4072,1050,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,23,0.4487186122791189,4072,1050,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,24,0.38491926564404116,4147,975,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,24,0.42231419233030576,4147,975,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,24,0.4344834377181656,4147,975,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,25,0.3850876435941876,4069,1053,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,25,0.4504654308139245,4069,1053,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,25,0.46863940816038985,4069,1053,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,26,0.37958962903486004,4092,1030,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,26,0.48974991938530743,4092,1030,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,26,0.4089270796097212,4092,1030,14,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,pairwise,27,0.3872869799029047,4156,966,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,27,0.4716022408790445,4156,966,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,27,0.4374237188007135,4156,966,14,42,"{'clf__alpha': np.float64(0.004467752817973905), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0007084541505250223)}"
+MLP,Neural,pairwise,28,0.26086089948119645,4010,1112,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,28,0.36388996040897154,4010,1112,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,28,0.37412738488043873,4010,1112,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,29,0.3282058165072076,4080,1042,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,29,0.33691931128663966,4080,1042,8,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,hb_graph,29,0.3405859495722807,4080,1042,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,30,0.28310068359858054,3976,1146,4,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hypergraph,30,0.39684041739259157,3976,1146,8,42,"{'clf__alpha': np.float64(0.0026926469100861782), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.000796156607806294)}"
+MLP,Neural,hb_graph,30,0.40924343729779705,3976,1146,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,31,0.40236961314286257,4044,1078,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,31,0.4619243104120264,4044,1078,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,31,0.4549961557378919,4044,1078,14,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,pairwise,32,0.42764032005357255,3990,1132,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,32,0.47405627589182403,3990,1132,8,42,"{'clf__alpha': np.float64(0.0026926469100861782), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.000796156607806294)}"
+MLP,Neural,hb_graph,32,0.4765298544118293,3990,1132,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,33,0.377466250163027,4050,1072,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,33,0.4359838571146438,4050,1072,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,33,0.4541218437869657,4050,1072,14,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,pairwise,34,0.3338125555473581,4065,1057,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,34,0.32781708488474026,4065,1057,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,34,0.3653186712475453,4065,1057,14,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,pairwise,35,0.39112148472875313,3985,1137,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,35,0.4307440483514418,3985,1137,8,42,"{'clf__alpha': np.float64(0.07852755494724252), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0008168455894760156)}"
+MLP,Neural,hb_graph,35,0.4311777974773933,3985,1137,14,42,"{'clf__alpha': np.float64(8.386394780402559e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0007591104805282694)}"
+MLP,Neural,pairwise,36,0.3548746317104783,4103,1019,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,36,0.42577340787246143,4103,1019,8,42,"{'clf__alpha': np.float64(0.0026926469100861782), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.000796156607806294)}"
+MLP,Neural,hb_graph,36,0.41666355690316076,4103,1019,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,37,0.333485294987135,4102,1020,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,37,0.20286389167769603,4102,1020,8,42,"{'clf__alpha': np.float64(1.067247683632372e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00038234752246751815)}"
+MLP,Neural,hb_graph,37,0.46416208953157256,4102,1020,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,38,0.28091813951218425,4085,1037,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,38,0.39641275486975747,4085,1037,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,38,0.3906671810817014,4085,1037,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,39,0.31081267325077644,4126,996,4,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hypergraph,39,0.3565384489566355,4126,996,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,39,0.3833019417797105,4126,996,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,40,0.40568446452218454,4036,1086,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,40,0.405489518473394,4036,1086,8,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,hb_graph,40,0.38412034592534633,4036,1086,14,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,pairwise,41,0.4585692613309629,4157,965,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,41,0.4920534709642577,4157,965,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,41,0.5576068907703701,4157,965,14,42,"{'clf__alpha': np.float64(0.004467752817973905), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0007084541505250223)}"
+MLP,Neural,pairwise,42,0.3075229064633081,4108,1014,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,42,0.3669996851883362,4108,1014,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,42,0.32488753058085174,4108,1014,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,43,0.3983538145085981,4136,986,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,43,0.4492121121693251,4136,986,8,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hb_graph,43,0.41730103168325117,4136,986,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,44,0.26175607346204205,4058,1064,4,42,"{'clf__alpha': np.float64(5.415244119402538e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.001672269700618367)}"
+MLP,Neural,hypergraph,44,0.3724932206964185,4058,1064,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,44,0.3717502096888213,4058,1064,14,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,pairwise,45,0.30305832356106954,4060,1062,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,45,0.37975826181294475,4060,1062,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,45,0.38205724846544714,4060,1062,14,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,pairwise,46,0.43051101835904215,4132,990,4,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hypergraph,46,0.44969361525511903,4132,990,8,42,"{'clf__alpha': np.float64(1.2087541473056957e-05), 'clf__hidden_layer_sizes': (128,), 'clf__learning_rate_init': np.float64(0.0027796975515266818)}"
+MLP,Neural,hb_graph,46,0.45841752329938656,4132,990,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,47,0.3721885143156166,4193,929,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,47,0.44812689067529793,4193,929,8,42,"{'clf__alpha': np.float64(0.0026926469100861782), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.000796156607806294)}"
+MLP,Neural,hb_graph,47,0.4492753003316243,4193,929,14,42,"{'clf__alpha': np.float64(0.07852755494724252), 'clf__hidden_layer_sizes': (64, 32), 'clf__learning_rate_init': np.float64(0.0008168455894760156)}"
+MLP,Neural,pairwise,48,0.30297455354142033,4114,1008,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,48,0.42352565533274483,4114,1008,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,48,0.3951607221574887,4114,1008,14,42,"{'clf__alpha': np.float64(8.386394780402559e-05), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0007591104805282694)}"
+MLP,Neural,pairwise,49,0.3079556045824101,4158,964,4,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,hypergraph,49,0.5352807282862347,4158,964,8,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hb_graph,49,0.5591710041343068,4158,964,14,42,"{'clf__alpha': np.float64(3.077180271250682e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00463863097239728)}"
+MLP,Neural,pairwise,50,0.435922178514144,4100,1022,4,42,"{'clf__alpha': np.float64(1.1299516083106613e-05), 'clf__hidden_layer_sizes': (64,), 'clf__learning_rate_init': np.float64(0.00853618986286683)}"
+MLP,Neural,hypergraph,50,0.5385029242064101,4100,1022,8,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+MLP,Neural,hb_graph,50,0.4954126626923876,4100,1022,14,42,"{'clf__alpha': np.float64(0.00021618942406574428), 'clf__hidden_layer_sizes': (128, 64), 'clf__learning_rate_init': np.float64(0.0026070247583707662)}"
+RandomForest,Bagged trees,pairwise,1,0.3491981612122807,4163,959,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,1,0.49290291665772307,4163,959,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,1,0.48756321941948255,4163,959,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,2,0.3395451057941358,4149,973,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,2,0.49043131219651787,4149,973,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,2,0.48590237479104326,4149,973,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,3,0.38314807520701505,4087,1035,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,3,0.4520848256758826,4087,1035,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,3,0.4642517929651103,4087,1035,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,4,0.3255711802308007,4127,995,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,4,0.3908391764957961,4127,995,8,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,4,0.37543368760409573,4127,995,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,5,0.3334177826801237,4120,1002,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,5,0.45878853396803676,4120,1002,8,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,5,0.4410793730009065,4120,1002,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,6,0.3159447087671037,4132,990,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,6,0.3635800833763759,4132,990,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,6,0.3407299941421379,4132,990,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,7,0.32518627703523684,4156,966,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,7,0.4364561184256138,4156,966,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,7,0.44059747692536383,4156,966,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,8,0.31815314320473653,4097,1025,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,8,0.3929601082630989,4097,1025,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,8,0.39045703386360353,4097,1025,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,9,0.35287193383049326,4106,1016,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,9,0.5183052457405997,4106,1016,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,9,0.4744222512529108,4106,1016,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,10,0.4024371571551638,4108,1014,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,10,0.5227893977462355,4108,1014,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,10,0.5271532138602363,4108,1014,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,11,0.3162624684125872,4055,1067,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,11,0.4505190254443947,4055,1067,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,11,0.44949468952497,4055,1067,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,12,0.3114845759855898,4060,1062,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,12,0.40711586100220415,4060,1062,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,12,0.41910294229475675,4060,1062,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,13,0.3412304035996717,4122,1000,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,13,0.37519637610415574,4122,1000,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,13,0.3912107940580464,4122,1000,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,14,0.3090911244045988,4106,1016,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,14,0.4473409454336277,4106,1016,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,14,0.43086380261073437,4106,1016,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,15,0.2966635392701937,4065,1057,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,15,0.3637366012084849,4065,1057,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,15,0.3481153568687704,4065,1057,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,16,0.32250807436352785,4085,1037,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,16,0.37239594761196315,4085,1037,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,16,0.3579705962652695,4085,1037,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,17,0.37806200375884685,4079,1043,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,17,0.5105134811504825,4079,1043,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,17,0.5044207157415411,4079,1043,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,18,0.3045408645197924,4086,1036,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,18,0.4469606995045966,4086,1036,8,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,18,0.39887983457821075,4086,1036,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,19,0.3606350234280222,3921,1201,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,19,0.37856377393358553,3921,1201,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,19,0.38500357005621727,3921,1201,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,20,0.30518051892087916,4052,1070,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,20,0.37923979000431585,4052,1070,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,20,0.4065960619995717,4052,1070,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,21,0.29778068050296796,4097,1025,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,21,0.3855504275092181,4097,1025,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,21,0.3948341941511187,4097,1025,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,22,0.2986542945019843,4148,974,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,22,0.42594293103840924,4148,974,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,22,0.4372759558424382,4148,974,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,23,0.32286529045039214,4072,1050,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,23,0.4319544249533678,4072,1050,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,23,0.3958652414184947,4072,1050,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,24,0.37198700126551204,4147,975,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,24,0.4405558601022882,4147,975,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,24,0.4084040104123262,4147,975,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,25,0.3769431988271034,4069,1053,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,25,0.4508475603155284,4069,1053,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,25,0.4455327881216502,4069,1053,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,26,0.32364058706414295,4092,1030,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,26,0.4698344839542094,4092,1030,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,26,0.5119806470517057,4092,1030,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,27,0.37157004391193116,4156,966,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,27,0.42456390252284615,4156,966,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,27,0.44305695757278224,4156,966,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,28,0.3188633541547239,4010,1112,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,28,0.39676899406968724,4010,1112,8,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,28,0.40792599684284386,4010,1112,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,29,0.3169377762874975,4080,1042,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,29,0.35640801082727924,4080,1042,8,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,29,0.35918204649512103,4080,1042,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,30,0.34173461262680893,3976,1146,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,30,0.4180047273776878,3976,1146,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,30,0.39858478626930843,3976,1146,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,31,0.383545125292074,4044,1078,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,31,0.4556207940557746,4044,1078,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,31,0.5052831125350684,4044,1078,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,32,0.430809745363948,3990,1132,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,32,0.4991160175932688,3990,1132,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,32,0.5101675303390049,3990,1132,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,33,0.3637346275214549,4050,1072,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,33,0.4560849072348347,4050,1072,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,33,0.4314641802030015,4050,1072,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,34,0.2878168198103365,4065,1057,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,34,0.3506615545148209,4065,1057,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,34,0.32468137384866735,4065,1057,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,35,0.3755426378942931,3985,1137,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,35,0.46522937309915346,3985,1137,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,35,0.43831300072634133,3985,1137,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,36,0.2854116583659734,4103,1019,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,36,0.350177057838978,4103,1019,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,36,0.3422030830799997,4103,1019,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,37,0.2649899115811639,4102,1020,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,37,0.40922800501276146,4102,1020,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,37,0.3643333253114364,4102,1020,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,38,0.3023146694071064,4085,1037,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,38,0.43144301964980186,4085,1037,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,38,0.4273165202444808,4085,1037,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,39,0.294849977307423,4126,996,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,39,0.4001503631092635,4126,996,8,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,39,0.39468740063413027,4126,996,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,40,0.39179488852140626,4036,1086,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,40,0.37902244440891825,4036,1086,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,40,0.4153418951076036,4036,1086,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,41,0.3924070010298277,4157,965,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,41,0.5186029198477548,4157,965,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,41,0.5239783729378426,4157,965,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,42,0.28871225052697724,4108,1014,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,42,0.39370182678205773,4108,1014,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,42,0.3944640250867183,4108,1014,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,43,0.38819091824494534,4136,986,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,43,0.44174354789442527,4136,986,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,43,0.4194406023136088,4136,986,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,44,0.40008990266709316,4058,1064,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,44,0.3929850883871197,4058,1064,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,44,0.3672143330913305,4058,1064,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,45,0.31463132450785886,4060,1062,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,45,0.3930407803051235,4060,1062,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,45,0.38261649122098923,4060,1062,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,46,0.4084147985086466,4132,990,4,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,46,0.44441067920013366,4132,990,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,46,0.43540937083483877,4132,990,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,pairwise,47,0.35290592134047083,4193,929,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 200}"
+RandomForest,Bagged trees,hypergraph,47,0.4733166555254473,4193,929,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,hb_graph,47,0.4684357896339917,4193,929,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,48,0.3360805994317902,4114,1008,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,48,0.3948496686010968,4114,1008,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,48,0.4083563722110073,4114,1008,14,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,pairwise,49,0.3496666611699328,4158,964,4,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 80}"
+RandomForest,Bagged trees,hypergraph,49,0.5297998400937322,4158,964,8,42,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 100}"
+RandomForest,Bagged trees,hb_graph,49,0.510362948799886,4158,964,14,42,"{'max_depth': 5, 'min_samples_split': 5, 'n_estimators': 200}"
+RandomForest,Bagged trees,pairwise,50,0.4330429378999128,4100,1022,4,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 100}"
+RandomForest,Bagged trees,hypergraph,50,0.526619072808323,4100,1022,8,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+RandomForest,Bagged trees,hb_graph,50,0.52111387797388,4100,1022,14,42,"{'max_depth': 5, 'min_samples_split': 10, 'n_estimators': 200}"
+XGBoost,Boosted trees,pairwise,1,0.35028059789236243,4163,959,4,42,"{'learning_rate': 0.05, 'max_depth': 5, 'n_estimators': 80, 'subsample': 0.75}"
+XGBoost,Boosted trees,hypergraph,1,0.5006954009202668,4163,959,8,42,"{'learning_rate': 0.01, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.75}"
+XGBoost,Boosted trees,hb_graph,1,0.5201311163410797,4163,959,14,42,"{'learning_rate': 0.01, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.75}"
+XGBoost,Boosted trees,pairwise,2,0.3512588267135883,4149,973,4,42,"{'learning_rate': 0.05, 'max_depth': 5, 'n_estimators': 80, 'subsample': 0.8}"
+XGBoost,Boosted trees,hypergraph,2,0.4714065348960242,4149,973,8,42,"{'learning_rate': 0.01, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.8}"
+XGBoost,Boosted trees,hb_graph,2,0.4763630240688711,4149,973,14,42,"{'learning_rate': 0.01, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.75}"

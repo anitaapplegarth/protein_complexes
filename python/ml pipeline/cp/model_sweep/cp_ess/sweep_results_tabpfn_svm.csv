@@ -1,0 +1,4 @@
+model,family,tier,split_index,pr_auc,n_train,n_test,n_features,seed,best_params
+LogisticRegression,Linear,pairwise,1,0.398211480874987,2612,694,4,42,{'clf__C': np.float64(0.001267425589893723)}
+LogisticRegression,Linear,hypergraph,1,0.41566678998128453,2612,694,8,42,{'clf__C': np.float64(0.4205156450913872)}
+LogisticRegression,Linear,hb_graph,1,0.4538163987671,2612,694,14,42,{'clf__C': np.float64(0.4205156450913872)}
