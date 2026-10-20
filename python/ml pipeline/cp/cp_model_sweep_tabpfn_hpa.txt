@@ -1,0 +1,31 @@
+======================================================================
+  MODEL-VARIANCE SWEEP  —  HPA
+======================================================================
+
+1. Loading data
+   Features merged: (3394, 44)
+   Splits file    : hpa_protein_splits.csv  (50 splits)
+   pairwise   : 4 features
+   hypergraph : 8 features
+   hb_graph   : 15 features
+
+2. Building model registry
+   Running 1 models x 50 splits x 3 tiers = 150 cells
+   Resuming: 300 (model, split) pairs already done
+
+3. Running sweep
+
+   TabPFN  [Amortised]  budget n_iter=none, scaled=False
+      split   1: pair 0.3314  hyper 0.3472  hb 0.3166   (531.5s)
+      split  10: pair 0.2654  hyper 0.4716  hb 0.4877   (578.1s)
+      split  20: pair 0.2153  hyper 0.3308  hb 0.3669   (533.8s)
+      split  30: pair 0.2425  hyper 0.3418  hb 0.3783   (548.2s)
+      split  40: pair 0.2993  hyper 0.4187  hb 0.4806   (534.5s)
+      split  50: pair 0.2227  hyper 0.3564  hb 0.3478   (593.5s)
+      -> TabPFN done in 458.8 min
+
+======================================================================
+  COMPLETE — 458.9 min
+  Results:     model_sweep/cp_hpa/sweep_results.csv
+  Predictions: model_sweep/cp_hpa/predictions.csv
+======================================================================
