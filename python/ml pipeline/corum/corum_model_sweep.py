@@ -71,7 +71,7 @@ from scipy.stats import loguniform, uniform
 # =======================================================
 # TASK SWITCH  — set this, everything else follows
 # =======================================================
-TASK = "hpa"          # "ess" | "hpa" | "chembl"
+TASK = "chembl"          # "ess" | "hpa" | "chembl"
 
 TASKS = {
     "ess": dict(
@@ -393,7 +393,7 @@ def build_registry(random_state: int) -> Dict[str, dict]:
         from tabpfn import TabPFNClassifier
         reg["TabPFN"] = dict(
             family="Amortised",
-            factory=lambda y, s: TabPFNClassifier(device='cpu',
+            factory=lambda y, s: TabPFNClassifier(device='cuda',
                                                   random_state=s),
             params={},
             n_iter=None,
