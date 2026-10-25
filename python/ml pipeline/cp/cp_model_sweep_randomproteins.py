@@ -34,7 +34,7 @@ so everything that could differ between tiers is held fixed:
     continuous features, refitted inside each CV fold)
 
 Note that the budget being constant across tiers of DIFFERENT
-dimensionality (4 / 8 / 14) means the 14-dimensional hb-graph space is
+dimensionality (4 / 8 / 15) means the 14-dimensional hb-graph space is
 searched least densely. Any ordering observed is therefore conservative.
 
 Budgets differ BETWEEN models. That is not unfairness: n_estimators has
@@ -67,7 +67,7 @@ from scipy.stats import loguniform, uniform
 # =======================================================
 # TASK SWITCH  — set this, everything else follows
 # =======================================================
-TASK = "ess"          # "ess" | "hpa" | "chembl"
+TASK = "chembl"          # "ess" | "hpa" | "chembl"
 
 TASKS = {
     "ess": dict(
@@ -106,15 +106,15 @@ CONFIG = {
     # Which models to run, in order. Comment out to skip.
     # Anything whose library is not installed is dropped with a warning.
     "MODELS_TO_RUN": [
-        # "LogisticRegression",
+        "LogisticRegression",
         # "EBM",  excluded: ~21 min/split (~17.5 h over 50 splits).
-        # "RBF-SVM",
+        "RBF-SVM",
         # "GaussianProcess",
-        # "MLP",
+        "MLP",
         # "MLP-lbfgs"
-        # "RandomForest",
-        # "XGBoost",
-        # "LightGBM",
+        "RandomForest",
+        "XGBoost",
+        "LightGBM",
         "TabPFN",   # slowest (~7.5 min/split); last so the rest land first
     ],
 
@@ -232,7 +232,7 @@ def build_registry(random_state: int) -> Dict[str, dict]:
     reg["RBF-SVM"] = dict(
     family="Kernel",
     factory=lambda y, s: SVC(
-        kernel='rbf', probability=False,
+        kernel='rbf',
         class_weight='balanced', random_state=s),
     params={
         'C':     [0.1, 1, 10, 100, 1000],
@@ -389,7 +389,7 @@ def build_registry(random_state: int) -> Dict[str, dict]:
         from tabpfn import TabPFNClassifier
         reg["TabPFN"] = dict(
             family="Amortised",
-            factory=lambda y, s: TabPFNClassifier(device='cpu',
+            factory=lambda y, s: TabPFNClassifier(device='cuda',
                                                   random_state=s),
             params={},
             n_iter=None,

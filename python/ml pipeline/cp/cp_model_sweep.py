@@ -67,7 +67,7 @@ from scipy.stats import loguniform, uniform
 # =======================================================
 # TASK SWITCH  — set this, everything else follows
 # =======================================================
-TASK = "ess"          # "ess" | "hpa" | "chembl"
+TASK = "chembl"          # "ess" | "hpa" | "chembl"
 
 TASKS = {
     "ess": dict(
@@ -93,8 +93,8 @@ TASKS = {
 CONFIG = {
     # --- Paths (mirror cp_ess_second.py) ---
     "DATA_DIR":    Path("../../../data/lookup_tables/cp/"),
-    "RESULTS_CSV":      "sweep_results.csv",       # long format, appended
-    "PREDICTIONS_CSV":  "predictions.csv",         # per-protein scores, appended
+    "RESULTS_CSV":      "sweep_results_tabpfn.csv",       # long format, appended
+    "PREDICTIONS_CSV":  "predictions_tabpfn.csv",         # per-protein scores, appended
 
     "PROTEIN_FEATURES_FILE":  "hypergraph_features.csv",
     "PAIRWISE_FEATURES_FILE": "pairwise_features.csv",
@@ -389,7 +389,7 @@ def build_registry(random_state: int) -> Dict[str, dict]:
         from tabpfn import TabPFNClassifier
         reg["TabPFN"] = dict(
             family="Amortised",
-            factory=lambda y, s: TabPFNClassifier(device='cpu',
+            factory=lambda y, s: TabPFNClassifier(device='cuda',
                                                   random_state=s),
             params={},
             n_iter=None,

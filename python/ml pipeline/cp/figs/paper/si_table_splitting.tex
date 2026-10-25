@@ -1,0 +1,93 @@
+\begin{table*}[ht]
+\centering
+\small
+\caption{\textbf{Optimism from random splitting, CP database.} Each
+value is the mean PR-AUC under random splitting minus the mean under
+structure-aware (group-atomic) splitting, across 50 splits of each kind.
+Positive values indicate that random splitting inflates performance.
+The two sets of splits are different partitions, so these differences
+are unpaired; the 50 splits within a scheme also share a protein set and
+have overlapping training sets, so associated standard errors understate
+the true uncertainty.}
+\label{tab:splitting-absolute}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llrrr@{}}
+\toprule
+& Model & Pairwise & Hypergraph & Hb-graph \\
+\multicolumn{5}{l}{\textit{Gene essentiality}} \\
+  & LightGBM & +0.079 & +0.086 & +0.059 \\
+  & LogisticRegression & -0.019 & -0.000 & +0.011 \\
+  & MLP & -0.003 & +0.019 & +0.031 \\
+  & RBF-SVM & -0.021 & -0.056 & -0.001 \\
+  & RandomForest & +0.051 & +0.051 & +0.058 \\
+  & TabPFN & +0.085 & +0.070 & +0.077 \\
+  & XGBoost & +0.069 & +0.076 & +0.067 \\
+\midrule
+\multicolumn{5}{l}{\textit{Drug target (ChEMBL)}} \\
+  & LightGBM & -0.000 & -0.002 & -0.003 \\
+  & LogisticRegression & -0.002 & -0.005 & -0.002 \\
+  & MLP & -0.003 & +0.007 & +0.008 \\
+  & RBF-SVM & +0.018 & -0.011 & -0.008 \\
+  & RandomForest & +0.026 & +0.019 & +0.000 \\
+  & TabPFN & +0.004 & -0.010 & +0.004 \\
+  & XGBoost & +0.018 & -0.015 & +0.008 \\
+\midrule
+\multicolumn{5}{l}{\textit{Drug target (HPA)}} \\
+  & LightGBM & +0.066 & +0.024 & +0.036 \\
+  & LogisticRegression & -0.015 & -0.004 & -0.000 \\
+  & MLP & -0.008 & +0.037 & +0.031 \\
+  & RBF-SVM & +0.006 & +0.013 & +0.000 \\
+  & RandomForest & +0.056 & +0.053 & +0.035 \\
+  & TabPFN & +0.063 & +0.069 & +0.096 \\
+  & XGBoost & +0.057 & +0.040 & +0.046 \\
+\bottomrule
+\end{tabular*}
+\end{table*}
+
+\begin{table*}[ht]
+\centering
+\small
+\caption{\textbf{Effect of each representation step under both splitting
+schemes, CP database.} $\Delta$ is the mean paired PR-AUC difference
+across the 50 splits of the scheme concerned; the tiers are paired within
+a split, so each $\Delta$ is a within-split quantity. The two schemes are
+not paired with one another, so $p$ is a two-sided Mann-Whitney test
+comparing the two sets of 50 differences. Because splits within a scheme
+are not independent, $p$ is optimistic and is given as a descriptive
+guide. Values close to each other indicate that the representation
+advantage is not an artefact of structural leakage.}
+\label{tab:splitting-steps}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll rrl rrl@{}}
+\toprule
+& & \multicolumn{3}{c}{Hypergraph $-$ Pairwise}
+  & \multicolumn{3}{c}{Hb-graph $-$ Hypergraph} \\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+& Model & Struct. & Random & $p$ & Struct. & Random & $p$ \\
+\multicolumn{8}{l}{\textit{Gene essentiality}} \\
+  & LightGBM & +0.006 & +0.013 & 0.556 & +0.025 & -0.002 & 0.020 \\
+  & LogisticRegression & +0.042 & +0.061 & 0.020 & +0.016 & +0.027 & 0.102 \\
+  & MLP & +0.046 & +0.068 & 0.017 & +0.004 & +0.015 & 0.319 \\
+  & RBF-SVM & +0.027 & -0.008 & $2.1\times10^{-6}$ & +0.016 & +0.071 & $1.0\times10^{-10}$ \\
+  & RandomForest & +0.017 & +0.017 & 0.117 & +0.008 & +0.015 & 0.303 \\
+  & TabPFN & +0.038 & +0.023 & 0.001 & +0.015 & +0.021 & 0.085 \\
+  & XGBoost & +0.020 & +0.028 & 0.579 & +0.017 & +0.007 & 0.084 \\
+\midrule
+\multicolumn{8}{l}{\textit{Drug target (ChEMBL)}} \\
+  & LightGBM & +0.027 & +0.025 & 0.796 & +0.039 & +0.039 & 0.733 \\
+  & LogisticRegression & +0.081 & +0.077 & 0.920 & +0.048 & +0.052 & 0.707 \\
+  & MLP & +0.094 & +0.104 & 0.153 & +0.034 & +0.034 & 0.860 \\
+  & RBF-SVM & +0.096 & +0.067 & 0.021 & +0.001 & +0.004 & 0.537 \\
+  & RandomForest & +0.035 & +0.028 & 0.493 & +0.064 & +0.045 & 0.026 \\
+  & TabPFN & +0.083 & +0.069 & 0.278 & +0.020 & +0.034 & 0.049 \\
+  & XGBoost & +0.063 & +0.030 & 0.010 & +0.025 & +0.047 & 0.013 \\
+\midrule
+\multicolumn{8}{l}{\textit{Drug target (HPA)}} \\
+  & LightGBM & +0.093 & +0.052 & 0.111 & +0.022 & +0.034 & 0.269 \\
+  & LogisticRegression & +0.054 & +0.064 & 0.143 & +0.018 & +0.022 & 0.234 \\
+  & MLP & +0.125 & +0.170 & 0.034 & -0.024 & -0.030 & 0.743 \\
+  & RBF-SVM & +0.050 & +0.058 & 0.759 & +0.008 & -0.004 & 0.243 \\
+  & RandomForest & +0.070 & +0.067 & 0.839 & +0.033 & +0.015 & 0.023 \\
+  & TabPFN & +0.064 & +0.070 & 0.519 & +0.024 & +0.051 & $8.9\times10^{-5}$ \\
+  & XGBoost & +0.087 & +0.069 & 0.418 & +0.012 & +0.019 & 0.459 \\
+\bottomrule
+\end{tabular*}
+\end{table*}

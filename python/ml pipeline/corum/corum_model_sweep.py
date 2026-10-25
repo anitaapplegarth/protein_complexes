@@ -71,7 +71,7 @@ from scipy.stats import loguniform, uniform
 # =======================================================
 # TASK SWITCH  — set this, everything else follows
 # =======================================================
-TASK = "chembl"          # "ess" | "hpa" | "chembl"
+TASK = "ess"          # "ess" | "hpa" | "chembl"
 
 TASKS = {
     "ess": dict(
