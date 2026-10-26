@@ -52,6 +52,17 @@ COMPLEX_SUBSETS = {
     "Not recorded":           "not_recorded",
 }
 
+# Complex Portal lists many variants of one complex (e.g. SCF ligases that
+# share SKP1-CUL1-RBX1 and differ only in the F-box protein). Variants are
+# not independent, so the test is repeated after collapsing them: complexes
+# whose member sets overlap by at least this Jaccard index are grouped
+# (single linkage) and one representative is kept per group (the one with
+# most members). None = keep every complex.
+VARIANT_MODES = {
+    "All complexes listed": None,
+    "Variants collapsed":   0.5,
+}
+
 MIN_LABELLED = 2       # complexes need at least this many labelled members
 N_PERM       = 1000
 RANDOM_STATE = 42
@@ -97,6 +108,58 @@ print(f"Membership: {membership['ComplexId'].nunique()} complexes, "
       f"{membership['ProteinId'].nunique()} proteins")
 print("Complexes by stoichiometry status:")
 print(complex_status.value_counts().to_string())
+
+
+def collapse_variants(mem, threshold):
+    """Group complexes with Jaccard overlap >= threshold (single linkage)
+    and keep the largest complex of each group."""
+    sets = mem.groupby('ComplexId')['ProteinId'].apply(frozenset)
+    ids = list(sets.index)
+    pos = {c: k for k, c in enumerate(ids)}
+    parent = list(range(len(ids)))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    # Only compare complexes that share at least one protein
+    by_prot = mem.groupby('ProteinId')['ComplexId'].apply(list)
+    seen = set()
+    for cxs in by_prot:
+        for a_i in range(len(cxs)):
+            for b_i in range(a_i + 1, len(cxs)):
+                a, b = pos[cxs[a_i]], pos[cxs[b_i]]
+                key = (min(a, b), max(a, b))
+                if key in seen:
+                    continue
+                seen.add(key)
+                sa, sb = sets.iloc[a], sets.iloc[b]
+                if len(sa & sb) / len(sa | sb) >= threshold:
+                    parent[find(a)] = find(b)
+
+    groups = pd.Series([find(k) for k in range(len(ids))], index=ids)
+    size = sets.map(len)
+    reps = (pd.DataFrame({'group': groups, 'size': size})
+            .reset_index(names='ComplexId')
+            .sort_values(['size', 'ComplexId'], ascending=[False, True])
+            .drop_duplicates('group')['ComplexId'])
+    group_sizes = groups.value_counts()
+    print(f"\nCollapsing variants (Jaccard >= {threshold}): "
+          f"{len(ids)} complexes -> {len(reps)} groups; "
+          f"largest group has {group_sizes.max()} complexes")
+    # Check for chaining: list the biggest groups by their representative
+    rep_of = (pd.DataFrame({'group': groups, 'size': size})
+              .loc[list(reps)].reset_index(names='rep')
+              .set_index('group')['rep'])
+    print("Largest variant groups (representative complex: n complexes):")
+    for g, n in group_sizes.head(8).items():
+        print(f"  {rep_of[g]}: {n}")
+    pd.DataFrame({'ComplexId': ids, 'representative': groups.map(rep_of).values}
+                 ).to_csv(OUTPUT_DIR / f'variant_groups_jaccard{threshold}.csv',
+                          index=False)
+    return mem[mem['ComplexId'].isin(set(reps))]
 
 
 def load_labels(splits_file, label_map):
@@ -164,74 +227,83 @@ def run_test(mem):
 
 
 # =======================================================
-# Test per task and complex subset
+# Test per task and complex subset, for each variant mode
 # =======================================================
-results, hist_rows = [], []
-n_sub, n_task = len(COMPLEX_SUBSETS), len(TASKS)
-fig, axes = plt.subplots(n_sub, n_task, figsize=(5.5 * n_task, 4.2 * n_sub),
-                         squeeze=False)
+all_results, all_hist = [], []
 
-for j, (task_name, cfg) in enumerate(TASKS.items()):
-    labels = load_labels(cfg["SPLITS_FILE"], cfg["LABEL_MAP"])
-    mem_all = membership.merge(labels, on='ProteinId', how='inner')
+for mode_name, threshold in VARIANT_MODES.items():
+    mem_mode = (membership if threshold is None
+                else collapse_variants(membership, threshold))
+    suffix = "" if threshold is None else "_variants_collapsed"
 
-    for i, (sub_name, status) in enumerate(COMPLEX_SUBSETS.items()):
-        mem = (mem_all if status == 'all'
-               else mem_all[mem_all['status'] == status])
-        r = run_test(mem)
-        ax = axes[i, j]
-        if r is None:
-            ax.set_visible(False)
-            continue
+    n_sub, n_task = len(COMPLEX_SUBSETS), len(TASKS)
+    fig, axes = plt.subplots(n_sub, n_task,
+                             figsize=(5.5 * n_task, 4.2 * n_sub),
+                             squeeze=False)
 
-        results.append({
-            'task':               task_name,
-            'complexes':          sub_name,
-            'n_complexes':        r['n_complexes'],
-            'n_proteins':         r['n_proteins'],
-            'pct_positive':       round(r['pct_positive'], 1),
-            'pct_pure_observed':  round(r['obs'], 1),
-            'pct_pure_null_mean': round(r['null'].mean(), 1),
-            'pct_pure_null_lo':   round(np.percentile(r['null'], 2.5), 1),
-            'pct_pure_null_hi':   round(np.percentile(r['null'], 97.5), 1),
-            'p_value':            r['p'],
-        })
-        for lab, o, n in zip(FRAC_LABELS, r['obs_hist'], r['null_hist']):
-            hist_rows.append({'task': task_name, 'complexes': sub_name,
-                              'bin': lab,
-                              'pct_complexes_observed': round(o, 1),
-                              'pct_complexes_chance': round(n, 1)})
+    for j, (task_name, cfg) in enumerate(TASKS.items()):
+        labels = load_labels(cfg["SPLITS_FILE"], cfg["LABEL_MAP"])
+        mem_all = mem_mode.merge(labels, on='ProteinId', how='inner')
 
-        x, w = np.arange(len(FRAC_LABELS)), 0.4
-        ax.bar(x - w / 2, r['obs_hist'], w, color=OBS_COLOUR,
-               label="Observed")
-        ax.bar(x + w / 2, r['null_hist'], w, color=NULL_COLOUR,
-               label="Expected by chance")
-        ax.set_xticks(x)
-        ax.set_xticklabels(FRAC_LABELS)
-        ax.set_xlabel("Labelled members that are positive"
-                      if i == n_sub - 1 else "")
-        ax.set_ylabel(f"{sub_name}\n% of complexes" if j == 0 else "")
-        title = f"{sub_name} ({r['n_complexes']} complexes)"
-        ax.set_title(f"{task_name}\n{title}" if i == 0 else title,
-                     fontsize=12)
-        ax.grid(axis='y', alpha=0.3)
-        ax.set_axisbelow(True)
-        if i == 0 and j == 0:
-            ax.legend(loc='upper center', frameon=False)
+        for i, (sub_name, status) in enumerate(COMPLEX_SUBSETS.items()):
+            mem = (mem_all if status == 'all'
+                   else mem_all[mem_all['status'] == status])
+            r = run_test(mem)
+            ax = axes[i, j]
+            if r is None:
+                ax.set_visible(False)
+                continue
 
-fig.suptitle("Do members of a complex share a label? CP", y=1.01)
-fig.tight_layout()
-out = OUTPUT_DIR / "complex_label_homogeneity.png"
-fig.savefig(out, dpi=150, bbox_inches='tight')
-plt.close(fig)
-print(f"\nSaved: {out}")
+            all_results.append({
+                'variants':           mode_name,
+                'task':               task_name,
+                'complexes':          sub_name,
+                'n_complexes':        r['n_complexes'],
+                'n_proteins':         r['n_proteins'],
+                'pct_positive':       round(r['pct_positive'], 1),
+                'pct_pure_observed':  round(r['obs'], 1),
+                'pct_pure_null_mean': round(r['null'].mean(), 1),
+                'pct_pure_null_lo':   round(np.percentile(r['null'], 2.5), 1),
+                'pct_pure_null_hi':   round(np.percentile(r['null'], 97.5), 1),
+                'p_value':            r['p'],
+            })
+            for lab, o, n in zip(FRAC_LABELS, r['obs_hist'], r['null_hist']):
+                all_hist.append({'variants': mode_name, 'task': task_name,
+                                 'complexes': sub_name, 'bin': lab,
+                                 'pct_complexes_observed': round(o, 1),
+                                 'pct_complexes_chance': round(n, 1)})
 
-res_df = pd.DataFrame(results)
+            x, w = np.arange(len(FRAC_LABELS)), 0.4
+            ax.bar(x - w / 2, r['obs_hist'], w, color=OBS_COLOUR,
+                   label="Observed")
+            ax.bar(x + w / 2, r['null_hist'], w, color=NULL_COLOUR,
+                   label="Expected by chance")
+            ax.set_xticks(x)
+            ax.set_xticklabels(FRAC_LABELS)
+            ax.set_xlabel("Labelled members that are positive"
+                          if i == n_sub - 1 else "")
+            ax.set_ylabel(f"{sub_name}\n% of complexes" if j == 0 else "")
+            title = f"{sub_name} ({r['n_complexes']} complexes)"
+            ax.set_title(f"{task_name}\n{title}" if i == 0 else title,
+                         fontsize=12)
+            ax.grid(axis='y', alpha=0.3)
+            ax.set_axisbelow(True)
+            if i == 0 and j == 0:
+                ax.legend(loc='upper center', frameon=False)
+
+    fig.suptitle(f"Do members of a complex share a label? CP ({mode_name})",
+                 y=1.01)
+    fig.tight_layout()
+    out = OUTPUT_DIR / f"complex_label_homogeneity{suffix}.png"
+    fig.savefig(out, dpi=150, bbox_inches='tight')
+    plt.close(fig)
+    print(f"Saved: {out}")
+
+res_df = pd.DataFrame(all_results)
 res_df.to_csv(OUTPUT_DIR / 'complex_label_homogeneity.csv', index=False)
-pd.DataFrame(hist_rows).to_csv(
+pd.DataFrame(all_hist).to_csv(
     OUTPUT_DIR / 'complex_label_homogeneity_bins.csv', index=False)
 
 print("\n% of complexes whose labelled members all share one label:")
-with pd.option_context('display.width', 200):
+with pd.option_context('display.width', 220):
     print(res_df.to_string(index=False))
